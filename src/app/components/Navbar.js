@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { navigation } from "@/app/data/navigation";
 export default function Navbar() {
     const [isVisible, setIsVisible] = useState(true);
@@ -33,8 +34,14 @@ export default function Navbar() {
             className={`fixed top-0 left-0 w-full p-4 text-black shadow-md transition-transform duration-300 backdrop-blur-lg bg-white/90 z-50 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
         >
             <div className="container mx-auto flex justify-between items-center">
-                <Link href="/" className="text-lg font-bold">
-                    Sentra Teknologi Investama
+                <Link href="/" className="flex items-center">
+                    <Image 
+                        src="/logo/logo_navbar.svg" 
+                        alt="Logo" 
+                        width={80} 
+                        height={60} 
+                        priority
+                    />
                 </Link>
                 <div className="hidden md:flex space-x-4"> 
                     {navigation.map((item) => (

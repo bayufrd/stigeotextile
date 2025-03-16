@@ -5,8 +5,6 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Footer() {
-  const currentYear = new Date().getFullYear();
-  
   return (
     <footer className="relative text-white py-8">
       {/* Background image with overlay */}
@@ -34,7 +32,7 @@ export default function Footer() {
                     height={120}
                     priority
                 />
-                </div>
+              </div>
             </div>
             <h2 className="text-2xl font-bold">{addressData.name}</h2>
             <div className="text-gray-300 mb-4">
@@ -65,9 +63,9 @@ export default function Footer() {
             </div>
           </div>
           
-          {/* Navigation */}
-          <div>
-            <h3 className="text-lg font-bold mb-4">Navigation</h3>
+          {/* Navigation - Aligned with company name */}
+          <div className="flex flex-col">
+            <h3 className="text-lg font-bold mb-4 mt-0 pt-0">Navigation</h3>
             <ul className="space-y-2">
               <li><Link href="/" className="text-gray-300 hover:text-white">Home</Link></li>
               <li><Link href="/pages" className="text-gray-300 hover:text-white">Pages</Link></li>
@@ -76,12 +74,10 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Contact Info */}
-          <div>
-            <div className="mt-6">
-              <h3 className="text-lg font-bold mb-2">Work Hours</h3>
-              <p className="text-gray-300">{addressData.hours}</p>
-            </div>
+          {/* Work Hours - Aligned with company name */}
+          <div className="flex flex-col">
+            <h3 className="text-lg font-bold mb-2 mt-0 pt-0">Work Hours</h3>
+            <p className="text-gray-300">{addressData.hours}</p>
             
             <div className="mt-4">
               <Link href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
@@ -92,7 +88,7 @@ export default function Footer() {
         </div>
         
         <div className="border-t border-gray-700 mt-8 pt-6 text-center">
-          <p>© {currentYear} dastrevas. All Rights Reserved</p>
+          <p>© 2025 dastrevas. All Rights Reserved</p>
         </div>
       </div>
     </footer>

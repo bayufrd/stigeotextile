@@ -1,0 +1,42 @@
+.hero-section {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.pinimg.com/1200x/43/26/22/432622b16aa9b0aa678150384a77aa18.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed; 
+    height: 300px;
+    display: flex;
+    align-items: center;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+  .hero-content {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .container {
+    width:90%;
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .hero-title {
+    color: white;
+    font-size: 2.5rem;
+    font-weight: 200;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    margin: 0;
+    padding-left: 5%;
+  }
+  
+  .map-section {
+    padding: 20px 0 60px;
+  }
+  
+  .map-section h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+  }

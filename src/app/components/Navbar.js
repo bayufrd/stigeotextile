@@ -31,7 +31,7 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 w-full p-4 text-black shadow-md transition-transform duration-300 backdrop-blur-lg bg-white/90 z-50 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
+            className={`fixed top-0 left-0 w-full p-4 text-black shadow-md transition-transform duration-300 backdrop-blur-lg bg-white/75 z-50 ${isVisible ? "translate-y-0" : "-translate-y-full"}`}
         >
             <div className="container mx-auto flex justify-between items-center">
                 <Link href="/" className="flex items-center">

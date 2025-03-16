@@ -1,6 +1,8 @@
 'use client';
 
 import { addressData } from '../data/addressData';
+import Link from 'next/link';
+import Image from 'next/image';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -23,14 +25,16 @@ export default function Footer() {
           {/* Logo and Description */}
           <div>
             <div className="flex items-center mb-4">
-              {/* Logo implementation */}
-              <image
-                src="/logo/logo_navbar.svg"
-                alt={addressData.name}
-                width={150}
-                height={60}
-                className="mr-3"
-              />
+              {/* Logo implementation with Next.js Image */}
+              <div className="flex items-start">
+                <Image
+                    src="/logo/logo_navbar.svg"
+                    alt={addressData.name}
+                    width={150}
+                    height={120}
+                    priority
+                />
+                </div>
             </div>
             <h2 className="text-2xl font-bold">{addressData.name}</h2>
             <div className="text-gray-300 mb-4">
@@ -49,15 +53,15 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white">
+              <Link href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-twitter"></i>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-instagram"></i>
-              </a>
+              </Link>
             </div>
           </div>
           
@@ -65,10 +69,10 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-bold mb-4">Navigation</h3>
             <ul className="space-y-2">
-              <li><a href="/" className="text-gray-300 hover:text-white">Home</a></li>
-              <li><a href="/pages" className="text-gray-300 hover:text-white">Pages</a></li>
-              <li><a href="/about-us" className="text-gray-300 hover:text-white">About Us</a></li>
-              <li><a href="/contact" className="text-gray-300 hover:text-white">Contact</a></li>
+              <li><Link href="/" className="text-gray-300 hover:text-white">Home</Link></li>
+              <li><Link href="/pages" className="text-gray-300 hover:text-white">Pages</Link></li>
+              <li><Link href="/about-us" className="text-gray-300 hover:text-white">About Us</Link></li>
+              <li><Link href="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
             </ul>
           </div>
           
@@ -80,9 +84,9 @@ export default function Footer() {
             </div>
             
             <div className="mt-4">
-              <a href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
+              <Link href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
                 Call Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -2,7 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
 
 :root {
-  --background: ##EAE8FF;
+  --background: #EAE8FF;
   --foreground: #171717;
   --font-sans: "Nunito", sans-serif;
 }

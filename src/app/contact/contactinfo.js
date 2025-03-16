@@ -1,6 +1,6 @@
 'use client';
 
-import { addressData } from './addressData';
+import { addressData } from '../data/addressData';
 
 const ContactInfo = () => {
   return (

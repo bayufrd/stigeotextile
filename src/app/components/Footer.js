@@ -9,7 +9,7 @@
 
 'use client';
 
-import { addressData } from '../contact/addressData';
+import { addressData } from '../data/addressData';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -24,21 +24,22 @@ export default function Footer() {
             <div className="flex items-center mb-4">
               <h2 className="text-2xl font-bold">{addressData.name}</h2>
             </div>
-            <p className="text-gray-400 mb-4">
+            {/* Replace p with div to avoid hydration error */}
+            <div className="text-gray-400 mb-4">
               <div className="contact-info-section">
-                    <div className="contact-details">
-                      <div className="details-wrapper">
-                        <address>
-                          {addressData.address} <br/>
-                          {addressData.city}<br />
-                          <strong>Phone:</strong> {addressData.phone}<br />
-                          <strong>Fax:</strong> {addressData.fax}<br />
-                          <strong>Email:</strong> <a href={`mailto:${addressData.email}`}>{addressData.email}</a>
-                        </address>
-                      </div>
-                    </div>
+                <div className="contact-details">
+                  <div className="details-wrapper">
+                    <address>
+                      {addressData.address} <br/>
+                      {addressData.city}<br />
+                      <strong>Phone:</strong> {addressData.phone}<br />
+                      <strong>Fax:</strong> {addressData.fax}<br />
+                      <strong>Email:</strong> <a href={`mailto:${addressData.email}`}>{addressData.email}</a>
+                    </address>
                   </div>
-            </p>
+                </div>
+              </div>
+            </div>
             <div className="flex space-x-4">
               <a href="#" className="text-gray-400 hover:text-white">
                 <i className="fab fa-facebook-f"></i>
@@ -71,7 +72,7 @@ export default function Footer() {
             </div>
             
             <div className="mt-4">
-            <a href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded">
+              <a href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded">
                 Call Us
               </a>
             </div>

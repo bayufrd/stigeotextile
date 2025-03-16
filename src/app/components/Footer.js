@@ -22,9 +22,16 @@ export default function Footer() {
           {/* Logo and Description */}
           <div>
             <div className="flex items-center mb-4">
-              <h2 className="text-2xl font-bold">{addressData.name}</h2>
+              {/* Fix the logo implementation */}
+              <img
+                src="/logo/logo_navbar.svg"
+                alt={addressData.name}
+                width={150}
+                height={60}
+                className="mr-3"
+              />
             </div>
-            {/* Replace p with div to avoid hydration error */}
+            <h2 className="text-2xl font-bold">{addressData.name}</h2>
             <div className="text-gray-400 mb-4">
               <div className="contact-info-section">
                 <div className="contact-details">

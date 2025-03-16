@@ -1,9 +1,10 @@
 'use client';
 
 export const addressData = {
-  name: 'VAMOS Bar&Restaurant',
-  address: 'Jl. Urip Sumoharjo No.111A, Klitren, Kec. Gondokusuman,',
-  city: 'Kota Yogyakarta, Daerah Istimewa Yogyakarta 55222',
+  name: 'Sentra Teknologi Investama',
+  mapsname: "Cv. Sentra Teknologi Investama",
+  address: 'Kibin, Kec. Kibin',
+  city: 'Kabupaten Serang, Banten',
   phone: '021- 5945 0128',
   fax: '021- 5945 0128',
   email: 'vamosplatinum@gmail.com',

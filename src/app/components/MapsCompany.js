@@ -1,9 +1,10 @@
 import styles from '../../styles/MapStyles.module.css';
+import { addressData } from '../data/addressData';
 
 const MapsCompany = () => {
   const lat = "-7.7536843";
   const lng = "110.4484708";
-  const location = "Vamos Jogja";
+  const location = addressData.mapsname;
   const encodedLocation = encodeURIComponent(location);
 
   return (

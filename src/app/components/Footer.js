@@ -24,7 +24,7 @@ export default function Footer() {
           <div>
             <div className="flex items-center mb-4">
               {/* Logo implementation */}
-              <img
+              <image
                 src="/logo/logo_navbar.svg"
                 alt={addressData.name}
                 width={150}
@@ -49,15 +49,15 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex space-x-4">
-              <a href="#" className="text-gray-300 hover:text-white">
+              <Link href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-twitter"></i>
-              </a>
-              <a href="#" className="text-gray-300 hover:text-white">
+              </Link>
+              <Link href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-instagram"></i>
-              </a>
+              </Link>
             </div>
           </div>
           
@@ -80,9 +80,9 @@ export default function Footer() {
             </div>
             
             <div className="mt-4">
-              <a href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
+              <Link href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
                 Call Us
-              </a>
+              </Link>
             </div>
           </div>
         </div>

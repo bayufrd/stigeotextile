@@ -9,7 +9,7 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className="min-h-screen flex flex-col">
         <Navbar />
-          <main className="flex-1 container mx-auto p-4">{children}</main>
+        <main className="flex-1 container mx-auto p-4">{children}</main>
         <Footer />
         <FloatingWhatsAppButton /> 
       </body>

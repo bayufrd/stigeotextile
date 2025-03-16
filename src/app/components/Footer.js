@@ -49,15 +49,15 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <a href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-facebook-f"></i>
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-twitter"></i>
-              </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
+              </a>
+              <a href="#" className="text-gray-300 hover:text-white">
                 <i className="fab fa-instagram"></i>
-              </Link>
+              </a>
             </div>
           </div>
           
@@ -80,9 +80,9 @@ export default function Footer() {
             </div>
             
             <div className="mt-4">
-              <Link href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
+              <a href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
                 Call Us
-              </Link>
+              </a>
             </div>
           </div>
         </div>

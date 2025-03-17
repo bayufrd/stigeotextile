@@ -1,3 +1,4 @@
+
 .hero-section {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.pinimg.com/1200x/43/26/22/432622b16aa9b0aa678150384a77aa18.jpg');
     background-size: cover;
@@ -40,3 +41,55 @@
     margin-bottom: 20px;
     font-size: 2rem;
   }
+/* styles.css or your global CSS file */
+
+/* Shake animation for the button */
+@keyframes shake {
+  0% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-5px);
+  }
+  50% {
+    transform: translateX(5px);
+  }
+  75% {
+    transform: translateX(-5px);
+  }
+  100% {
+    transform: translateX(5px);
+  }
+}
+
+/* Animate shake with duration */
+.animate-shake {
+  animation: shake 0.5s ease-in-out infinite;
+}
+
+/* Shake animation for the 'Contact Us' text with a different rhythm */
+@keyframes contact-shake {
+  0% {
+    transform: translateX(0);
+  }
+  20% {
+    transform: translateX(-10px);
+  }
+  40% {
+    transform: translateX(10px);
+  }
+  60% {
+    transform: translateX(-10px);
+  }
+  80% {
+    transform: translateX(10px);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
+/* Animate shake with slower and more pronounced motion */
+.animate-contact-shake {
+  animation: contact-shake 0.7s ease-in-out infinite;
+}

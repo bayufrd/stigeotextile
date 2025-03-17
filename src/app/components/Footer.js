@@ -1,6 +1,7 @@
 'use client';
 
 import { addressData } from '../data/addressData';
+import { navigation } from '../data/navigation'; // Import navigasi dari file navigation.js
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -63,14 +64,17 @@ export default function Footer() {
             </div>
           </div>
           
-          {/* Navigation - Aligned with company name */}
+          {/* Navigation - Menggunakan data dari navigation.js */}
           <div className="flex flex-col">
             <h3 className="text-lg font-bold mb-4 mt-0 pt-0">Navigation</h3>
             <ul className="space-y-2">
-              <li><Link href="/" className="text-gray-300 hover:text-white">Home</Link></li>
-              <li><Link href="/pages" className="text-gray-300 hover:text-white">Pages</Link></li>
-              <li><Link href="/about" className="text-gray-300 hover:text-white">About Us</Link></li>
-              <li><Link href="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
+              {navigation.map((item) => (
+                <li key={item.name}>
+                  <Link href={item.href} className="text-gray-300 hover:text-white">
+                    {item.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
           

@@ -35,12 +35,12 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`
-                ${isAtTop ? "absolute bg-transparent" : "fixed before:content-[''] before:absolute before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:z-[-1] backdrop-blur-lg"} 
-                top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-300 z-50 
-                ${isVisible ? "translate-y-0" : "-translate-y-full"}
-            `} 
-        >
+        className={`
+            ${isAtTop ? "absolute bg-transparent" : "fixed before:content-[''] before:absolute before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1] backdrop-blur-lg"} 
+            top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-300 z-50 
+            ${isVisible ? "translate-y-0" : "-translate-y-full"}
+        `} 
+    >
             <div className="container mx-auto flex justify-between items-center">
                 <Link href="/" className="flex items-center">
                     <Image 

@@ -13,7 +13,9 @@ export default function Footer() {
         className="absolute inset-0 z-0 bg-cover bg-center" 
         style={{
           backgroundImage: "url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')", 
-          filter: "brightness(0.3)"
+          filter: "brightness(0.3)",
+          backgroundAttachment: "fixed" // Corrected property
+
         }}
       ></div>
       

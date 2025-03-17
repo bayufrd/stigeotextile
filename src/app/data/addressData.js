@@ -11,8 +11,8 @@ export const addressData = {
   email: 'vamosplatinum@gmail.com',
   hours: '7 AM - 9 PM Mon - Sat',
   social: {
-    facebook: '#',
-    twitter: '#',
-    instagram: '#'
+    facebook: 'https://fb.com/bayufrd',
+    twitter: 'https://x.com',
+    instagram: 'https://instagram.com/bayufrd'
   }
 };

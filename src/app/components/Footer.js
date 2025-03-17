@@ -52,18 +52,20 @@ export default function Footer() {
               </div>
             </div>
             <div className="flex space-x-4">
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <Link href={addressData.social.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
                 <i className="fab fa-facebook-f"></i>
               </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <Link href={addressData.social.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
                 <i className="fab fa-twitter"></i>
               </Link>
-              <Link href="#" className="text-gray-300 hover:text-white">
+              <Link href={addressData.social.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
                 <i className="fab fa-instagram"></i>
+              </Link>
+              <Link href={`https://wa.me/${addressData.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
+                <i className="fab fa-whatsapp"></i>
               </Link>
             </div>
           </div>
-          
           {/* Navigation - Menggunakan data dari navigation.js */}
           <div className="flex flex-col">
             <h3 className="text-lg font-bold mb-4 mt-0 pt-0">Navigation</h3>

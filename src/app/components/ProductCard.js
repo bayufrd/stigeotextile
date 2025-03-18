@@ -10,35 +10,38 @@ import "swiper/css/pagination";
 
 const ProductCard = ({ images, name, description, details, specs }) => {
     return (
-        <div className="flex border rounded-lg p-4 shadow-md">
-        <div className="w-1/3 flex items-center justify-center border-r p-4">
-            <Swiper
-                modules={[Navigation, Pagination]}
-                navigation
-                pagination={{ clickable: true }}
-                className="w-full"
-            >
-            {images.map((img, index) => (
-                <SwiperSlide key={index}>
-                <div className="relative w-full h-40">
-                    <Image
-                    src={img}
-                    alt={name}
-                    layout="fill"
-                    objectFit="contain"
-                    />
-                </div>
-                </SwiperSlide>
-            ))}
-            </Swiper>
-        </div>
+        <div className="flex border rounded-lg p-4 shadow-md max-h-fit">
+            <div className="w-1/2 flex items-center justify-center border-r p-4 rounded-lg">
+                <Swiper
+                    modules={[Navigation, Pagination]}
+                    navigation
+                    pagination={{ clickable: true }}
+                    className="w-full"
+                >
+                {images.map((img, index) => (
+                    <SwiperSlide key={index}>
+                        <div className="relative w-full h-96">
+                            <Image
+                                src={img}
+                                alt={name}
+                                layout="responsive" 
+                                width={350} 
+                                height={350} 
+                                objectFit="contain"
+                                className="hover:scale-105 transition-transform duration-300"
+                            />
+                        </div>
+                    </SwiperSlide>
+                ))}
+                </Swiper>
+            </div>
 
-        <div className="w-2/3 p-4 space-y-2">
-            <h2 className="text-xl font-semibold">{name}</h2>
-            <p className="text-gray-700">{description}</p>
-            {details && <p className="text-sm text-gray-500">{details}</p>}
-            <p className="text-sm font-medium text-gray-900">{specs}</p>
-        </div>
+            <div className="w-2/3 p-4 space-y-2">
+                <h2 className="text-xl font-semibold">{name}</h2>
+                <p className="text-gray-700">{description}</p>
+                {details && <p className="text-sm text-gray-500">{details}</p>}
+                <p className="text-sm font-medium text-gray-900">{specs}</p>
+            </div>
         </div>
     );
 };

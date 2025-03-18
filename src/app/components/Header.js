@@ -31,7 +31,7 @@ export default function Header() {
       ></div>
       
       <div className="relative z-10 hero-content">
-        <h1 className="hero-title">{getPageTitle()}</h1>
+        <h1 className="hero-title mt-6">{getPageTitle()}</h1>
       </div>
     </header>
   );

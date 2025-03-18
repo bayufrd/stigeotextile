@@ -18,10 +18,10 @@ const ProductCard = ({ images, name, description, details, specs }) => {
     return (
         <div className="relative flex border rounded-2xl p-4 shadow-md w-full">
         {/* Image Slider */}
-        <div className="w-1/2 flex items-center justify-center border-r pb-10 relative">
+        <div className="w-1/2 flex items-center justify-center border-r pb-12 pr-10 pl-6 pt-6 relative">
             <button
                 onClick={prevImage}
-                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black p-3 rounded-full z-10"
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
             >
             <i className="fa-solid fa-circle-left text-xl" />
             </button>
@@ -43,7 +43,7 @@ const ProductCard = ({ images, name, description, details, specs }) => {
 
             <button
                 onClick={nextImage}
-                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black p-3 rounded-full z-10"
+                className="absolute right-6 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
             >
             <i className="fa-solid fa-circle-right text-xl" />
             </button>

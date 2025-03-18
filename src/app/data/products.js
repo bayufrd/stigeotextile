@@ -5,10 +5,13 @@ export const products = [
             "/products/2.jpeg",
             "/products/3.jpeg",
         ],
-        name: "Produk 1",
+        name: "ada deh",
+        category: "Composite Geomembrane",
         description: "Deskripsi singkat produk 1.",
         details: "Detail produk atau pengaplikasian (opsional).",
         specs: "Spesifikasi produk 1.",
+        slug_category: "composite-geomembrane",
+        slug_product: "ada-deh"
     },
     {
         images: [
@@ -16,21 +19,24 @@ export const products = [
             "/products/5.jpg",
             "/products/6.jpg",
         ],
-        name: "Produk ",
+        name: "Produk kedua",
+        category: "Geogrid",
         description: "Deskripsi singkat produk 2.",
         details: "Detail produk atau pengaplikasian (opsional).",
         specs: "Spesifikasi produk 2.",
+        slug_category: "geogrid",
+        slug_product: "produk-kedua"
     },
     {
         images: [
-            "/products/1.jpeg",
-            "/products/2.jpeg",
-            "/products/3.jpeg",
         ],
-        name: "Produk 1",
+        name: "Produk ketiga",
+        category: "Composite Geomembrane",
         description: "Deskripsi singkat produk 1.",
         details: "Detail produk atau pengaplikasian (opsional).",
         specs: "Spesifikasi produk 1.",
+        slug_category: "composite-geomembrane",
+        slug_product: "produk-ketiga"
     },
     {
         images: [
@@ -38,21 +44,24 @@ export const products = [
             "/products/5.jpg",
             "/products/6.jpg",
         ],
-        name: "Produk ",
+        name: "Produk keempat",
+        category: "Geogrid",
         description: "Deskripsi singkat produk 2.",
         details: "Detail produk atau pengaplikasian (opsional).",
         specs: "Spesifikasi produk 2.",
+        slug_category: "geogrid",
+        slug_product: "produk-keempat"
     },
     {
         images: [
-            "/products/1.jpeg",
-            "/products/2.jpeg",
-            "/products/3.jpeg",
         ],
-        name: "Produk 1",
+        name: "ada kelima",
+        category: "Composite Geomembrane",
         description: "Deskripsi singkat produk 1.",
         details: "Detail produk atau pengaplikasian (opsional).",
         specs: "Spesifikasi produk 1.",
+        slug_category: "composite-geomembrane",
+        slug_product: "ada-kelima"
     },
     {
         images: [
@@ -60,9 +69,12 @@ export const products = [
             "/products/5.jpg",
             "/products/6.jpg",
         ],
-        name: "Produk ",
+        name: "Produk keenam",
+        category: "Geogrid",
         description: "Deskripsi singkat produk 2.",
         details: "Detail produk atau pengaplikasian (opsional).",
         specs: "Spesifikasi produk 2.",
-    }
+        slug_category: "geogrid",
+        slug_product: "produk-keenam"
+    },
 ];

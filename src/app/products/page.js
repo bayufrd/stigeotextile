@@ -9,7 +9,7 @@ const ProductsPage = () => {
             {/* Sidebar for Categories */}
             <ProductCategoryCard />
             {/* Products */}
-            <div className="grid grid-cols-1 gap-6">
+            <div className="grid grid-cols-1 gap-6 w-full">
                 {products.map((product, index) => (
                     <ProductCard key={index} {...product} />
                 ))}

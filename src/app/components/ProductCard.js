@@ -2,46 +2,60 @@
 "use client";
 
 import Image from "next/image";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
+import { useState } from "react";
 
 const ProductCard = ({ images, name, description, details, specs }) => {
+    const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+    const prevImage = () => {
+        setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
+    };
+
+    const nextImage = () => {
+        setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+    };
+
     return (
-        <div className="flex border rounded-lg p-4 shadow-md max-h-fit">
-            <div className="w-1/2 flex items-center justify-center border-r p-4 rounded-lg">
-                <Swiper
-                    modules={[Navigation, Pagination]}
-                    navigation
-                    pagination={{ clickable: true }}
-                    className="w-full"
-                >
-                {images.map((img, index) => (
-                    <SwiperSlide key={index}>
-                        <div className="relative w-full h-96">
-                            <Image
-                                src={img}
-                                alt={name}
-                                layout="responsive" 
-                                width={350} 
-                                height={350} 
-                                objectFit="contain"
-                                className="hover:scale-105 transition-transform duration-300"
-                            />
-                        </div>
-                    </SwiperSlide>
-                ))}
-                </Swiper>
+        <div className="relative flex border rounded-2xl p-4 shadow-md w-full">
+        {/* Image Slider */}
+        <div className="w-1/2 flex items-center justify-center border-r pb-10 relative">
+            <button
+                onClick={prevImage}
+                className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black p-3 rounded-full z-10"
+            >
+            <i className="fa-solid fa-circle-left text-xl" />
+            </button>
+
+            <div className="relative w-[560px] h-[480px] rounded-xl shadow-xl">
+                <Image
+                    src={images[currentImageIndex]}
+                    alt={name}
+                    width={560}
+                    height={480}
+                    className="w-full h-full object-cover rounded-lg"
+                    priority
+                />
             </div>
 
-            <div className="w-2/3 p-4 space-y-2">
-                <h2 className="text-xl font-semibold">{name}</h2>
-                <p className="text-gray-700">{description}</p>
-                {details && <p className="text-sm text-gray-500">{details}</p>}
-                <p className="text-sm font-medium text-gray-900">{specs}</p>
+            <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm">
+                {currentImageIndex + 1} / {images.length}
             </div>
+
+            <button
+                onClick={nextImage}
+                className="absolute right-2 top-1/2 transform -translate-y-1/2 text-black p-3 rounded-full z-10"
+            >
+            <i className="fa-solid fa-circle-right text-xl" />
+            </button>
+        </div>
+
+        {/* Product Details */}
+        <div className="w-1/2 p-4 space-y-2">
+            <h2 className="text-xl font-semibold">{name}</h2>
+            <p className="text-gray-700">{description}</p>
+            {details && <p className="text-sm text-gray-500">{details}</p>}
+            <p className="text-sm font-medium text-gray-900">{specs}</p>
+        </div>
         </div>
     );
 };

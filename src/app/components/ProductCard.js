@@ -9,6 +9,7 @@ const ProductCard = ({ images, name, description, details, specs, category, slug
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
     const categorySlug = slug_category ? slug_category : slugify(category) || "uncategorized";
     const productSlug = slug_product ? slug_product : slugify(name);
+    const hasImages = images.length > 0;
 
     const prevImage = () => {
         setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
@@ -22,34 +23,38 @@ const ProductCard = ({ images, name, description, details, specs, category, slug
         <div className="relative flex border rounded-2xl p-4 shadow-md w-full">
             {/* Image Slider */}
             <div className="w-1/2 flex items-center justify-center border-r pb-10 pr-10 pl-6 pt-6 relative">
-                <button
-                    onClick={prevImage}
-                    className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
-                >
-                <i className="fa-solid fa-circle-left text-xl" />
-                </button>
+                {hasImages && (
+                    <button
+                        onClick={prevImage}
+                        className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
+                    >
+                        <i className="fa-solid fa-circle-left text-xl" />
+                    </button>
+                )}
 
-                <div className="relative w-[500px] h-[480px] rounded-xl shadow-xl">
+                <div className="relative w-[500px] h-[480px] rounded-xl shadow-xl overflow-hidden group">
                     <Image
                         src={images.length > 0 ? images[currentImageIndex] : "/no-image.jpg"}
                         alt={name}
                         width={560}
                         height={480}
-                        className="w-full h-full object-cover rounded-lg"
+                        className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-in-out group-hover:scale-110"
                         priority
                     />
                 </div>
 
                 <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm">
-                    {images.length > 0 ? `${currentImageIndex + 1} / ${images.length}` : "No Image"}
+                    {hasImages ? `${currentImageIndex + 1} / ${images.length}` : "No Image"}
                 </div>
 
-                <button
-                    onClick={nextImage}
-                    className="absolute right-6 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
-                >
-                <i className="fa-solid fa-circle-right text-xl" />
-                </button>
+                {hasImages && (
+                    <button
+                        onClick={nextImage}
+                        className="absolute right-6 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
+                    >
+                        <i className="fa-solid fa-circle-right text-xl" />
+                    </button>
+                )}
             </div>
 
             {/* Product Details */}

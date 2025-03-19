@@ -1,12 +1,17 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import ProductCategoryCard from "../components/ProductCategoryCard";
 import { products } from "@/app/data/products";
 
 const ProductsPage = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
+
+     // Scroll to top function
+     const scrollToTop = () => {
+        window.scrollTo({ top: 130, behavior: "smooth" });
+    };
 
      // Filtration by Category
      const filteredProducts = selectedCategory
@@ -20,6 +25,11 @@ const ProductsPage = () => {
     const startIndex = (currentPage - 1) * productsPerPage; // Hitung produk yang ditampilkan di halaman saat ini
     const currentProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
 
+    // Gunakan useEffect untuk memantau perubahan currentPage
+    useEffect(() => {
+        scrollToTop();
+    }, [currentPage]); // Akan dijalankan setiap currentPage berubah
+
     return (
         <div className="flex px-2 gap-5 py-8 h-auto">
             {/* Sidebar for Categories */}
@@ -28,6 +38,7 @@ const ProductsPage = () => {
                 onSelectCategory={(category) => {
                     setSelectedCategory(category);
                     setCurrentPage(1);
+                    scrollToTop(); 
                 }}  
             />
 
@@ -70,6 +81,7 @@ const ProductsPage = () => {
                         onClick={() => {
                             setSelectedCategory(null);
                             setCurrentPage(1);
+                            scrollToTop(); 
                         }}
                         className="mt-6 w-full p-3 bg-blue-600 text-white font-bold rounded hover:bg-blue-700"
                     >

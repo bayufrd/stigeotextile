@@ -8,7 +8,11 @@ const ContactInfo = () => {
         <div className="bg-[#0A1E2B] p-4 rounded-2xl text-center shadow-lg">
           <FaPhone className="w-6 h-6 mx-auto mb-2 text-white" /> {/* Phone Icon */}
           <p className="font-semibold text-white">CALL US</p>
-          <p className="text-white">{addressData.phone}</p>
+          <p className="text-white">
+            Banten: {addressData.phone.banten}<br/>
+            Jakarta: {addressData.phone.jakarta}<br/>
+            Kalimantan Barat: {addressData.phone.kalimantanbarat}
+          </p>
         </div>
         <div className="bg-[#4A6B8C] p-4 rounded-2xl text-center shadow-lg">
           <FaEnvelope className="w-6 h-6 mx-auto mb-2 text-[#0A1E2B]" /> {/* Email Icon */}

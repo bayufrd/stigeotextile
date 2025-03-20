@@ -117,29 +117,33 @@ export default function About() {
             <div className="container mx-auto px-4">
               <h2 className="text-3xl font-bold mb-2 text-center">ABOUT US</h2>
               <p className="text-sm text-gray-600 mb-12 text-center">
-                  Selamat datang di Sentra Teknologi Inveetama, pemimpin dalam industri tekstil yang berkomitmen untuk menyediakan produk berkualitas tinggi dan inovatif. 
-            Dengan pengalaman lebih dari 100 tahun di pasar, kami telah membangun reputasi sebagai produsen tekstil yang terpercaya, 
-            menghasilkan kain dan produk tekstil yang memenuhi standar internasional.
+              Selamat datang di CV. Sentra Teknologi Investama, 
+              sebuah perusahaan yang bergerak di bidang penyediaan produk Geotextile dengan kualitas terbaik dan telah memenuhi Standar Nasional. 
             </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="text-sm leading-relaxed">
                   <p className="mb-4">
-                    <span className="font-bold">VISI</span> Menjadi perusahaan tekstil terkemuka yang tidak hanya dikenal karena kualitas, 
-                    tetapi juga karena kontribusi kami terhadap keberlanjutan dan inovasi dalam industri tekstil global.<br/>
-                    <span className="font-bold">MISI</span> Menyediakan produk tekstil berkualitas tinggi yang memenuhi kebutuhan pasar lokal dan internasional.<br/>
-                      Berkomitmen untuk menerapkan prinsip-prinsip keberlanjutan dalam setiap proses produksi.<br/>
-                      Mengedepankan teknologi terbaru untuk meningkatkan efisiensi dan inovasi produk kami.
+                    <span className="font-bold">VISI </span> 
+                    Menjadi produsen Geotextile terkemuka dengan menyediakan produk berkualitas tinggi, 
+                    bertaraf Nasional dan berperan didalam menunjang Pembangunan di Indonesia.<br/><br/><br/>
+                    <span className="font-bold">MISI </span> 
+                    Perusahaan yang selalu siap menyediakan produk-produk Geotextile di pasaran agar supaya kelangsungan Pembangunan tidak terganggu 
+                    dan menciptakan Inovasi dan efesiensi di berbagai bidang.
                   </p>
                 </div>
                 <div className="text-sm leading-relaxed">
                   <p className="mb-4">
-                    <span className="font-bold">Apa yang Kami Tawarkan</span> Kami menawarkan berbagai produk tekstil, mulai dari kain untuk industri pakaian, 
-                    rumah tangga, hingga produk fungsional lainnya. Dengan menggunakan bahan baku terbaik dan teknologi canggih, 
-                    setiap produk kami dirancang untuk memberikan kenyamanan dan daya tahan yang optimal.<br/>
-                    <span className="font-bold">Keunggulan Kami</span> <br/>Kualitas Terjamin: Kami hanya menggunakan bahan baku pilihan dan proses produksi yang ketat untuk memastikan setiap produk yang dihasilkan memenuhi standar tinggi.
-                    <br/>Inovasi: Kami selalu mencari cara untuk berinovasi dan memberikan solusi terbaru yang sesuai dengan tren pasar dan kebutuhan pelanggan.
-                    <br/>Keberlanjutan: Kami percaya bahwa keberlanjutan adalah kunci untuk masa depan yang lebih baik. Oleh karena itu, kami berkomitmen untuk mengurangi dampak lingkungan melalui produksi yang ramah lingkungan dan penggunaan bahan daur ulang.
+                    <span className="font-bold">Apa yang Kami Tawarkan </span> 
+                    Core Business kami adalah penyedia kebutuhan Pembangunan disektor antara lain penguatan 
+                    Tanah dengan menawarkan produk Geotextile dengan varian-varian yang ada.<br/><br/><br/>
+                    <span className="font-bold">Keunggulan Kami </span> 
+                    Produk yang kami tawarkan adalah produk yang langsung dihasilkan dari hasil Pabrikasi dengan 
+                    mesin berteknologi tinggi sehingga menghasilkan produk Geotextile berkualitas dan memenuhi 
+                    Standart yang ditetapkan. Untuk tetap menjaga kualitas, kami selalu mengadakan ujicoba (test) 
+                    secara berkala dengan melibatkan Lembaga ujicoba secara Independent, berkompeten dan terakriditasi. 
+                    Oleh sebab itu kami memberikan jaminan & kenyamanan terhadap setiap Konsume didalam menggunakan produk-produk 
+                    yang kami tawarkan.
                   </p>
                 </div>
               </div>
@@ -165,7 +169,7 @@ export default function About() {
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
             <Image
-              src="/displayAbout/about-product1.jpg"
+              src="/displayAbout/about-product3.jpg"
               alt="Devialet Product 1"
               layout="fill"
               className="object-cover"
@@ -177,7 +181,7 @@ export default function About() {
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
             <Image
-              src="/displayAbout/about-product2.jpg"
+              src="/displayAbout/about-product4.jpg"
               alt="Devialet Product 2"
               layout="fill"
               className="object-cover"
@@ -189,7 +193,7 @@ export default function About() {
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
             <Image
-              src="/displayAbout/about-product3.jpg"
+              src="/displayAbout/about-product5.jpg"
               alt="Devialet Product 3"
               layout="fill"
               className="object-cover"
@@ -201,7 +205,7 @@ export default function About() {
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
             <Image
-              src="/displayAbout/about-product1.jpg"
+              src="/displayAbout/about-product6.jpg"
               alt="Devialet Product 4"
               layout="fill"
               className="object-cover"
@@ -213,7 +217,7 @@ export default function About() {
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
             <Image
-              src="/displayAbout/about-product2.jpg"
+              src="/displayAbout/about-product7.jpg"
               alt="Devialet Product 5"
               layout="fill"
               className="object-cover"
@@ -283,11 +287,38 @@ export default function About() {
       </div>
     </div>
   </section>
-                  <div className="text-sm mb-12 text-center">
+  <div className="text-sm mb-12 text-left px-4 ml-64 mr-64">
                   <p className="mb-4">
-                    <span className="font-bold">Hubungi Kami</span> Kami senang dapat membantu Anda. 
-                    Jika Anda memiliki pertanyaan atau ingin mengetahui lebih lanjut tentang produk kami, 
-                    jangan ragu untuk menghubungi kami melalui halaman kontak.
+                    <span className="font-bold">CV. Sentra Teknologi Investama </span>
+                    didirikan di pertengahan tahun 2019 sebagai usaha kecil-menengah yang mengawali kegiatan 
+                    sebagai supplier kebutuhan pabrik di kawasan Industri di kota Serang, kemudian mengembangkan 
+                    diri dan fokus pada penyedia kebutuhan Geosyntethics untuk pembangunan infrastruktur.  
+                    Kami menjual Geotextile antara lain Geotextile Non Woven, Geotextile Woven, Geomembrane, Geocell, Geobag/Sandbag dan Plastik Cor, dll.
+                    <br/><br/>
+                    Produk yang kami hasilkan merupakan hasil dari proses produksi yang berkualitas tinggi dengan menggunakan mesin-mesin canggih & 
+                    modern serta Kapasitas produksi yang tinggi sehingga menghasilkan produk dengan jumlah yang besar.
+                    <br/><br/>
+                    Sentra Geotex adalah nama produk kami yang dapat dan cocok diaplikasikan pada berbagai Proyek Sipil, Proyek Bangunan, 
+                    Teknik Lingkungn hingga Pertanian.
+                    <br/>
+                    Kami juga dapat membantu memberikan masukan (advise), perencanaan dan perhitungan untuk menentukan jenis geotextile apa yang 
+                    sesuai, berapa Volume yang dibutuhkan, dll. 
+                    <br/><br/>
+                    Produk Geotextile sangat cocok digunakan pada struktur tanah yang kurang baik dimana Pembangunan infrastruktur terpaksa dilakukan 
+                    di atas tanah gambut atau tanah ber-air seperti Pembangunan :
+                    <br/><br/>
+                    ●	Kontruksi Jalan Raya/Tol			<br/>
+                    ●	Bandara Udara<br/>
+                    ●	Pengelolaan Air Limbah<br/>
+                    ●	Landasan rel Kereta Api<br/>
+                    ●	Tambak Udang/Garam<br/>
+                    ●	Waduk, Tepi Sungai, Pantai, dll
+                    <br/><br/>
+                    <span className="font-bold">CV. Sentra Teknologi Investama </span>
+                    menyediakan Geosyntetic berbahan dasar Polimer (Polyester, Polypropylene) yang memiliki 
+                    daya Tarik kuat dan kemuluran yang tinggi dan telah diuji di laboratorium pengujian tekstil (ASTM) dan berasal dari pabrik yang 
+                    memiliki standardisasi 
+                    <span className="font-bold"> SNI-7718:2011, ISO 9001-2008 dan UKAS-Quality Management.</span>
                   </p>
                 </div>
         </main>

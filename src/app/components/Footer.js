@@ -45,7 +45,10 @@ export default function Footer() {
                     <address>
                       {addressData.address} <br/>
                       {addressData.city}<br />
-                      <strong>Phone:</strong> {addressData.phone}<br />
+                      <strong>Phone:</strong><br/>
+                      -Banten: {addressData.phone.banten}<br/>
+                      -Jakarta: {addressData.phone.jakarta}<br/>
+                      -Kalimantan Barat: {addressData.phone.kalimantanbarat}<br />
                       <strong>Fax:</strong> {addressData.fax}<br />
                       <strong>Email:</strong> <a href={`mailto:${addressData.email}`} className="text-gray-300 hover:text-white">{addressData.email}</a>
                     </address>

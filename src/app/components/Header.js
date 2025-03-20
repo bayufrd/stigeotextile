@@ -27,10 +27,10 @@ export default function Header() {
   return (
     <header className="relative w-full py-16 px-4">
       <div 
-        className="absolute inset-0 z-0 bg-cover bg-center bg-fixed bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] brightness-50" 
+        className="absolute inset-0 z-0 bg-cover bg-center bg-fixed bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] brightness-50"
+        style={{backgroundSize: 'cover', backgroundPosition: 'center center'}}
       ></div>
-      
-      <div className="relative z-10 hero-content">
+      <div className="relative z-20 hero-content">
         <h1 className="hero-title mt-6">{getPageTitle()}</h1>
       </div>
     </header>

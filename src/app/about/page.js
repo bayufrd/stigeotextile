@@ -146,20 +146,19 @@ export default function About() {
             </div>
           </section>
 
-  {/* Gallery Section */}
-  <section className="py-16 bg-gray-100 w-full">
-    <div className="relative w-full overflow-hidden">
-      {/* Left navigation button */}
-      <button 
-        onClick={() => handleSlideChange('prev')} 
-        className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition-colors"
-        aria-label="Previous slide"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-        </svg>
-      </button>
-      
+      {/* Gallery Section */}
+      <section className="py-16 bg-gray-100 w-full">
+        <div className="relative w-full overflow-hidden">
+          {/* Left navigation button */}
+          <button 
+            onClick={() => handleSlideChange('prev')} 
+            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+            aria-label="Previous slide"
+          >
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+            </svg>
+          </button>
       {/* Carousel container */}
       <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
         {/* First slide */}
@@ -169,11 +168,11 @@ export default function About() {
               src="/displayAbout/about-product1.jpg"
               alt="Devialet Product 1"
               layout="fill"
-              objectFit="contain"
+              className="object-cover"
             />
           </div>
         </div>
-        
+
         {/* Second slide */}
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
@@ -181,11 +180,11 @@ export default function About() {
               src="/displayAbout/about-product2.jpg"
               alt="Devialet Product 2"
               layout="fill"
-              objectFit="contain"
+              className="object-cover"
             />
           </div>
         </div>
-        
+
         {/* Third slide */}
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
@@ -193,23 +192,23 @@ export default function About() {
               src="/displayAbout/about-product3.jpg"
               alt="Devialet Product 3"
               layout="fill"
-              objectFit="contain"
+              className="object-cover"
             />
           </div>
         </div>
-        
+
         {/* Fourth slide */}
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
             <Image
-              src="/displayAbout/about-product1.jpg" 
+              src="/displayAbout/about-product1.jpg"
               alt="Devialet Product 4"
               layout="fill"
-              objectFit="contain"
+              className="object-cover"
             />
           </div>
         </div>
-        
+
         {/* Fifth slide */}
         <div className="min-w-full flex justify-center items-center">
           <div className="w-full relative h-[500px] overflow-hidden">
@@ -217,22 +216,22 @@ export default function About() {
               src="/displayAbout/about-product2.jpg"
               alt="Devialet Product 5"
               layout="fill"
-              objectFit="contain"
+              className="object-cover"
             />
           </div>
         </div>
       </div>
-      
+
       {/* Right navigation button */}
-      <button 
-        onClick={() => handleSlideChange('next')} 
-        className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 transition-colors"
-        aria-label="Next slide"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-        </svg>
-      </button>
+    <button 
+      onClick={() => handleSlideChange('next')} 
+      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+      aria-label="Next slide"
+    >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+      </svg>
+    </button>
     </div>
     
     <div className="container mx-auto px-4 mt-12">

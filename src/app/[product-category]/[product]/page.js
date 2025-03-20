@@ -3,6 +3,7 @@
 import { notFound } from "next/navigation";
 import { useParams } from "next/navigation";
 import { products } from "../../data/products";
+// import Breadcrumb from "@/app/components/Breadcrumb";
 
 const ProductDetail = () => {
     const { "product-category": category, product } = useParams();
@@ -15,10 +16,13 @@ const ProductDetail = () => {
     if (!productData) return notFound(); 
 
     return (
-        <div>
-            <h1>{productData.name}</h1>
-            <p>{productData.description}</p>
-        </div>
+        <>
+            {/* <Breadcrumb /> */}
+            <div>
+                <h1>{productData.name}</h1>
+                <p>{productData.description}</p>
+            </div>
+        </>
     );
 };
 

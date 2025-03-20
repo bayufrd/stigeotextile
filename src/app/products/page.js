@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import ProductCategoryCard from "../components/ProductCategoryCard";
+// import Breadcrumb from "../components/Breadcrumb";
 import { products } from "@/app/data/products";
 
 const ProductsPage = () => {
@@ -31,65 +32,68 @@ const ProductsPage = () => {
     }, [currentPage]); // Akan dijalankan setiap currentPage berubah
 
     return (
-        <div className="flex px-2 gap-5 py-8 h-auto">
-            {/* Sidebar for Categories */}
-            <ProductCategoryCard 
-                selectedCategory={selectedCategory} 
-                onSelectCategory={(category) => {
-                    setSelectedCategory(category);
-                    setCurrentPage(1);
-                    scrollToTop(); 
-                }}  
-            />
+        <>
+            {/* <Breadcrumb /> */}
+            <div className="flex px-2 gap-5 py-8 h-auto">
+                {/* Sidebar for Categories */}
+                <ProductCategoryCard 
+                    selectedCategory={selectedCategory} 
+                    onSelectCategory={(category) => {
+                        setSelectedCategory(category);
+                        setCurrentPage(1);
+                        scrollToTop(); 
+                    }}  
+                />
 
-            <div className="w-full">
-                {/* Products */}
-                <div className="grid grid-cols-1 gap-6">
-                    {currentProducts.length > 0 ? (
-                        currentProducts.map((product, index) => (
-                            <ProductCard key={index} {...product} />
-                        ))
-                    ) : (
-                        <p className="text-gray-500">No products found for this category.</p>
+                <div className="w-full">
+                    {/* Products */}
+                    <div className="grid grid-cols-1 gap-6">
+                        {currentProducts.length > 0 ? (
+                            currentProducts.map((product, index) => (
+                                <ProductCard key={index} {...product} />
+                            ))
+                        ) : (
+                            <p className="text-gray-500">No products found for this category.</p>
+                        )}
+                    </div>
+
+                    {/* Pagination Controls */}
+                    {totalPages > 1 && (
+                        <div className="flex justify-center items-center gap-4 mt-6">
+                            <button
+                                onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
+                                disabled={currentPage === 1}
+                                className={`px-4 py-2 rounded font-bold ${currentPage === 1 ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700 text-white"}`}
+                            >
+                                Previous
+                            </button>
+                            <span className="font-bold">{currentPage} / {totalPages}</span>
+                            <button
+                                onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
+                                disabled={currentPage === totalPages}
+                                className={`px-4 py-2 rounded font-bold ${currentPage === totalPages ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700 text-white"}`}
+                            >
+                                Next
+                            </button>
+                        </div>
+                    )}
+
+                    {/* Show All Products Button */}
+                    {selectedCategory && (
+                        <button
+                            onClick={() => {
+                                setSelectedCategory(null);
+                                setCurrentPage(1);
+                                scrollToTop(); 
+                            }}
+                            className="mt-6 w-full p-3 bg-blue-600 text-white font-bold rounded hover:bg-blue-700"
+                        >
+                            Show All Products
+                        </button>
                     )}
                 </div>
-
-                {/* Pagination Controls */}
-                {totalPages > 1 && (
-                    <div className="flex justify-center items-center gap-4 mt-6">
-                        <button
-                            onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
-                            disabled={currentPage === 1}
-                            className={`px-4 py-2 rounded font-bold ${currentPage === 1 ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700 text-white"}`}
-                        >
-                            Previous
-                        </button>
-                        <span className="font-bold">{currentPage} / {totalPages}</span>
-                        <button
-                            onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
-                            disabled={currentPage === totalPages}
-                            className={`px-4 py-2 rounded font-bold ${currentPage === totalPages ? "bg-gray-400" : "bg-blue-600 hover:bg-blue-700 text-white"}`}
-                        >
-                            Next
-                        </button>
-                    </div>
-                )}
-
-                {/* Show All Products Button */}
-                {selectedCategory && (
-                    <button
-                        onClick={() => {
-                            setSelectedCategory(null);
-                            setCurrentPage(1);
-                            scrollToTop(); 
-                        }}
-                        className="mt-6 w-full p-3 bg-blue-600 text-white font-bold rounded hover:bg-blue-700"
-                    >
-                        Show All Products
-                    </button>
-                )}
             </div>
-        </div>
+        </>
     );
 };
 

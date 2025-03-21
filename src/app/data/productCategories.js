@@ -6,5 +6,21 @@ export const ProductCategories = [
     { name: "Geocell" },
     { name: "Geobag" },
     { name: "Three-dimensional Vegetation Network" },
-    { name: "Grass Grid" }
+    { name: "Grass Grid" },
+    { name: "Geogrid Kedua" },
+    { name: "Geotextile Kedua" },
+    { name: "Geomembrane Kedua" },
+    { name: "Composite Geomembrane Kedua" },
+    { name: "Geocell Kedua" },
+    { name: "Geobag Kedua" },
+    { name: "Three-dimensional Vegetation Network Kedua"},
+    { name: "Grass Grid Kedua" },
+    { name: "Geogrid Kedua" },
+    { name: "Geotextil Ketigae" },
+    { name: "Geomembrane Ketiga" },
+    { name: "Composite Geomembrane Ketiga" },
+    { name: "Geocell Ketiga" },
+    { name: "Geobag Ketiga"},
+    { name: "Three-dimensional Vegetation Network Ketiga" },
+    { name: "Grass Grid Ketiga" }
 ];

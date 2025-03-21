@@ -5,74 +5,50 @@ import Link from "next/link";
 import { useState } from "react";
 import { slugify } from "@/utils/slugify";
 
-const ProductCard = ({ images, name, description, details, specs, category, slug_category, slug_product }) => {
+const ProductCard = ({ images, name, category, description, details, specs, slug_category, slug_product }) => {
     const [currentImageIndex, setCurrentImageIndex] = useState(0);
+    const hasImages = images.length > 0;
     const categorySlug = slug_category ? slug_category : slugify(category) || "uncategorized";
     const productSlug = slug_product ? slug_product : slugify(name);
-    const hasImages = images.length > 0;
-
-    const prevImage = () => {
-        setCurrentImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
-    };
-
-    const nextImage = () => {
-        setCurrentImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
-    };
 
     return (
-        <div className="relative flex border rounded-2xl p-4 shadow-md w-full">
-            {/* Image Slider */}
-            <div className="w-1/2 flex items-center justify-center border-r pb-10 pr-10 pl-6 pt-6 relative">
-                {hasImages && (
-                    <button
-                        onClick={prevImage}
-                        className="absolute left-2 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
-                    >
-                        <i className="fa-solid fa-circle-left text-xl" />
-                    </button>
-                )}
-
-                <div className="relative w-[500px] h-[480px] rounded-xl shadow-xl overflow-hidden group">
-                    <Image
-                        src={images.length > 0 ? images[currentImageIndex] : "/no-image.jpg"}
-                        alt={name}
-                        width={560}
-                        height={480}
-                        className="w-full h-full object-cover rounded-lg transition-transform duration-300 ease-in-out group-hover:scale-110"
-                        priority
-                    />
+        <div className="flex flex-col items-center justify-center py-10 px-6">
+            <h2 className="text-2xl font-semibold mb-4">{name}</h2>
+            <p className="text-gray-600 text-center mb-6">{description}</p>
+            
+            <div className="flex items-center w-full max-w-4xl">
+                {/* Left Section (Details) */}
+                <div className="w-1/3 space-y-6 text-right pr-4">
+                    <h3 className="text-lg font-medium text-blue-600">Category</h3>
+                    <p className="text-gray-600 text-sm">{category}</p>
+                    <h3 className="text-lg font-medium text-blue-600">Specifications</h3>
+                    <p className="text-gray-600 text-sm">{specs}</p>
                 </div>
-
-                <div className="absolute bottom-0 left-1/2 transform -translate-x-1/2 bg-black bg-opacity-50 text-white px-3 py-1 rounded text-sm">
-                    {hasImages ? `${currentImageIndex + 1} / ${images.length}` : "No Image"}
+                
+                {/* Product Image */}
+                <div className="w-1/3 flex flex-col items-center">
+                    <div className="relative w-48 h-48 mb-4">
+                        <Image
+                            src={hasImages ? images[currentImageIndex] : "/no-image.jpg"}
+                            alt={name}
+                            width={192}
+                            height={192}
+                            className="w-full h-full object-cover"
+                        />
+                    </div>
+                    <div className="flex space-x-2">
+                        {images.map((img, index) => (
+                            <button key={index} onClick={() => setCurrentImageIndex(index)}
+                                className={`w-6 h-6 border rounded-full ${currentImageIndex === index ? 'border-blue-600' : 'border-gray-300'}`}></button>
+                        ))}
+                    </div>
                 </div>
-
-                {hasImages && (
-                    <button
-                        onClick={nextImage}
-                        className="absolute right-6 top-1/2 transform -translate-y-1/2 text-black rounded-full z-10"
-                    >
-                        <i className="fa-solid fa-circle-right text-xl" />
-                    </button>
-                )}
-            </div>
-
-            {/* Product Details */}
-            <div className="w-1/2 pr-2 pl-4 pb-4 flex flex-col justify-between">
-                <div className="space-y-4">
-                    <h2 className="text-xl text-center font-semibold border-b-2 shadow-lg pb-2">{name}</h2>
-                    <p className="text-gray-700">{description}</p>
-                    {details && <p className="text-sm text-gray-500">{details}</p>}
-                    <p className="text-sm font-medium text-gray-900">{specs}</p>
-                </div>
-                {/* Button detail */}
-                <div>
-                    <Link
-                        href={`/${categorySlug}/${productSlug}`}
-                        className="flex justify-center bg-blue-600 text-white px-4 py-3 rounded-lg hover:bg-blue-700 transition"
-                    >
-                        Detail Produk
-                    </Link>
+                
+                {/* Right Section (Details) */}
+                <div className="w-1/3 space-y-6 text-left pl-4">
+                    <h3 className="text-lg font-medium text-blue-600">Details</h3>
+                    <p className="text-gray-600 text-sm">{details || "No additional details available."}</p>
+                    <Link href={`/${categorySlug}/${productSlug}`} className="text-blue-600 underline">View Product</Link>
                 </div>
             </div>
         </div>

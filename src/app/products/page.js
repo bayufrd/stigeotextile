@@ -3,25 +3,33 @@
 import { useState, useEffect } from "react";
 import ProductCard from "../components/ProductCard";
 import ProductCategoryCard from "../components/ProductCategoryCard";
-// import Breadcrumb from "../components/Breadcrumb";
 import { products } from "@/app/data/products";
 
 const ProductsPage = () => {
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const [currentPage, setCurrentPage] = useState(1);
+    const productsPerPage = 5;
 
      // Scroll to top function
-     const scrollToTop = () => {
+    const scrollToTop = () => {
         window.scrollTo({ top: 130, behavior: "smooth" });
     };
 
-     // Filtration by Category
-     const filteredProducts = selectedCategory
-     ? products.filter((product) => product.category === selectedCategory)
-     : products;
+    // Ambil kategori dari sessionStorage jika datang dari breadcrumb
+    useEffect(() => {
+        const storedCategory = sessionStorage.getItem("selectedCategory");
+        if (storedCategory) {
+            setSelectedCategory(storedCategory);
+            sessionStorage.removeItem("selectedCategory");
+        }
+    }, []);
+
+    // Filtration by Category
+    const filteredProducts = selectedCategory
+        ? products.filter((product) => product.category.toLowerCase() === selectedCategory)
+        : products;
 
     // Pagination Products
-    const [currentPage, setCurrentPage] = useState(1);
-    const productsPerPage = 5; // Jumlah produk per halaman
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage); // Hitung total halaman
     const startIndex = (currentPage - 1) * productsPerPage; // Hitung produk yang ditampilkan di halaman saat ini
     const currentProducts = filteredProducts.slice(startIndex, startIndex + productsPerPage);
@@ -33,13 +41,12 @@ const ProductsPage = () => {
 
     return (
         <>
-            {/* <Breadcrumb /> */}
-            <div className="flex px-2 gap-5 py-8 h-auto">
+            <div className="flex flex-col px-2 gap-5 py-8 h-auto mx-auto">
                 {/* Sidebar for Categories */}
                 <ProductCategoryCard 
                     selectedCategory={selectedCategory} 
                     onSelectCategory={(category) => {
-                        setSelectedCategory(category);
+                        setSelectedCategory(category.toLowerCase());
                         setCurrentPage(1);
                         scrollToTop(); 
                     }}  

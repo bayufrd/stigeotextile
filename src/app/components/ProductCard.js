@@ -12,13 +12,13 @@ const ProductCard = ({ images, name, category, description, details, specs, slug
     const productSlug = slug_product ? slug_product : slugify(name);
 
     return (
-        <div className="flex flex-col items-center justify-center py-10 px-6">
+        <div className="flex flex-col items-center justify-center py-10 border-b last:border-b-0">
             <h2 className="text-2xl font-semibold mb-4">{name}</h2>
-            <p className="text-gray-600 text-center mb-6">{description}</p>
+            <p className="w-2/4 text-gray-600 text-center mb-6">{description}</p>
             
-            <div className="flex items-center w-full max-w-4xl">
+            <div className="flex items-center w-full">
                 {/* Left Section (Details) */}
-                <div className="w-1/3 space-y-6 text-right pr-4">
+                <div className="w-1/4 space-y-6 text-right pr-4">
                     <h3 className="text-lg font-medium text-blue-600">Category</h3>
                     <p className="text-gray-600 text-sm">{category}</p>
                     <h3 className="text-lg font-medium text-blue-600">Specifications</h3>
@@ -26,14 +26,14 @@ const ProductCard = ({ images, name, category, description, details, specs, slug
                 </div>
                 
                 {/* Product Image */}
-                <div className="w-1/3 flex flex-col items-center">
-                    <div className="relative w-48 h-48 mb-4">
+                <div className="w-2/4 flex flex-col items-center">
+                    <div className="relative w-[480px] h-[480px] mb-4">
                         <Image
                             src={hasImages ? images[currentImageIndex] : "/no-image.jpg"}
                             alt={name}
-                            width={192}
-                            height={192}
-                            className="w-full h-full object-cover"
+                            width={480}
+                            height={480}
+                            className="w-full h-full object-cover rounded-xl"
                         />
                     </div>
                     <div className="flex space-x-2">
@@ -45,7 +45,7 @@ const ProductCard = ({ images, name, category, description, details, specs, slug
                 </div>
                 
                 {/* Right Section (Details) */}
-                <div className="w-1/3 space-y-6 text-left pl-4">
+                <div className="w-1/4 space-y-6 text-left pl-4">
                     <h3 className="text-lg font-medium text-blue-600">Details</h3>
                     <p className="text-gray-600 text-sm">{details || "No additional details available."}</p>
                     <Link href={`/${categorySlug}/${productSlug}`} className="text-blue-600 underline">View Product</Link>

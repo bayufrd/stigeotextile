@@ -36,8 +36,8 @@ export default function Navbar() {
     return (
         <nav
         className={`
-            ${isAtTop ? "absolute bg-transparent" : "fixed before:content-[''] before:absolute before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1] backdrop-blur-lg"} 
-            top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-300 z-50 
+            ${isAtTop ? "relative bg-transparent" : "fixed before:content-[''] before:relative before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1] backdrop-blur-lg"} 
+            top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-500 z-50 
             ${isVisible ? "translate-y-0" : "-translate-y-full"}
         `} 
     >
@@ -51,7 +51,7 @@ export default function Navbar() {
                         priority
                     />
                 </Link>
-                <div className="hidden md:flex space-x-4"> 
+                <div className="hidden md:flex space-x-4 text-l gap-5 font-bold"> 
                     {navigation.map((item) => (
                         <Link key={item.name} href={item.href} className="hover:underline">{item.name}</Link>
                     ))}

@@ -310,40 +310,6 @@ export default function Home() {
       </div>
     </div>
   </section>
-  <div className="text-sm mb-12 text-left px-4 ml-64 mr-64">
-                  <p className="mb-4">
-                    <span className="font-bold">CV. Sentra Teknologi Investama </span>
-                    didirikan di pertengahan tahun 2019 sebagai usaha kecil-menengah yang mengawali kegiatan 
-                    sebagai supplier kebutuhan pabrik di kawasan Industri di kota Serang, kemudian mengembangkan 
-                    diri dan fokus pada penyedia kebutuhan Geosyntethics untuk pembangunan infrastruktur.  
-                    Kami menjual Geotextile antara lain Geotextile Non Woven, Geotextile Woven, Geomembrane, Geocell, Geobag/Sandbag dan Plastik Cor, dll.
-                    <br/><br/>
-                    Produk yang kami hasilkan merupakan hasil dari proses produksi yang berkualitas tinggi dengan menggunakan mesin-mesin canggih & 
-                    modern serta Kapasitas produksi yang tinggi sehingga menghasilkan produk dengan jumlah yang besar.
-                    <br/><br/>
-                    Sentra Geotex adalah nama produk kami yang dapat dan cocok diaplikasikan pada berbagai Proyek Sipil, Proyek Bangunan, 
-                    Teknik Lingkungn hingga Pertanian.
-                    <br/>
-                    Kami juga dapat membantu memberikan masukan (advise), perencanaan dan perhitungan untuk menentukan jenis geotextile apa yang 
-                    sesuai, berapa Volume yang dibutuhkan, dll. 
-                    <br/><br/>
-                    Produk Geotextile sangat cocok digunakan pada struktur tanah yang kurang baik dimana Pembangunan infrastruktur terpaksa dilakukan 
-                    di atas tanah gambut atau tanah ber-air seperti Pembangunan :
-                    <br/><br/>
-                    ●	Kontruksi Jalan Raya/Tol			<br/>
-                    ●	Bandara Udara<br/>
-                    ●	Pengelolaan Air Limbah<br/>
-                    ●	Landasan rel Kereta Api<br/>
-                    ●	Tambak Udang/Garam<br/>
-                    ●	Waduk, Tepi Sungai, Pantai, dll
-                    <br/><br/>
-                    <span className="font-bold">CV. Sentra Teknologi Investama </span>
-                    menyediakan Geosyntetic berbahan dasar Polimer (Polyester, Polypropylene) yang memiliki 
-                    daya Tarik kuat dan kemuluran yang tinggi dan telah diuji di laboratorium pengujian tekstil (ASTM) dan berasal dari pabrik yang 
-                    memiliki standardisasi 
-                    <span className="font-bold"> SNI-7718:2011, ISO 9001-2008 dan UKAS-Quality Management.</span>
-                  </p>
-                </div>
         </main>
       </div>
     );

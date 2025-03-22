@@ -21,7 +21,7 @@ const ProductsPage = () => {
 
      // Scroll to top function
     const scrollToTop = () => {
-        window.scrollTo({ top: 130, behavior: "smooth" });
+        window.scrollTo({ top: 735, behavior: "smooth" });
     };
 
     // Ambil kategori dari sessionStorage jika datang dari breadcrumb

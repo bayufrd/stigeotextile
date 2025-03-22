@@ -9,15 +9,6 @@ export default function Navbar() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAtTop, setIsAtTop] = useState(true);
-    // const [navHeight, setNavHeight] = useState(0);
-    // const navRef = useRef(null);
-
-    // useLayoutEffect(() => {
-    //     if (navRef.current) {
-    //         setNavHeight(navRef.current.offsetHeight);
-    //         console.log("Navbar height:", navRef.current.offsetHeight);
-    //     }
-    // }, []);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -38,6 +29,16 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, [lastScrollY]);
 
+    useEffect(() => {
+        if (isVisible && !isAtTop) {
+            const timer = setTimeout(() => {
+                setIsVisible(false);
+            }, 2500);
+            
+            return () => clearTimeout(timer);
+        }
+    }, [isVisible, isAtTop]);
+
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
@@ -47,7 +48,7 @@ export default function Navbar() {
             <div className={`transition-transform duration-500 ${isAtTop ? "h-0" : "h-[91px]"}`}></div>
             <nav
                 className={`
-                    ${isAtTop ? "relative bg-transparent" : "fixed before:content-[''] before:relative before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1] backdrop-blur-lg"} 
+                    ${isAtTop ? "relative bg-transparent" : "fixed before:content-[''] before:relative before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1] bg-[#0A1E2B]"} 
                     top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-500 z-50 
                     ${isVisible ? "translate-y-0" : "-translate-y-full"}
                 `} 

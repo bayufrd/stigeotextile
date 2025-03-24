@@ -80,7 +80,7 @@ const ProductsPage = () => {
                         </div>
                     </div>
                     <div className="w-1/2 flex justify-center ml-4">
-                        <div className="w-2/3 relative h-[600px] rounded-lg rounded-t-[50%] border-2 border-gray-400 overflow-hidden">
+                        <div className="w-2/3 relative h-[600px] rounded-lg rounded-t-[50%] border-t-4 border-x-4 border-white overflow-hidden">
                             {slides.map((slide, index) => (
                                 <div 
                                     key={index}

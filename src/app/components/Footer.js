@@ -1,7 +1,7 @@
 'use client';
 
 import { addressData } from '../data/addressData';
-import { navigation } from '../data/navigation'; // Import navigasi dari file navigation.js
+import { navigation } from '../data/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
@@ -14,8 +14,7 @@ export default function Footer() {
         style={{
           backgroundImage: "url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')", 
           filter: "brightness(0.3)",
-          backgroundAttachment: "fixed" // Corrected property
-
+          backgroundAttachment: "fixed"
         }}
       ></div>
       
@@ -71,9 +70,9 @@ export default function Footer() {
               </Link>
             </div>
           </div>
-          {/* Navigation - Menggunakan data dari navigation.js */}
-          <div className="flex flex-col">
-            <h3 className="text-lg font-bold mb-4 mt-0 pt-0">Navigation</h3>
+          {/* Navigation - Menggunakan data dari navigation.js dengan padding sesuai */}
+          <div className="flex flex-col md:pt-[120px]">
+            <h3 className="text-lg font-bold mb-4">Navigation</h3>
             <ul className="space-y-2">
               {navigation.map((item) => (
                 <li key={item.name}>
@@ -85,13 +84,13 @@ export default function Footer() {
             </ul>
           </div>
           
-          {/* Work Hours - Aligned with company name */}
-          <div className="flex flex-col">
-            <h3 className="text-lg font-bold mb-2 mt-0 pt-0">Work Hours</h3>
+          {/* Work Hours - dengan padding sesuai */}
+          <div className="flex flex-col md:pt-[120px]">
+            <h3 className="text-lg font-bold mb-2">Work Hours</h3>
             <p className="text-gray-300">{addressData.hours}</p>
             
             <div className="mt-4">
-              <Link href={`tel:${addressData.phone}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
+              <Link href={`tel:${addressData.phone.banten}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
                 Call Us
               </Link>
             </div>

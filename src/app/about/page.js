@@ -2,6 +2,7 @@
 
 import Head from 'next/head';
 import Image from 'next/image';
+import { aboutData } from '../data/aboutData';
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
@@ -46,7 +47,7 @@ export default function About() {
           <div className="container mx-auto px-4 py-6">
             <div className="flex justify-between items-center">
               <div className="text-4xl font-bold">SENTRA TEKNOLOGI INVESTAMA</div>
-              <div className="text-xs text-gray-500">Inovasi dalam Setiap Benang, Kemajuan di Setiap Langkah</div>
+              <div className="text-xs text-gray-500">{aboutData.aboutMotto}</div>
               <div className="flex space-x-4">
                 <Link href="https://instagram.com" className="text-gray-600 hover:text-gray-900">
                   <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
@@ -107,7 +108,7 @@ export default function About() {
           
           <div className="container mx-auto px-4 py-8">
             <div className="text-sm text-gray-600 text-center max-w-md mx-auto">
-            Kualitas Tanpa Kompromi, Inovasi Tanpa Henti.
+            {aboutData.aboutSlogan}
               {/* Removed duplicate slider indicators here */}
             </div>
           </div>
@@ -117,33 +118,24 @@ export default function About() {
             <div className="container mx-auto px-4">
               <h2 className="text-3xl font-bold mb-2 text-center">ABOUT US</h2>
               <p className="text-sm text-gray-600 mb-12 text-center">
-              Selamat datang di CV. Sentra Teknologi Investama, 
-              sebuah perusahaan yang bergerak di bidang penyediaan produk Geotextile dengan kualitas terbaik dan telah memenuhi Standar Nasional. 
+              {aboutData.aboutDetail}
             </p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                 <div className="text-sm leading-relaxed">
                   <p className="mb-4">
-                    <span className="font-bold">VISI </span> 
-                    Menjadi produsen Geotextile terkemuka dengan menyediakan produk berkualitas tinggi, 
-                    bertaraf Nasional dan berperan didalam menunjang Pembangunan di Indonesia.<br/><br/><br/>
-                    <span className="font-bold">MISI </span> 
-                    Perusahaan yang selalu siap menyediakan produk-produk Geotextile di pasaran agar supaya kelangsungan Pembangunan tidak terganggu 
-                    dan menciptakan Inovasi dan efesiensi di berbagai bidang.
+                    <span className="font-bold">VISI </span><br/>
+                    {aboutData.aboutVisi}<br/><br/><br/>
+                    <span className="font-bold">MISI </span><br/>
+                    {aboutData.aboutMisi}
                   </p>
                 </div>
                 <div className="text-sm leading-relaxed">
                   <p className="mb-4">
-                    <span className="font-bold">Apa yang Kami Tawarkan </span> 
-                    Core Business kami adalah penyedia kebutuhan Pembangunan disektor antara lain penguatan 
-                    Tanah dengan menawarkan produk Geotextile dengan varian-varian yang ada.<br/><br/><br/>
-                    <span className="font-bold">Keunggulan Kami </span> 
-                    Produk yang kami tawarkan adalah produk yang langsung dihasilkan dari hasil Pabrikasi dengan 
-                    mesin berteknologi tinggi sehingga menghasilkan produk Geotextile berkualitas dan memenuhi 
-                    Standart yang ditetapkan. Untuk tetap menjaga kualitas, kami selalu mengadakan ujicoba (test) 
-                    secara berkala dengan melibatkan Lembaga ujicoba secara Independent, berkompeten dan terakriditasi. 
-                    Oleh sebab itu kami memberikan jaminan & kenyamanan terhadap setiap Konsume didalam menggunakan produk-produk 
-                    yang kami tawarkan.
+                    <span className="font-bold">Apa yang Kami Tawarkan </span><br/>
+                    {aboutData.aboutOffers}<br/><br/><br/>
+                    <span className="font-bold">Keunggulan Kami </span><br/>
+                    {aboutData.aboutAdvantages}
                   </p>
                 </div>
               </div>
@@ -288,39 +280,12 @@ export default function About() {
     </div>
   </section>
   <div className="text-sm mb-12 text-left px-4 ml-64 mr-64">
-                  <p className="mb-4">
-                    <span className="font-bold">CV. Sentra Teknologi Investama </span>
-                    didirikan di pertengahan tahun 2019 sebagai usaha kecil-menengah yang mengawali kegiatan 
-                    sebagai supplier kebutuhan pabrik di kawasan Industri di kota Serang, kemudian mengembangkan 
-                    diri dan fokus pada penyedia kebutuhan Geosyntethics untuk pembangunan infrastruktur.  
-                    Kami menjual Geotextile antara lain Geotextile Non Woven, Geotextile Woven, Geomembrane, Geocell, Geobag/Sandbag dan Plastik Cor, dll.
-                    <br/><br/>
-                    Produk yang kami hasilkan merupakan hasil dari proses produksi yang berkualitas tinggi dengan menggunakan mesin-mesin canggih & 
-                    modern serta Kapasitas produksi yang tinggi sehingga menghasilkan produk dengan jumlah yang besar.
-                    <br/><br/>
-                    Sentra Geotex adalah nama produk kami yang dapat dan cocok diaplikasikan pada berbagai Proyek Sipil, Proyek Bangunan, 
-                    Teknik Lingkungn hingga Pertanian.
-                    <br/>
-                    Kami juga dapat membantu memberikan masukan (advise), perencanaan dan perhitungan untuk menentukan jenis geotextile apa yang 
-                    sesuai, berapa Volume yang dibutuhkan, dll. 
-                    <br/><br/>
-                    Produk Geotextile sangat cocok digunakan pada struktur tanah yang kurang baik dimana Pembangunan infrastruktur terpaksa dilakukan 
-                    di atas tanah gambut atau tanah ber-air seperti Pembangunan :
-                    <br/><br/>
-                    ●	Kontruksi Jalan Raya/Tol			<br/>
-                    ●	Bandara Udara<br/>
-                    ●	Pengelolaan Air Limbah<br/>
-                    ●	Landasan rel Kereta Api<br/>
-                    ●	Tambak Udang/Garam<br/>
-                    ●	Waduk, Tepi Sungai, Pantai, dll
-                    <br/><br/>
-                    <span className="font-bold">CV. Sentra Teknologi Investama </span>
-                    menyediakan Geosyntetic berbahan dasar Polimer (Polyester, Polypropylene) yang memiliki 
-                    daya Tarik kuat dan kemuluran yang tinggi dan telah diuji di laboratorium pengujian tekstil (ASTM) dan berasal dari pabrik yang 
-                    memiliki standardisasi 
-                    <span className="font-bold"> SNI-7718:2011, ISO 9001-2008 dan UKAS-Quality Management.</span>
-                  </p>
-                </div>
+  {aboutData.aboutMoreDetails.map((paragraph, index) => (
+    paragraph === "" ? 
+      <div key={index} className="h-4"></div> : 
+      <p key={index} className="mb-4">{paragraph}</p>
+  ))}
+</div>
         </main>
       </div>
     );

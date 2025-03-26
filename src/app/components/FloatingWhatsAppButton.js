@@ -1,26 +1,37 @@
 "use client";
 
-import Link from "next/link";
-import { addressData } from '../data/addressData';
+import { useState } from "react";
 
 const FloatingWhatsAppButton = () => {
-  return (
-    <div className="fixed bottom-3 right-3 flex items-center space-x-2">
-      {/* "Contact Us" Text Block with Green Background and White Text */}
-      <div className="border-2 border-[#2BB673] bg-[#2BB673] text-white p-2 rounded-lg flex items-center justify-center">
-        Contact Us
-      </div>
+  const [position, setPosition] = useState({
+    bottom: '3rem',
+    right: '3rem',
+  });
 
+  // Function to generate random position within the viewport
+  const getRandomPosition = () => {
+    const randomBottom = `${Math.floor(Math.random() * 60)}rem`; // Random bottom between 0 and 60rem
+    const randomRight = `${Math.floor(Math.random() * 60)}rem`; // Random right between 0 and 60rem
+    setPosition({
+      bottom: randomBottom,
+      right: randomRight,
+    });
+  };
+
+  return (
+    <div
+      className="fixed"
+      style={{ bottom: position.bottom, right: position.right }}
+      onClick={getRandomPosition} // Change position on click
+    >
       {/* WhatsApp Button */}
-      <Link
-        href={`https://wa.me/${addressData.whatsapp}`}
-        target="_blank"
-        rel="noopener noreferrer"
+      <div
         className="bg-[#2BB673] text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center"
         style={{ cursor: 'pointer' }} // Ensure the cursor is not obstructed
+        onClick={getRandomPosition} // Change position on click
       >
-        <i className="fab fa-whatsapp text-2xl"></i>
-      </Link>
+        <i className="fab fa-whatsapp text-4xl"></i>
+      </div>
     </div>
   );
 };

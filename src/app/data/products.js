@@ -25,7 +25,7 @@ export const products = [
         ],
         specs: "",
         slug_category: "gotextile-non-woven",
-        slug_product: "Geotextile-Non-Woven-Polyester-pet"
+        slug_product: "geotextile-non-woven-polyester-pet"
     },
     {
         images: [
@@ -108,7 +108,7 @@ export const products = [
         details: [
         ],
         specs: "Spesifikasi produk 1.",
-        slug_category: "gotextile-non-woven",
+        slug_category: "geotextile-woven",
         slug_product: "ada-kelima"
     }
 ];

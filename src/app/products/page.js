@@ -31,12 +31,13 @@ const ProductsPage = () => {
         if (storedCategory) {
             setSelectedCategory(storedCategory);
             sessionStorage.removeItem("selectedCategory");
+            scrollToTopCategories(); 
         }
     }, []);
 
     // Filtration by Category
     const filteredProducts = selectedCategory
-        ? products.filter((product) => product.category.toLowerCase() === selectedCategory)
+        ? products.filter((product) => product.slug_category === selectedCategory)
         : products;
 
     // Pagination Products
@@ -123,8 +124,8 @@ const ProductsPage = () => {
                 {/* Sidebar for Categories */}
                 <ProductCategoryCard 
                     selectedCategory={selectedCategory} 
-                    onSelectCategory={(category) => {
-                        setSelectedCategory(category.toLowerCase());
+                    onSelectCategory={(item) => {
+                        setSelectedCategory(item);
                         setCurrentPage(1);
                         scrollToTopCategories(); 
                     }}  

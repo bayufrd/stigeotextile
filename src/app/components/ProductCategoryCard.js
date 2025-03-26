@@ -4,10 +4,10 @@ import { useState, useRef, useEffect } from "react";
 import { ProductCategories } from "@/app/data/productCategories";
 
 const ProductCategorySlider = ({ selectedCategory, onSelectCategory }) => {
-    const [currentIndex, setCurrentIndex] = useState(0);
     const [showButtons, setShowButtons] = useState(false);
     const sliderRef = useRef(null);
-
+    console.log(selectedCategory);
+    
     useEffect(() => {
         const slider = sliderRef.current;
         if (slider) {
@@ -39,7 +39,7 @@ const ProductCategorySlider = ({ selectedCategory, onSelectCategory }) => {
                     {ProductCategories.map((category, index) => (
                         <li
                             key={index}
-                            onClick={() => onSelectCategory(category.name)}
+                            onClick={() => onSelectCategory(category.slug)}
                             className={`p-2 whitespace-nowrap rounded cursor-pointer list-none flex-shrink-0 ${
                                 selectedCategory === category.name.toLowerCase() ? "bg-blue-700" : "hover:bg-[#4A6B8C]"
                             }`}

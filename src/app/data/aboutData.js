@@ -8,7 +8,7 @@ export const aboutData = {
     aboutMisi: "Perusahaan yang selalu siap menyediakan produk-produk Geotextile di pasaran agar supaya kelangsungan Pembangunan tidak terganggu dan menciptakan Inovasi dan efesiensi di berbagai bidang.",
     aboutOffers: "Apa yang Kami TawarkanCore Business kami adalah penyedia kebutuhan Pembangunan disektor antara lain penguatan Tanah dengan menawarkan produk Geotextile dengan varian-varian yang ada.",
     aboutAdvantages: "Produk yang kami tawarkan adalah produk yang langsung dihasilkan dari hasil Pabrikasi dengan mesin berteknologi tinggi sehingga menghasilkan produk Geotextile berkualitas dan memenuhi Standart yang ditetapkan. Untuk tetap menjaga kualitas, kami selalu mengadakan ujicoba (test) secara berkala dengan melibatkan Lembaga ujicoba secara Independent, berkompeten dan terakriditasi. Oleh sebab itu kami memberikan jaminan & kenyamanan terhadap setiap Konsume didalam menggunakan produk-produk yang kami tawarkan.",
-    aboutMotto: "Inovasi dalam Setiap Benang, Kemajuan di Setiap Langkah", 
+    aboutMotto: "Inovasi dalam Setiap Bahan, Kemajuan di Setiap Langkah", 
     aboutSlogan: "Kualitas Tanpa Kompromi, Inovasi Tanpa Henti.",
     aboutMoreDetails: [
         "CV. Sentra Teknologi Investama didirikan di pertengahan tahun 2019 sebagai usaha kecil-menengah yang mengawali kegiatan sebagai supplier kebutuhan pabrik di kawasan Industri di kota Serang, kemudian mengembangkan diri dan fokus pada penyedia kebutuhan Geosyntethics untuk pembangunan infrastruktur. Kami menjual Geotextile antara lain Geotextile Non Woven, Geotextile Woven, Geomembrane, Geocell, Geobag/Sandbag dan Plastik Cor, dll.",

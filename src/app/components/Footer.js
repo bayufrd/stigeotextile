@@ -1,11 +1,19 @@
 'use client';
 
+import { useState } from 'react';
+import ContactModal from '../components/ContactModal';
 import { addressData } from '../data/addressData';
 import { navigation } from '../data/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function Footer() {
+
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+  
+
   return (
     <footer className="relative text-white py-8">
       {/* Background image with overlay */}
@@ -54,7 +62,7 @@ export default function Footer() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div>{/* 
             <div className="flex space-x-4">
               <Link href={addressData.social.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
                 <i className="fab fa-facebook-f"></i>
@@ -68,10 +76,10 @@ export default function Footer() {
               <Link href={`https://wa.me/${addressData.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
                 <i className="fab fa-whatsapp"></i>
               </Link>
-            </div>
+            </div> */}
           </div>
           {/* Navigation - Menggunakan data dari navigation.js dengan padding sesuai */}
-          <div className="flex flex-col md:pt-[120px]">
+          <div className="flex flex-col md:pt-[125px]">
             <h3 className="text-lg font-bold mb-4">Navigation</h3>
             <ul className="space-y-2">
               {navigation.map((item) => (
@@ -85,15 +93,20 @@ export default function Footer() {
           </div>
           
           {/* Work Hours - dengan padding sesuai */}
-          <div className="flex flex-col md:pt-[120px]">
+          <div className="flex flex-col md:pt-[125px]">
             <h3 className="text-lg font-bold mb-2">Work Hours</h3>
             <p className="text-gray-300">{addressData.hours}</p>
             
             <div className="mt-4">
-              <Link href={`tel:${addressData.phone.banten}`} className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors">
-                Call Us
-              </Link>
+            <button
+              onClick={openModal}
+              className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors cursor-pointer"
+            >
+              Call Us
+            </button>
             </div>
+            <ContactModal isOpen={isModalOpen} onClose={closeModal} />
+
           </div>
         </div>
         

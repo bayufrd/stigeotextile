@@ -20,7 +20,7 @@ const Page = () => {
       <div className="map-section">
         <MapComponent />
       </div>
-      <div className="follow-us-section p-6 text-center mt-8">
+      {/* <div className="follow-us-section p-6 text-center mt-8">
         <h3 className="text-xl font-semibold mb-4">Follow Us:</h3>
         <div className="flex justify-center items-center space-x-6">
           <Link href={addressData.social.facebook} target="_blank" rel="noopener noreferrer">
@@ -39,7 +39,7 @@ const Page = () => {
             </div>
           </Link>
         </div>
-      </div>
+      </div> */}
     </div>
   );
 };

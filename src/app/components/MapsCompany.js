@@ -1,4 +1,3 @@
-import styles from '../../styles/MapStyles.module.css';
 import { addressData } from '../data/addressData';
 
 const MapsCompany = () => {
@@ -8,12 +7,12 @@ const MapsCompany = () => {
   const encodedLocation = encodeURIComponent(location);
 
   return (
-    <div className={styles.mapContainer}>
+    <div className="w-full rounded-2xl overflow-hidden shadow-lg border-4 border-green-500 p-2 bg-white hover:shadow-2xl">
       <iframe 
-        className={styles.mapFrame}
+        className="w-full h-[500px] sm:h-[400px] md:h-[450px] lg:h-[300px] xl:h-[300px] 2xl:h-[600px] rounded-lg border-none"
         //src={`https://maps.google.com/maps?q=${lat},${lng}&t=&z=15&ie=UTF8&iwloc=&output=embed`} //Location lat and lang
         src={`https://maps.google.com/maps?q=${encodedLocation}&t=&z=15&ie=UTF8&iwloc=&output=embed`} //Location Name
-        allowFullScreen="" 
+        allowFullScreen=""
         loading="lazy"
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>

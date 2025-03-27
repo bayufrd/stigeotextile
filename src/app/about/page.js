@@ -7,73 +7,72 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 
 export default function About() {
-    // State to track current slide
+  // State to track current slide
   const [currentSlide, setCurrentSlide] = useState(0);
   const slides = [
     "/displayAbout/about-product1.jpg",
     "/displayAbout/about-product2.jpg"
   ];
 
-  // Add this to your component's state
-    const [currentProductSlide, setCurrentProductSlide] = useState(0);
+  // State for Sentra Collection carousel
+  const [currentProductSlide, setCurrentProductSlide] = useState(0);
+  const totalSlides = 5; // Total slides in the collection
 
-    // Add this function to handle slide changes
-    const handleSlideChange = (direction) => {
+  // Function to handle slide changes
+  const handleSlideChange = (direction) => {
     if (direction === 'next') {
-        setCurrentProductSlide((prev) => (prev === 4 ? 0 : prev + 1));
+      setCurrentProductSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
     } else {
-        setCurrentProductSlide((prev) => (prev === 0 ? 4 : prev - 1));
+      setCurrentProductSlide((prev) => (prev === 0 ? totalSlides - 1 : prev - 1));
     }
-    };
+  };
 
-    // Auto slide effect
-    useEffect(() => {
-      const timer = setInterval(() => {
-        setCurrentSlide((prev) => (prev === 0 ? 1 : 0));
-      }, 5000); // Change slide every 5 seconds
-      
-      return () => clearInterval(timer);
-    }, []);
-    return (
-      <div className="min-h-screen bg-gray-100">
-        <Head>
-          <title>About Us - STI</title>
-          <meta name="description" content="About Sentra Teknologi Investama" />
-          <link rel="icon" href="../../public/logo/logo.ico" />
-        </Head>
+  // Auto slide effect
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentSlide((prev) => (prev === slides.length - 1 ? 0 : prev + 1));
+    }, 5000); // Change slide every 5 seconds
+    
+    return () => clearInterval(timer);
+  }, []);
 
-        {/* Header/Navigation */}
-        <header className="bg-white shadow-sm">
-          <div className="container mx-auto px-4 py-6">
-            <div className="flex justify-between items-center">
-              <div className="text-4xl font-bold">SENTRA TEKNOLOGI INVESTAMA</div>
-              <div className="text-xs text-gray-500">{aboutData.aboutMotto}</div>
-              {/* <div className="flex space-x-4">
-                <Link href="https://instagram.com" className="text-gray-600 hover:text-gray-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M12 2.163c3.24 0 3.584.12 4.85.07 3.252.148 4.771 1.691 4.919 4.919.58 1.265.069 1.645.069 4.849 0 3.25-.12 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.58-1.644.07-4.85.07-3.24 0-3.584-.12-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.58-1.265-.07-1.644-.07-4.849 0-3.24.13-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.57 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.14-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.59 1.281-.073 1.689-.073 4.948 0 3.259.14 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.58 1.689.072 4.948.072 3.259 0 3.668-.14 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.59-1.28.073-1.689.073-4.948 0-3.259-.14-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.59-1.69-.073-4.949-.073zm0 5.838c-3.43 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.43-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" />
-                  </svg>
-                </Link>
-                <Link href="https://twitter.com" className="text-gray-600 hover:text-gray-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.12-.53A8.348 8.348 0 022 5.92a8.19 8.19 0 1-2.357.646 4.118 4.118 0 01.84-2.27 8.224 8.224 0 1-2.65.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 1-8.457-4.287 4.106 4.106 0 01.27 5.477A4.072 4.072 0 12.8 9.713v.52a4.15 4.15 0 03.292 4.22 4.095 4.095 0 1-1.853.07 4.108 4.108 0 03.834 2.85A8.233 8.233 0 12 18.407a11.616 11.616 0 006.29 1.84" />
-                  </svg>
-                </Link>
-                <Link href="https://facebook.com" className="text-gray-600 hover:text-gray-900">
-                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="currentColor" viewBox="0 0 24 24">
-                    <path d="M9 8h-3v4h3v12h5v-12h3.642l.358-4h-4v-1.667c0-.955.192-1.333 1.115-1.333h2.885v-5h-3.808c-3.596 0-5.192 1.583-5.192 4.615v3.385z" />
-                  </svg>
-                </Link>
-              </div> */}
-            </div>
-          </div>
-        </header>
+  // Auto slide effect for product collection
+  useEffect(() => {
+    const productTimer = setInterval(() => {
+      setCurrentProductSlide((prev) => (prev === totalSlides - 1 ? 0 : prev + 1));
+    }, 5000); // Change slide every 5 seconds for Sentra Collection
 
-        {/* Main Content */}
-        <main>
-          {/* Hero Product Section with Slider */}
-          <section className="bg-white w-full">
-          <div className="w-full relative h-[500px] overflow-hidden">
+    return () => clearInterval(productTimer);
+  }, [currentProductSlide]);
+
+  return (
+    <div className="min-h-screen bg-gray-100">
+      <Head>
+        <title>About Us - STI</title>
+        <meta name="description" content="About Sentra Teknologi Investama" />
+        <link rel="icon" href="../../public/logo/logo.ico" />
+      </Head>
+
+      {/* Header/Navigation */}
+      <header className="bg-white shadow-sm">
+  <div className="container mx-auto px-4 py-6">
+    <div className="flex flex-col sm:flex-row justify-between items-center">
+      <div className="text-4xl font-bold sm:text-3xl md:text-2xl lg:text-4xl xl:text-2xl text-center sm:text-left">
+        SENTRA TEKNOLOGI INVESTAMA
+      </div>
+      <div className="text-xs text-gray-500 text-center sm:text-left">
+        {aboutData.aboutMotto}
+      </div>
+    </div>
+  </div>
+</header>
+
+
+      {/* Main Content */}
+      <main>
+        {/* Hero Product Section with Slider */}
+        <section className="bg-white w-full">
+    <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
             {slides.map((slide, index) => (
               <div 
                 key={index}
@@ -91,7 +90,7 @@ export default function About() {
               </div>
             ))}
             
-            {/* Slider indicators - Keep only this set and remove the duplicate */}
+            {/* Slider indicators */}
             <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
               {slides.map((_, index) => (
                 <button 
@@ -108,193 +107,184 @@ export default function About() {
           
           <div className="container mx-auto px-4 py-8">
             <div className="text-sm text-gray-600 text-center max-w-md mx-auto">
-            {aboutData.aboutSlogan}
-              {/* Removed duplicate slider indicators here */}
+              {aboutData.aboutSlogan}
             </div>
           </div>
         </section>
-          {/* About Us Section */}
-          <section className="py-16">
-            <div className="container mx-auto px-4">
-              <h2 className="text-3xl font-bold mb-2 text-center">ABOUT US</h2>
-              <p className="text-sm text-gray-600 mb-12 text-center">
+
+        {/* About Us Section */}
+        <section className="py-16">
+          <div className="container mx-auto px-4">
+            <h2 className="text-3xl font-bold mb-2 text-center">ABOUT US</h2>
+            <p className="text-sm text-gray-600 mb-12 text-center">
               {aboutData.aboutDetail}
             </p>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-                <div className="text-sm leading-relaxed">
-                  <p className="mb-4">
-                    <span className="font-bold">VISI </span><br/>
-                    {aboutData.aboutVisi}<br/><br/><br/>
-                    <span className="font-bold">MISI </span><br/>
-                    {aboutData.aboutMisi}
-                  </p>
-                </div>
-                <div className="text-sm leading-relaxed">
-                  <p className="mb-4">
-                    <span className="font-bold">Apa yang Kami Tawarkan </span><br/>
-                    {aboutData.aboutOffers}<br/><br/><br/>
-                    <span className="font-bold">Keunggulan Kami </span><br/>
-                    {aboutData.aboutAdvantages}
-                  </p>
-                </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div className="text-sm leading-relaxed">
+                <p className="mb-4">
+                  <span className="font-bold">VISI </span><br/>
+                  {aboutData.aboutVisi}<br/><br/><br/>
+                  <span className="font-bold">MISI </span><br/>
+                  {aboutData.aboutMisi}
+                </p>
+              </div>
+              <div className="text-sm leading-relaxed">
+                <p className="mb-4">
+                  <span className="font-bold">Apa yang Kami Tawarkan </span><br/>
+                  {aboutData.aboutOffers}<br/><br/><br/>
+                  <span className="font-bold">Keunggulan Kami </span><br/>
+                  {aboutData.aboutAdvantages}
+                </p>
               </div>
             </div>
-          </section>
+          </div>
+        </section>
 
-      {/* Gallery Section */}
-      <section className="py-16 bg-gray-100 w-full">
-        <div className="relative w-full overflow-hidden">
-          {/* Left navigation button */}
+        {/* Gallery Section */}
+            <section className="py-16 bg-gray-100 w-full">
+            <div className="relative w-full overflow-hidden">
+  {/* Left navigation button */}
+  <button 
+    onClick={() => handleSlideChange('prev')} 
+    className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+    aria-label="Previous slide"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+    </svg>
+  </button>
+
+  <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
+    {/* Image slides */}
+    <div className="min-w-full flex justify-center items-center">
+    <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+
+        <Image
+          src="/displayAbout/about-product3.jpg"
+          alt="Sentra Product 1"
+          layout="responsive"
+          width={1600}
+          height={500}
+          className="object-cover"
+        />
+      </div>
+    </div>
+    {/* Second slide */}
+    <div className="min-w-full flex justify-center items-center">
+    <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+
+        <Image
+          src="/displayAbout/about-product4.jpg"
+          alt="Sentra Product 2"
+          layout="responsive"
+          width={1600}
+          height={500}
+          className="object-cover"
+        />
+      </div>
+    </div>
+    {/* Third slide */}
+    <div className="min-w-full flex justify-center items-center">
+    <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+
+        <Image
+          src="/displayAbout/about-product5.jpg"
+          alt="Sentra Product 3"
+          layout="responsive"
+          width={1600}
+          height={500}
+          className="object-cover"
+        />
+      </div>
+    </div>
+    {/* Fourth slide */}
+    <div className="min-w-full flex justify-center items-center">
+    <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+
+        <Image
+          src="/displayAbout/about-product6.jpg"
+          alt="Sentra Product 4"
+          layout="responsive"
+          width={1600}
+          height={500}
+          className="object-cover"
+        />
+      </div>
+    </div>
+    {/* Fifth slide */}
+    <div className="min-w-full flex justify-center items-center">
+    <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+        <Image
+          src="/displayAbout/about-product7.jpg"
+          alt="Sentra Product 5"
+          layout="responsive"
+          width={1600}
+          height={500}
+          className="object-cover"
+        />
+      </div>
+    </div>
+  </div>
+
+  {/* Right navigation button */}
+  <button 
+    onClick={() => handleSlideChange('next')} 
+    className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+    aria-label="Next slide"
+  >
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+    </svg>
+  </button>
+</div>
+
+          {/* Right navigation button */}
           <button 
-            onClick={() => handleSlideChange('prev')} 
-            className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-            aria-label="Previous slide"
+            onClick={() => handleSlideChange('next')} 
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+            aria-label="Next slide"
           >
             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
             </svg>
           </button>
-      {/* Carousel container */}
-      <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
-        {/* First slide */}
-        <div className="min-w-full flex justify-center items-center">
-          <div className="w-full relative h-[500px] overflow-hidden">
-            <Image
-              src="/displayAbout/about-product3.jpg"
-              alt="Devialet Product 1"
-              layout="fill"
-              className="object-cover"
-            />
+        </section>
+
+        {/* Pagination Section - 3 Columns Layout */}
+        <div className="grid grid-cols-3 items-center gap-4">
+          {/* Column 1: Title */}
+          <div className="font-bold text-2xl">
+            SENTRA COLLECTION
+          </div>
+          
+          {/* Column 2: Pagination Numbers */}
+          <div className="flex justify-center items-center space-x-2">
+            {Array.from({ length: totalSlides }).map((_, index) => (
+              <button 
+                key={index} 
+                onClick={() => setCurrentProductSlide(index)}
+                className={`text-xs ${currentProductSlide === index ? 'font-bold text-gray-800' : 'text-gray-400'}`}
+                aria-label={`Go to slide ${index + 1}`}
+              >
+                {index + 1}
+              </button>
+            ))}
+          </div>
+
+          {/* Column 3: Empty Column (centered) */}
+          <div className="flex justify-center items-center">
+            {/* This column remains empty, but content inside will be centered */}
           </div>
         </div>
-
-        {/* Second slide */}
-        <div className="min-w-full flex justify-center items-center">
-          <div className="w-full relative h-[500px] overflow-hidden">
-            <Image
-              src="/displayAbout/about-product4.jpg"
-              alt="Devialet Product 2"
-              layout="fill"
-              className="object-cover"
-            />
-          </div>
+        <div className="text-sm mb-12 text-left px-4 ml-4 md:ml-8 lg:ml-16 xl:ml-32 2xl:ml-64 sm:mr-4 md:mr-8 lg:mr-16 xl:mr-32 2xl:mr-64">
+          {aboutData.aboutMoreDetails.map((paragraph, index) => (
+            paragraph === "" ? 
+              <div key={index} className="h-4"></div> : 
+              <p key={index} className="mb-4 mt-4">{paragraph}</p>
+          ))}
         </div>
-
-        {/* Third slide */}
-        <div className="min-w-full flex justify-center items-center">
-          <div className="w-full relative h-[500px] overflow-hidden">
-            <Image
-              src="/displayAbout/about-product5.jpg"
-              alt="Devialet Product 3"
-              layout="fill"
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Fourth slide */}
-        <div className="min-w-full flex justify-center items-center">
-          <div className="w-full relative h-[500px] overflow-hidden">
-            <Image
-              src="/displayAbout/about-product6.jpg"
-              alt="Devialet Product 4"
-              layout="fill"
-              className="object-cover"
-            />
-          </div>
-        </div>
-
-        {/* Fifth slide */}
-        <div className="min-w-full flex justify-center items-center">
-          <div className="w-full relative h-[500px] overflow-hidden">
-            <Image
-              src="/displayAbout/about-product7.jpg"
-              alt="Devialet Product 5"
-              layout="fill"
-              className="object-cover"
-            />
-          </div>
-        </div>
-      </div>
-
-      {/* Right navigation button */}
-    <button 
-      onClick={() => handleSlideChange('next')} 
-      className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-      aria-label="Next slide"
-    >
-      <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-      </svg>
-    </button>
+      </main>
     </div>
-    <div className="container mx-auto px-4 mt-12">
-  <div className="flex items-center justify-between">
-    
-    {/* Kiri: Judul */}
-    <h3 className="font-bold text-2xl">SENTRA COLLECTION</h3>
-    
-    {/* Tengah: Pagination */}
-    <div className="absolute left-1/2 transform -translate-x-1/2">
-      <div className="flex items-center space-x-1">
-        {currentProductSlide === 0 ? (
-          <>
-            <span className="text-xs font-bold">1</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs text-gray-400">2 3 4 5</span>
-          </>
-        ) : currentProductSlide === 1 ? (
-          <>
-            <span className="text-xs text-gray-400">1</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs font-bold">2</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs text-gray-400">3 4 5</span>
-          </>
-        ) : currentProductSlide === 2 ? (
-          <>
-            <span className="text-xs text-gray-400">1 2</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs font-bold">3</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs text-gray-400">4 5</span>
-          </>
-        ) : currentProductSlide === 3 ? (
-          <>
-            <span className="text-xs text-gray-400">1 2 3</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs font-bold">4</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs text-gray-400">5</span>
-          </>
-        ) : currentProductSlide === 4 ? (
-          <>
-            <span className="text-xs text-gray-400">1 2 3 4</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs font-bold">5</span>
-          </>
-        ) : (
-          <>
-            <span className="text-xs text-gray-400">1</span>
-            <span className="text-xs text-gray-400">—</span>
-            <span className="text-xs text-gray-400">2 3 4 5</span>
-          </>
-        )}
-      </div>
-    </div>
-    <div className="w-40" />
-  </div>
-</div>
-  </section>
-  <div className="text-sm mb-12 text-left px-4 ml-64 mr-64">
-  {aboutData.aboutMoreDetails.map((paragraph, index) => (
-    paragraph === "" ? 
-      <div key={index} className="h-4"></div> : 
-      <p key={index} className="mb-4">{paragraph}</p>
-  ))}
-</div>
-        </main>
-      </div>
-    );
+  );
 }

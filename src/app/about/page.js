@@ -67,7 +67,6 @@ export default function About() {
         </div>
       </header>
 
-
       {/* Main Content */}
       <main>
         {/* Hero Product Section with Slider */}
@@ -84,7 +83,8 @@ export default function About() {
                   alt={`Hero slide ${index + 1}`}
                   fill
                   style={{ objectFit: "cover" }}
-                  priority
+                  className="object-cover transition-all duration-300 ease-in-out"
+                  loading="lazy"
                 />
               </div>
             ))}
@@ -157,69 +157,65 @@ export default function About() {
               {/* Image slides */}
               <div className="min-w-full flex justify-center items-center">
                 <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-
                   <Image
                     src="/displayAbout/about-product3.jpg"
                     alt="Sentra Product 1"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
+                    className="object-cover transition-all duration-300 ease-in-out"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Second slide */}
               <div className="min-w-full flex justify-center items-center">
                 <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-
                   <Image
                     src="/displayAbout/about-product4.jpg"
                     alt="Sentra Product 2"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
+                    className="object-cover transition-all duration-300 ease-in-out"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Third slide */}
               <div className="min-w-full flex justify-center items-center">
                 <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-
                   <Image
                     src="/displayAbout/about-product5.jpg"
                     alt="Sentra Product 3"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
+                    className="object-cover transition-all duration-300 ease-in-out"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Fourth slide */}
               <div className="min-w-full flex justify-center items-center">
                 <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-
                   <Image
                     src="/displayAbout/about-product6.jpg"
                     alt="Sentra Product 4"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
+                    className="object-cover transition-all duration-300 ease-in-out"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Fifth slide */}
               <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+              <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
                   <Image
                     src="/displayAbout/about-product7.jpg"
                     alt="Sentra Product 5"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
+                    className="object-cover transition-all duration-300 ease-in-out"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -264,11 +260,14 @@ export default function About() {
             {/* This column remains empty, but content inside will be centered */}
           </div>
         </div>
+
         <div className="text-sm mb-12 text-left px-4 ml-4 md:ml-8 lg:ml-16 xl:ml-32 2xl:ml-64 sm:mr-4 md:mr-8 lg:mr-16 xl:mr-32 2xl:mr-64">
           {aboutData.aboutMoreDetails.map((paragraph, index) => (
-            paragraph === "" ?
-              <div key={index} className="h-4"></div> :
+            paragraph === "" ? (
+              <div key={index} className="h-4"></div>
+            ) : (
               <p key={index} className="mb-4 mt-4">{paragraph}</p>
+            )
           ))}
         </div>
       </main>

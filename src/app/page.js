@@ -72,7 +72,6 @@ export default function Home() {
                   alt={`Hero slide ${index + 1}`}
                   fill
                   style={{ objectFit: "cover" }}
-                  priority
                   loading="lazy" // Menambahkan lazy loading pada gambar
                 />
                 {/* Dark Overlay */}

@@ -57,10 +57,10 @@ export default function About() {
       <header className="bg-white shadow-sm">
         <div className="container mx-auto px-4 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center">
-            <div className="text-4xl font-bold sm:text-3xl md:text-2xl lg:text-4xl xl:text-2xl text-center sm:text-left">
+            <div className="text-title text-center sm:text-left">
               SENTRA TEKNOLOGI INVESTAMA
             </div>
-            <div className="text-xs text-gray-500 text-center sm:text-left">
+            <div className="text-body text-gray-500 text-center sm:text-left">
               {aboutData.aboutMotto}
             </div>
           </div>
@@ -104,7 +104,7 @@ export default function About() {
           </div>
 
           <div className="container mx-auto px-4 py-8">
-            <div className="text-sm text-gray-600 text-center max-w-md mx-auto">
+            <div className="text-body text-gray-600 text-center max-w-md mx-auto">
               {aboutData.aboutSlogan}
             </div>
           </div>
@@ -113,13 +113,13 @@ export default function About() {
         {/* About Us Section */}
         <section className="py-16">
           <div className="container mx-auto px-4">
-            <h2 className="text-3xl font-bold mb-2 text-center">ABOUT US</h2>
-            <p className="text-sm text-gray-600 mb-12 text-center">
+            <h2 className="text-title font-bold mb-2 text-center">ABOUT US</h2>
+            <p className="text-subtitle text-gray-600 mb-12 text-center">
               {aboutData.aboutDetail}
             </p>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="text-sm leading-relaxed">
+              <div className="text-body leading-relaxed">
                 <p className="mb-4">
                   <span className="font-bold">VISI </span><br />
                   {aboutData.aboutVisi}<br /><br /><br />
@@ -127,7 +127,7 @@ export default function About() {
                   {aboutData.aboutMisi}
                 </p>
               </div>
-              <div className="text-sm leading-relaxed">
+              <div className="text-body leading-relaxed">
                 <p className="mb-4">
                   <span className="font-bold">Apa yang Kami Tawarkan </span><br />
                   {aboutData.aboutOffers}<br /><br /><br />
@@ -141,103 +141,103 @@ export default function About() {
 
         {/* Gallery Section */}
         <section className="py-16 bg-gray-100 w-full">
-          <div className="relative w-full overflow-hidden">
-            {/* Left navigation button */}
-            <button
-              onClick={() => handleSlideChange('prev')}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-              aria-label="Previous slide"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-              </svg>
-            </button>
-
-            <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
-              {/* Image slides */}
-              <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-                  <Image
-                    src="/displayAbout/about-product3.jpg"
-                    alt="Sentra Product 1"
-                    width={1600}
-                    height={500}
-                    className="object-cover transition-all duration-300 ease-in-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              {/* Second slide */}
-              <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-                  <Image
-                    src="/displayAbout/about-product4.jpg"
-                    alt="Sentra Product 2"
-                    width={1600}
-                    height={500}
-                    className="object-cover transition-all duration-300 ease-in-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              {/* Third slide */}
-              <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-                  <Image
-                    src="/displayAbout/about-product5.jpg"
-                    alt="Sentra Product 3"
-                    width={1600}
-                    height={500}
-                    className="object-cover transition-all duration-300 ease-in-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              {/* Fourth slide */}
-              <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-                  <Image
-                    src="/displayAbout/about-product6.jpg"
-                    alt="Sentra Product 4"
-                    width={1600}
-                    height={500}
-                    className="object-cover transition-all duration-300 ease-in-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-              {/* Fifth slide */}
-              <div className="min-w-full flex justify-center items-center">
-              <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
-                  <Image
-                    src="/displayAbout/about-product7.jpg"
-                    alt="Sentra Product 5"
-                    width={1600}
-                    height={500}
-                    className="object-cover transition-all duration-300 ease-in-out"
-                    loading="lazy"
-                  />
-                </div>
-              </div>
-            </div>
-
-            {/* Right navigation button */}
-            <button
-              onClick={() => handleSlideChange('next')}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-              aria-label="Next slide"
-            >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-              </svg>
-            </button>
-          </div>
-        </section>
+                  <div className="relative w-full overflow-hidden" style={{ height: "min(400px, 50vh)" }}>
+                    {/* Left navigation button */}
+                    <button
+                      onClick={() => handleSlideChange('prev')}
+                      className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+                      aria-label="Previous slide"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                      </svg>
+                    </button>
+        
+                    <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
+                      {/* Image slides */}
+                      <div className="min-w-full flex justify-center items-center">
+                        <div className="w-full relative h-full overflow-hidden">
+                          <Image
+                            src="/displayAbout/about-product3.jpg"
+                            alt="Sentra Product 1"
+                            width={1600}
+                            height={500}
+                            className="object-cover w-full h-full"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      {/* Second slide */}
+                      <div className="min-w-full flex justify-center items-center">
+                        <div className="w-full relative h-full overflow-hidden">
+                          <Image
+                            src="/displayAbout/about-product4.jpg"
+                            alt="Sentra Product 2"
+                            width={1600}
+                            height={500}
+                            className="object-cover w-full h-full"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      {/* Third slide */}
+                      <div className="min-w-full flex justify-center items-center">
+                        <div className="w-full relative h-full overflow-hidden">
+                          <Image
+                            src="/displayAbout/about-product5.jpg"
+                            alt="Sentra Product 3"
+                            width={1600}
+                            height={500}
+                            className="object-cover w-full h-full"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      {/* Fourth slide */}
+                      <div className="min-w-full flex justify-center items-center">
+                        <div className="w-full relative h-full overflow-hidden">
+                          <Image
+                            src="/displayAbout/about-product6.jpg"
+                            alt="Sentra Product 4"
+                            width={1600}
+                            height={500}
+                            className="object-cover w-full h-full"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                      {/* Fifth slide */}
+                      <div className="min-w-full flex justify-center items-center">
+                        <div className="w-full relative h-full overflow-hidden">
+                          <Image
+                            src="/displayAbout/about-product7.jpg"
+                            alt="Sentra Product 5"
+                            width={1600}
+                            height={500}
+                            className="object-cover w-full h-full"
+                            loading="lazy"
+                          />
+                        </div>
+                      </div>
+                    </div>
+        
+                    {/* Right navigation button */}
+                    <button
+                      onClick={() => handleSlideChange('next')}
+                      className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+                      aria-label="Next slide"
+                    >
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                      </svg>
+                    </button>
+                  </div>
+                </section>
 
         {/* Pagination Section - 3 Columns Layout */}
         <div className="grid grid-cols-3 items-center gap-4">
           {/* Column 1: Title */}
-          <div className="font-bold text-2xl">
+          <div className="text-title font-bold">
             SENTRA COLLECTION
           </div>
 
@@ -261,7 +261,7 @@ export default function About() {
           </div>
         </div>
 
-        <div className="text-sm mb-12 text-left px-4 ml-4 md:ml-8 lg:ml-16 xl:ml-32 2xl:ml-64 sm:mr-4 md:mr-8 lg:mr-16 xl:mr-32 2xl:mr-64">
+        <div className="text-body mb-12 text-left px-4 ml-4 md:ml-8 lg:ml-16 xl:ml-32 2xl:ml-64 sm:mr-4 md:mr-8 lg:mr-16 xl:mr-32 2xl:mr-64">
           {aboutData.aboutMoreDetails.map((paragraph, index) => (
             paragraph === "" ? (
               <div key={index} className="h-4"></div>

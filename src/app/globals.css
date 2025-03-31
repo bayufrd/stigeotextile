@@ -1,5 +1,94 @@
 @import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700&display=swap');
+/* src/app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  /* Typography classes */
+  .text-title {
+    @apply text-3xl font-bold;
+  }
+  
+  @screen sm {
+    .text-title {
+      @apply text-4xl;
+    }
+  }
+  
+  @screen md {
+    .text-title {
+      @apply text-5xl;
+    }
+  }
+  
+  @screen lg {
+    .text-title {
+      @apply text-4xl;
+    }
+  }
+  
+  @screen xl {
+    .text-title {
+      @apply text-5xl;
+    }
+  }
+
+  /* Subtitle */
+  .text-subtitle {
+    @apply text-base font-semibold;
+  }
+  
+  @screen sm {
+    .text-subtitle {
+      @apply text-lg;
+    }
+  }
+  
+  @screen md {
+    .text-subtitle {
+      @apply text-xl;
+    }
+  }
+  
+  @screen lg {
+    .text-subtitle {
+      @apply text-lg;
+    }
+  }
+  
+  @screen xl {
+    .text-subtitle {
+      @apply text-xl;
+    }
+  }
+
+  /* Body text */
+  .text-body {
+    @apply text-sm;
+  }
+  
+  @screen md {
+    .text-body {
+      @apply text-base;
+    }
+  }
+  
+  @screen lg {
+    .text-body {
+      @apply text-sm;
+    }
+  }
+  
+  @screen xl {
+    .text-body {
+      @apply text-base;
+    }
+  }
+}
+
+/* Regular CSS */
 
 :root {
   --background: #FFFFFF;

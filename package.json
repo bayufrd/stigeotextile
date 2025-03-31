@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "analyze": "set ANALYZE=true && next build",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
@@ -12,9 +13,10 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.7.2",
     "@heroicons/react": "^2.2.0",
+    "@next/bundle-analyzer": "^15.2.4",
     "@react-google-maps/api": "^2.20.6",
     "leaflet": "^1.9.4",
-    "next": "15.2.1",
+    "next": "^15.2.4",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0"
@@ -26,6 +28,7 @@
     "eslint": "^9",
     "eslint-config-next": "15.2.1",
     "postcss": "^8.5.3",
-    "tailwindcss": "^4.0.14"
+    "tailwindcss": "^4.0.14",
+    "webpack-bundle-analyzer": "^4.10.2"
   }
 }

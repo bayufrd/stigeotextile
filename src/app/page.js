@@ -60,7 +60,7 @@ export default function Home() {
       <main>
         {/* Hero Product Section with Slider */}
         <section className="bg-white w-full">
-          <div className="w-full relative h-[500px] overflow-hidden">
+          <div className="w-full relative overflow-hidden" style={{ height: "min(450px, 60vh)" }}>
             {slides.map((slide, index) => (
               <div
                 key={index}
@@ -71,35 +71,36 @@ export default function Home() {
                   src={slide}
                   alt={`Hero slide ${index + 1}`}
                   fill
-                  style={{ objectFit: "cover" }}
-                  loading="lazy" // Menambahkan lazy loading pada gambar
+                  style={{ objectFit: "cover", objectPosition: "center" }}
+                  priority={index === 0} // Prioritas untuk slide pertama
+                  loading={index === 0 ? "eager" : "lazy"} // Eager loading untuk slide pertama, lazy untuk lainnya
                 />
                 {/* Dark Overlay */}
                 <div className="absolute top-0 left-0 w-full h-full bg-black opacity-60 z-20"></div>
               </div>
             ))}
             {/* Text and Button Section */}
-            <div className="absolute top-0 right-0 p-8 z-20 mt-10 mr-4 text-right">
-              <h1 className="text-white text-4xl font-bold mb-4">
+            <div className="absolute top-0 right-0 p-4 md:p-8 z-20 mt-4 md:mt-10 mr-2 md:mr-4 text-right max-w-full md:max-w-[60%]">
+              <h1 className="text-title text-white mb-2 md:mb-4">
                 Geotextile Non Woven Polyester (PET)
               </h1>
-              <p className="text-white text-lg mb-6">
-                Produk Geotextile ini berbahan 100% Polyester (PET) dan berkualitas, diproduksi dengan mesin modern <br />
-                sehingga dihasilkan produk dengan ketebalan, kekuatan dan kelenturan yang berbeda-beda <br />
-                sehingga dapat memenuhi berbagai macam kebutuhan proyek yang ada.
+              <p className="text-subtitle text-white mb-4 md:mb-6">
+                Produk Geotextile ini berbahan 100% Polyester (PET) dan berkualitas, diproduksi dengan mesin modern
+                <span className="hidden md:inline"><br /></span> sehingga dihasilkan produk dengan ketebalan, kekuatan dan kelenturan yang berbeda-beda
+                <span className="hidden md:inline"><br /></span> sehingga dapat memenuhi berbagai macam kebutuhan proyek yang ada.
               </p>
-              <button className="text-white px-6 py-2 rounded-full opacity-75 hover:opacity-100 transition-opacity"
+              <button className="text-white px-4 py-1 md:px-6 md:py-2 rounded-full opacity-75 hover:opacity-100 transition-opacity"
                 style={{ backgroundColor: "rgba(1, 2, 3, 0.9)" }}>
-                <span className="font-bold">LOOK MORE</span>
+                <span className="font-bold text-body">LOOK MORE</span>
               </button>
             </div>
             {/* Slider indicators */}
-            <div className="absolute bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
+            <div className="absolute bottom-4 md:bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
               {slides.map((_, index) => (
                 <button
                   key={index}
                   onClick={() => setCurrentSlide(index)}
-                  className={`w-3 h-3 rounded-full ${index === currentSlide ? 'bg-gray-800' : 'bg-gray-300'
+                  className={`w-2 h-2 md:w-3 md:h-3 rounded-full ${index === currentSlide ? 'bg-gray-800' : 'bg-gray-300'
                     }`}
                   aria-label={`Go to slide ${index + 1}`}
                 />
@@ -110,16 +111,16 @@ export default function Home() {
 
         {/* About Us Section */}
         <section className="py-16">
-          <div className="text-center text-4xl font-bold mt-4 mb-4">
+          <div className="text-center text-title mt-4 mb-4">
             <h1 className="text-black inline">SEKILAS</h1>
-            <h1 className="text-blue-900 inline"> TENTANG KAMI</h1>
+            <h1 className="text-[#1F3D57] inline"> TENTANG KAMI</h1>
           </div>
 
           {/* Baris pertama: Text Section */}
           <div className="container mx-auto px-4 mb-16">
             <div className="flex flex-col justify-center items-center">
-              <h3 className="text-2xl font-bold mb-4 text-center">Kami menghadirkan solusi Geotextile terbaik untuk setiap kebutuhan pembangunan.</h3>
-              <p className="text-lg mb-8 text-black-300 text-center">
+              <h3 className="text-subtitle mb-4 text-center">Kami menghadirkan solusi Geotextile terbaik untuk setiap kebutuhan pembangunan.</h3>
+              <p className="text-body mb-8 text-black-300 text-center">
                 Selamat datang di CV. Sentra Teknologi Investama, sebuah perusahaan yang bergerak dibidang penyediaan produk
                 Geotextile dengan kualitas terbaik dan telah memenuhi Standar Nasional. <br /><br />
                 <span className="font-bold">CV. Sentra Teknologi Investama </span>
@@ -133,7 +134,7 @@ export default function Home() {
           {/* Keunggulan Kami */}
           <div className="container mx-auto px-4">
             <div className="text-center mb-8">
-              <h3 className="text-2xl font-bold">Keunggulan Kami</h3>
+              <h3 className="text-subtitle">Keunggulan Kami</h3>
             </div>
 
             {/* 6 Kolom untuk Keunggulan Kami */}
@@ -142,37 +143,37 @@ export default function Home() {
               {/* Point 1: Produk Berkualitas Tinggi */}
               <div className="flex flex-col items-center mb-6 transform transition-all duration-300 ease-in-out hover:scale-110 hover:text-[#1F3D57]">
                 <i className="fas fa-cogs text-4xl mb-2 w-6 h-6 sm:w-7 sm:h-7 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 mx-auto text-[#1F3D57]"></i>
-                <p className="font-semibold text-[#1F3D57] mt-3 text-sm sm:text-sm md:text-sm lg:text-sm text-center">Produk Berkualitas Tinggi</p>
+                <p className="font-semibold text-[#1F3D57] mt-3 text-body text-center">Produk Berkualitas Tinggi</p>
               </div>
 
               {/* Point 2: Uji Kualitas Berkala */}
               <div className="flex flex-col items-center mb-6 transform transition-all duration-300 ease-in-out hover:scale-110 hover:text-[#1F3D57]">
                 <i className="fas fa-check-circle text-4xl mb-2 w-6 h-6 sm:w-7 sm:h-7 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 mx-auto text-[#1F3D57]"></i>
-                <p className="font-semibold text-[#1F3D57] mt-3 text-sm sm:text-sm md:text-sm lg:text-sm text-center">Uji Kualitas Berkala</p>
+                <p className="font-semibold text-[#1F3D57] mt-3 text-body text-center">Uji Kualitas Berkala</p>
               </div>
 
               {/* Point 3: Jaminan dan Keamanan */}
               <div className="flex flex-col items-center mb-6 transform transition-all duration-300 ease-in-out hover:scale-110 hover:text-[#1F3D57]">
                 <i className="fas fa-shield-alt text-4xl mb-2 h-6 sm:w-7 sm:h-7 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 mx-auto text-[#1F3D57]"></i>
-                <p className="font-semibold text-[#1F3D57] mt-3 text-sm sm:text-sm md:text-sm lg:text-sm text-center">Jaminan dan Keamanan</p>
+                <p className="font-semibold text-[#1F3D57] mt-3 text-body text-center">Jaminan dan Keamanan</p>
               </div>
 
               {/* Point 4: Standar Internasional */}
               <div className="flex flex-col items-center mb-6 transform transition-all duration-300 ease-in-out hover:scale-110 hover:text-[#1F3D57]">
                 <i className="fas fa-globe-americas text-4xl mb-2 w-6 h-6 sm:w-7 sm:h-7 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 mx-auto text-[#1F3D57]"></i>
-                <p className="font-semibold text-[#1F3D57] mt-3 text-sm sm:text-sm md:text-sm lg:text-sm text-center">Standar Internasional</p>
+                <p className="font-semibold text-[#1F3D57] mt-3 text-body text-center">Standar Internasional</p>
               </div>
 
               {/* Point 5: Komitmen terhadap Inovasi */}
               <div className="flex flex-col items-center mb-6 transform transition-all duration-300 ease-in-out hover:scale-110 hover:text-[#1F3D57]">
                 <i className="fas fa-lightbulb text-4xl mb-2 w-6 h-6 sm:w-7 sm:h-7 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 mx-auto text-[#1F3D57]"></i>
-                <p className="font-semibold text-[#1F3D57] mt-3 text-sm sm:text-sm md:text-sm lg:text-sm text-center">Komitmen terhadap Inovasi</p>
+                <p className="font-semibold text-[#1F3D57] mt-3 text-body text-center">Komitmen terhadap Inovasi</p>
               </div>
 
               {/* Point 6: Layanan Pelanggan 24/7 */}
               <div className="flex flex-col items-center mb-6 transform transition-all duration-300 ease-in-out hover:scale-110 hover:text-[#1F3D57]">
                 <i className="fas fa-headset text-4xl mb-2 w-6 h-6 sm:w-7 h-7 md:h-6 lg:w-6 lg:h-6 xl:w-6 xl:h-6 mx-auto text-[#1F3D57]"></i>
-                <p className="font-semibold text-[#1F3D57] mt-3 text-sm sm:text-sm md:text-sm lg:text-sm text-center">Layanan Pelanggan 24/7</p>
+                <p className="font-semibold text-[#1F3D57] mt-3 text-body text-center">Layanan Pelanggan 24/7</p>
               </div>
 
             </div>
@@ -181,14 +182,14 @@ export default function Home() {
         </section>
         {/* Gallery Section */}
         <section className="py-16 bg-gray-100 w-full">
-          <div className="relative w-full overflow-hidden">
+          <div className="relative w-full overflow-hidden" style={{ height: "min(400px, 50vh)" }}>
             {/* Left navigation button */}
             <button
               onClick={() => handleSlideChange('prev')}
-              className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+              className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
               aria-label="Previous slide"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
               </svg>
             </button>
@@ -196,71 +197,66 @@ export default function Home() {
             <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
               {/* Image slides */}
               <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+                <div className="w-full relative h-full overflow-hidden">
                   <Image
                     src="/displayAbout/about-product3.jpg"
                     alt="Sentra Product 1"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
-                    loading="lazy" // Lazy load for product images
+                    className="object-cover w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Second slide */}
               <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+                <div className="w-full relative h-full overflow-hidden">
                   <Image
                     src="/displayAbout/about-product4.jpg"
                     alt="Sentra Product 2"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
-                    loading="lazy" // Lazy load for product images
+                    className="object-cover w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Third slide */}
               <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+                <div className="w-full relative h-full overflow-hidden">
                   <Image
                     src="/displayAbout/about-product5.jpg"
                     alt="Sentra Product 3"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
-                    loading="lazy" // Lazy load for product images
+                    className="object-cover w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Fourth slide */}
               <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+                <div className="w-full relative h-full overflow-hidden">
                   <Image
                     src="/displayAbout/about-product6.jpg"
                     alt="Sentra Product 4"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
-                    loading="lazy" // Lazy load for product images
+                    className="object-cover w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
               {/* Fifth slide */}
               <div className="min-w-full flex justify-center items-center">
-                <div className="w-full relative h-[50vh] md:h-[40vh] sm:h-[30vh] overflow-hidden">
+                <div className="w-full relative h-full overflow-hidden">
                   <Image
                     src="/displayAbout/about-product7.jpg"
                     alt="Sentra Product 5"
-                    layout="responsive"
                     width={1600}
                     height={500}
-                    className="object-cover"
-                    loading="lazy" // Lazy load for product images
+                    className="object-cover w-full h-full"
+                    loading="lazy"
                   />
                 </div>
               </div>
@@ -269,10 +265,10 @@ export default function Home() {
             {/* Right navigation button */}
             <button
               onClick={() => handleSlideChange('next')}
-              className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+              className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
               aria-label="Next slide"
             >
-              <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
               </svg>
             </button>
@@ -282,7 +278,7 @@ export default function Home() {
         {/* Pagination Section - 3 Columns Layout */}
         <div className="grid grid-cols-3 items-center gap-4">
           {/* Column 1: Title */}
-          <div className="font-bold text-2xl">
+          <div className="text-title font-bold">
             SENTRA COLLECTION
           </div>
 

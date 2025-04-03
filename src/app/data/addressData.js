@@ -2,8 +2,8 @@
 
 export const addressData = {
   name: 'Sentra Teknologi Investama',
-  mapsname: "Cikande Permai Blok L3 No.32, Cikande, Banten",
-  address: 'Cikande Permai Blok L3 No.32',
+  mapsname: "Jl. Perum Cikande Permai Blok L1 No.24",
+  address: 'Jl. Perum Cikande Permai Blok L1 No.24',
   city: 'Cikande, Banten',
   phone: {
     banten: '08119891210 - Bonari Nasution',

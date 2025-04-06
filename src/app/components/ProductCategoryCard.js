@@ -6,7 +6,6 @@ import { ProductCategories } from "@/app/data/productCategories";
 const ProductCategorySlider = ({ selectedCategory, onSelectCategory }) => {
     const [showButtons, setShowButtons] = useState(false);
     const sliderRef = useRef(null);
-    console.log(selectedCategory);
     
     useEffect(() => {
         const slider = sliderRef.current;

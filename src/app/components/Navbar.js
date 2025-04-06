@@ -30,14 +30,15 @@ export default function Navbar() {
     }, [lastScrollY]);
 
     useEffect(() => {
-        if (isVisible && !isAtTop) {
+        if (isVisible && !isAtTop || isMenuOpen && !isAtTop) {
             const timer = setTimeout(() => {
                 setIsVisible(false);
+                setIsMenuOpen(false);
             }, 2500);
             
             return () => clearTimeout(timer);
         }
-    }, [isVisible, isAtTop]);
+    }, [isVisible, isAtTop, isMenuOpen]);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);

@@ -25,7 +25,7 @@ export default function Header() {
   };
 
   return (
-    <header className="absolute inset-0 w-full h-1/2 -z-10">
+    <header className="absolute inset-0 w-screen h-1/3 -z-10">
       <div 
         className="absolute inset-0 z-0 bg-cover bg-center bg-fixed bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] brightness-50"
         style={{backgroundSize: 'cover', backgroundPosition: 'center center'}}

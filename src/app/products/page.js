@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import Image from 'next/image';
 import ProductCard from "../components/ProductCard";
-import ProductCategoryCard from "../components/ProductCategoryCard";
+// import ProductCategoryCard from "../components/ProductCategoryCard";
 
 import { products } from "@/app/data/products";
 
@@ -64,24 +64,10 @@ const ProductsPage = () => {
 
     return (
         <>
-            <div className="w-full pt-6 h-screen">
-                <div className="flex justify-evenly">
-                    <div className="w-1/2 flex flex-col justify-evenly">
-                        <div>
-                            <h1 className="text-4xl text-amber-200 font-bold mb-4">PRODUK KAMI</h1>
-                            <h3 className="text-lg text-white">
-                                Produk kami ini eksklusif bro, jadi dari pada dari pada mending beli disini aja bro, udah terpercaya seIndonesia Raya loh, pokoknya nyesal deh kalau ente ga beli disini, parah nyeselnya, kek kek gimana gitu lah pokoknya!
-                            </h3>
-                        </div>
-                        <div>
-                            <h1 className="text-4xl text-[#0A1E2B] font-bold mb-4">KEUNGGULAN PRODUK KAMI</h1>
-                            <h3 className="text-lg text-[#4A6B8C]">
-                                Produk kami ini eksklusif bro, jadi dari pada dari pada mending beli disini aja bro, udah terpercaya seIndonesia Raya loh, pokoknya nyesal deh kalau ente ga beli disini, parah nyeselnya, kek kek gimana gitu lah pokoknya!
-                            </h3>
-                        </div>
-                    </div>
-                    <div className="w-1/2 flex justify-center ml-4">
-                        <div className="w-2/3 relative h-[600px] rounded-lg rounded-t-[50%] border-t-4 border-x-4 border-white overflow-hidden">
+            <div className="w-full min-h-screen h-screen sm:h-full lg:container mx-auto lg:px-5 xl:px-12 2xl:px-30">
+                <div className="flex flex-col gap-4 sm:grid sm:grid-cols-2 sm:grid-rows-4 sm:items-center">
+                    <div className="flex justify-center sm:row-span-4 items-center w-full h-2/5 px-3 sm:px-0 order-1 sm:order-2">
+                        <div className="relative 2xl:w-2/3 w-full h-[350px] lg:h-[400px] lg:w-4/5 rounded-lg rounded-t-[50%] border-t-4 border-x-4 border-white overflow-hidden">
                             {slides.map((slide, index) => (
                                 <div 
                                     key={index}
@@ -113,15 +99,75 @@ const ProductsPage = () => {
                             </div>
                         </div>
                     </div>
+                    <div className="flex flex-col gap-6 lg:pb-12 px-2 sm:row-span-4 sm:justify-center sm:h-full order-2 sm:order-1 2xl:pt-12 2xl:gap-36">
+                        <div className="sm:h-full sm:flex sm:flex-col sm:justify-end">
+                            <h1 className="text-center sm:text-title sm:text-left text-subtitle text-[#0A1E2B] sm:text-amber-200">PRODUK KAMI</h1>
+                            <h3 className="text-body sm:text-subtitle text-[#4A6B8C] sm:text-white text-justify">
+                                Produk kami ini eksklusif bro, jadi dari pada dari pada mending beli disini aja bro, udah terpercaya seIndonesia Raya loh, pokoknya nyesal deh kalau ente ga beli disini, parah nyeselnya, kek kek gimana gitu lah pokoknya!
+                            </h3>
+                        </div>
+                        <div className="sm:h-full sm:flex sm:flex-col sm:justify-center md:justify-start">
+                            <h1 className="text-center sm:text-title sm:text-left text-subtitle text-[#0A1E2B]">KEUNGGULAN PRODUK KAMI</h1>
+                            <h3 className="text-body sm:text-subtitle text-[#4A6B8C] text-justify">
+                                Produk kami ini eksklusif bro, jadi dari pada dari pada mending beli disini aja bro, udah terpercaya seIndonesia Raya loh, pokoknya nyesal deh kalau ente ga beli disini, parah nyeselnya, kek kek gimana gitu lah pokoknya!
+                            </h3>
+                        </div>
+                    </div>
                 </div>
-                <div className="relative flex pt-6 bottom-0 mx-auto justify-center text-center animate-bounce w-fit"
-                    onClick={() => {scrollToTopCategories()}}>
-                    <i className="fa-solid fa-angles-down cursor-pointer align-middle text-xl"></i>
+                <div className="p-6">
+                    {/* 6 Kolom untuk Keunggulan Kami */}
+                    <div className="grid grid-cols-3 gap-4 grid-rows-subgrid md:flex md:justify-between flex-wrap">
+                        
+                        {/* Point 1 */}
+                        <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
+                            <i className="fas fa-cogs text-title text-[#1F3D57] mb-2"></i>
+                            <p className="font-semibold text-body text-[#1F3D57] text-center">Produk Berkualitas Tinggi</p>
+                        </div>
+
+                        {/* Point 2 */}
+                        <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
+                        <i className="fas fa-check-circle text-title text-[#1F3D57] mb-2"></i>
+                        <p className="font-semibold text-body text-[#1F3D57] text-center">Uji Kualitas Berkala</p>
+                        </div>
+
+                        {/* Point 3 */}
+                        <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
+                        <i className="fas fa-shield-alt text-title text-[#1F3D57] mb-2"></i>
+                        <p className="font-semibold text-body text-[#1F3D57] text-center">Jaminan dan Keamanan</p>
+                        </div>
+
+                        {/* Point 4 */}
+                        <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
+                        <i className="fas fa-globe-americas text-title text-[#1F3D57] mb-2"></i>
+                        <p className="font-semibold text-body text-[#1F3D57] text-center">Standar Internasional</p>
+                        </div>
+
+                        {/* Point 5 */}
+                        <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
+                        <i className="fas fa-lightbulb text-title text-[#1F3D57] mb-2"></i>
+                        <p className="font-semibold text-body text-[#1F3D57] text-center">Komitmen terhadap Inovasi</p>
+                        </div>
+
+                        {/* Point 6 */}
+                        <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
+                        <i className="fas fa-headset text-title text-[#1F3D57] mb-2"></i>
+                        <p className="font-semibold text-body text-[#1F3D57] text-center">Layanan Pelanggan 24/7</p>
+                        </div>
+                    </div>
+                </div>
+                <div className="flex justify-center pt-6">
+                    <button
+                        onClick={scrollToTopCategories}
+                        className="animate-bounce text-[#1F3D57] bg-white rounded-full p-2 transform transition duration-300 hover:scale-110 hover:text-[#1F3D57] cursor-pointer"
+                        aria-label="Scroll to Categories"
+                    >
+                        <i className="fa-solid fa-angles-down text-xl"></i>
+                    </button>
                 </div>
             </div>
 
-            <div className="flex flex-col px-2 gap-5 py-6 h-auto mx-auto w-full overflow-x-hidden">
-                {/* Sidebar for Categories */}
+            <div className="flex flex-col px-2 gap-5 my-6 h-auto mx-auto w-full overflow-x-hidden">
+                {/* Sidebar for Categories
                 <ProductCategoryCard 
                     selectedCategory={selectedCategory} 
                     onSelectCategory={(item) => {
@@ -129,7 +175,7 @@ const ProductsPage = () => {
                         setCurrentPage(1);
                         scrollToTopCategories(); 
                     }}  
-                />
+                /> */}
 
                 <div className="w-full">
                     {/* Products */}

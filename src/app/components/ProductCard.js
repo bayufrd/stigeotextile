@@ -35,7 +35,7 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
                 
                 {/* Product Image */}
                 <div className="w-1/3 flex flex-col items-center">
-                    <div className="relative w-[500px] h-[500px] mb-4">
+                    <div className="relative w-[500px] h-[500px] mb-4 shadow-lg border border-gray-300 rounded-xl">
                         <Image
                             src={hasImages ? images[currentImageIndex] : "/no-image.jpg"}
                             alt={name}

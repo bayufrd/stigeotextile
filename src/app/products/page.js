@@ -121,38 +121,38 @@ const ProductsPage = () => {
                             
                             {/* Point 1 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                                <i className="fas fa-cogs text-subtitle text-[#1F3D57] mb-2"></i>
-                                <p className="font-semibold text-body text-[#1F3D57] text-center">Produk Berkualitas Tinggi</p>
+                                <i className="fas fa-cogs text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
+                                <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Produk Berkualitas Tinggi</p>
                             </div>
 
                             {/* Point 2 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-check-circle text-subtitle text-[#1F3D57] mb-2"></i>
-                            <p className="font-semibold text-body text-[#1F3D57] text-center">Uji Kualitas Berkala</p>
+                            <i className="fas fa-check-circle text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
+                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Uji Kualitas Berkala</p>
                             </div>
 
                             {/* Point 3 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-shield-alt text-subtitle text-[#1F3D57] mb-2"></i>
-                            <p className="font-semibold text-body text-[#1F3D57] text-center">Jaminan dan Keamanan</p>
+                            <i className="fas fa-shield-alt text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
+                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Jaminan dan Keamanan</p>
                             </div>
 
                             {/* Point 4 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-globe-americas text-subtitle text-[#1F3D57] mb-2"></i>
-                            <p className="font-semibold text-body text-[#1F3D57] text-center">Standar Internasional</p>
+                            <i className="fas fa-globe-americas text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
+                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Standar Internasional</p>
                             </div>
 
                             {/* Point 5 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-lightbulb text-subtitle text-[#1F3D57] mb-2"></i>
-                            <p className="font-semibold text-body text-[#1F3D57] text-center">Komitmen terhadap Inovasi</p>
+                            <i className="fas fa-lightbulb text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
+                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Komitmen terhadap Inovasi</p>
                             </div>
 
                             {/* Point 6 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-headset text-subtitle text-[#1F3D57] mb-2"></i>
-                            <p className="font-semibold text-body text-[#1F3D57] text-center">Layanan Pelanggan 24/7</p>
+                            <i className="fas fa-headset text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
+                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Layanan Pelanggan 24/7</p>
                             </div>
                         </div>
                     </div>
@@ -167,7 +167,7 @@ const ProductsPage = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col px-2 gap-5 my-6 h-auto mx-auto overflow-x-hidden">
+                <div className="flex flex-col gap-5 my-6 h-auto mx-auto overflow-x-hidden">
                     {/* Sidebar for Categories
                     <ProductCategoryCard 
                         selectedCategory={selectedCategory} 

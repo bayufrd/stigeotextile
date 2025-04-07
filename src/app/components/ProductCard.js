@@ -59,7 +59,7 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
 
             {/* Mobile: Image dulu */}
             <div className="lg:hidden w-full flex flex-col items-center">
-            <div className="relative w-[300px] h-[300px] mb-4 shadow-lg border border-gray-300 rounded-xl"
+            <div className="relative w-[350px] h-[350px] mb-4 shadow-lg border border-gray-300 rounded-xl"
                 onTouchStart={handleTouchStartImg}
                 onTouchMove={handleTouchMoveImg}
                 onTouchEnd={handleTouchEndImg}
@@ -82,7 +82,7 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
             </div>
 
             {/* Mobile: Left & Right jadi slider */}
-            <div className="lg:hidden w-full relative px-4"
+            <div className="lg:hidden w-full relative"
                 onTouchStart={handleTouchStartContent}
                 onTouchMove={handleTouchMoveContent}
                 onTouchEnd={handleTouchEndContent}
@@ -93,38 +93,38 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
                     style={{ transform: `translateX(-${currentContentIndex * 100}%)` }}
                     >
                     {/* Left Slide */}
-                    <div className="w-full shrink-0 px-2">
+                    <div className="w-full shrink-0">
                         <div className="relative text-right pr-4 p-4 bg-white rounded shadow-md min-h-[420px] flex flex-col justify-between">
                         <div className="absolute -inset-x-2 w-full h-[70%] bg-[url('/products/assets/leftside-product-bg.svg')] bg-cover bg-center opacity-25 z-0"></div>
                         <div className="relative z-10 space-y-3 font-bold flex flex-col justify-center">
-                            <h3 className="text-2xl text-amber-300">Aplikasi Produk:</h3>
-                            <ul className="text-gray-600 text-l list-none pr-2">
-                            {applications.map((application, index) => (
-                                <li key={index} className="flex justify-end gap-x-4">
-                                <span>{application}</span>
-                                <span>•</span>
-                                </li>
-                            ))}
+                            <h3 className="text-subtitle text-amber-300">Aplikasi Produk:</h3>
+                            <ul className="text-gray-600 text-body list-none pr-2">
+                                {applications.map((application, index) => (
+                                    <li key={index} className="flex justify-end gap-x-4">
+                                    <span>{application}</span>
+                                    <span>•</span>
+                                    </li>
+                                ))}
                             </ul>
                         </div>
                         </div>
                     </div>
 
                     {/* Right Slide */}
-                    <div className="w-full shrink-0 px-2">
+                    <div className="w-full shrink-0">
                         <div className="relative pl-4 p-4 bg-white rounded shadow-md min-h-[420px] flex flex-col justify-between">
                         <div className="relative z-10 space-y-3 font-bold">
-                            <h3 className="text-2xl text-blue-600">Detail Produk:</h3>
-                            <p className="text-gray-600 text-l text-justify">
-                            {detail_title || "No additional details available."}
+                            <h3 className="text-subtitle text-blue-600">Detail Produk:</h3>
+                            <p className="text-gray-600 text-body text-justify">
+                                {detail_title || "No additional details available."}
                             </p>
-                            <ul className="text-gray-600 text-l list-none p-2">
-                            {details.map((detail, index) => (
-                                <li key={index} className="flex justify-start gap-x-4">
-                                <span>•</span>
-                                <span>{detail}</span>
-                                </li>
-                            ))}
+                            <ul className="text-gray-600 text-body list-none p-2">
+                                {details.map((detail, index) => (
+                                    <li key={index} className="flex justify-start gap-x-4">
+                                    <span>•</span>
+                                    <span>{detail}</span>
+                                    </li>
+                                ))}
                             </ul>
                             <div className="flex gap-4 mt-4">
                             <i className="fa-regular fa-hand-point-right text-3xl"></i>
@@ -142,7 +142,7 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
             </div>
 
             {/* Tombol navigasi */}
-            <div className="flex justify-between mt-4">
+            <div className="flex justify-between mt-4 px-4">
                 <button
                 className="text-sm bg-gray-200 px-4 py-2 rounded disabled:opacity-50"
                 onClick={() => setCurrentContentIndex((prev) => Math.max(prev - 1, 0))}
@@ -167,8 +167,8 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
             <div className="relative h-full w-1/3 text-right pr-4">
                 <div className="absolute -inset-x-2 w-full h-[70%] bg-[url('/products/assets/leftside-product-bg.svg')] bg-cover bg-center opacity-25 z-0"></div>
                 <div className="z-10 space-y-3 font-bold flex flex-col justify-center h-full">
-                <h3 className="text-2xl text-amber-300">Aplikasi Produk:</h3>
-                <ul className="text-gray-600 text-l list-none pr-2">
+                <h3 className="text-title text-amber-300">Aplikasi Produk:</h3>
+                <ul className="text-gray-600 text-body list-none pr-2">
                     {applications.map((application, index) => (
                     <li key={index} className="flex justify-end space-y-3 gap-x-4">
                         <span>{application}</span>
@@ -205,10 +205,10 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
                 <div className="relative h-full">
                     <div className="absolute -inset-y-20 w-full h-[150%] bg-[url('/products/assets/rightside-product-bg.svg')] bg-cover bg-center opacity-20 z-0"></div>
                     <div className="z-10 text-left space-y-3 font-bold h-full flex flex-col">
-                    <h3 className="text-2xl text-blue-600">Detail Produk:</h3>
+                    <h3 className="text-title text-blue-600">Detail Produk:</h3>
                     <div className="space-y-2">
-                        <p className="text-gray-600 text-l text-justify">{detail_title || "No additional details available."}</p>
-                        <ul className="text-gray-600 text-l list-none p-2">
+                        <p className="text-gray-600 text-body text-justify">{detail_title || "No additional details available."}</p>
+                        <ul className="text-gray-600 text-body list-none p-2">
                         {details.map((detail, index) => (
                             <li key={index} className="flex justify-start space-y-3 gap-x-4">
                             <span>•</span>

@@ -121,42 +121,42 @@ const ProductsPage = () => {
                             
                             {/* Point 1 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                                <i className="fas fa-cogs text-title text-[#1F3D57] mb-2"></i>
+                                <i className="fas fa-cogs text-subtitle text-[#1F3D57] mb-2"></i>
                                 <p className="font-semibold text-body text-[#1F3D57] text-center">Produk Berkualitas Tinggi</p>
                             </div>
 
                             {/* Point 2 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-check-circle text-title text-[#1F3D57] mb-2"></i>
+                            <i className="fas fa-check-circle text-subtitle text-[#1F3D57] mb-2"></i>
                             <p className="font-semibold text-body text-[#1F3D57] text-center">Uji Kualitas Berkala</p>
                             </div>
 
                             {/* Point 3 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-shield-alt text-title text-[#1F3D57] mb-2"></i>
+                            <i className="fas fa-shield-alt text-subtitle text-[#1F3D57] mb-2"></i>
                             <p className="font-semibold text-body text-[#1F3D57] text-center">Jaminan dan Keamanan</p>
                             </div>
 
                             {/* Point 4 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-globe-americas text-title text-[#1F3D57] mb-2"></i>
+                            <i className="fas fa-globe-americas text-subtitle text-[#1F3D57] mb-2"></i>
                             <p className="font-semibold text-body text-[#1F3D57] text-center">Standar Internasional</p>
                             </div>
 
                             {/* Point 5 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-lightbulb text-title text-[#1F3D57] mb-2"></i>
+                            <i className="fas fa-lightbulb text-subtitle text-[#1F3D57] mb-2"></i>
                             <p className="font-semibold text-body text-[#1F3D57] text-center">Komitmen terhadap Inovasi</p>
                             </div>
 
                             {/* Point 6 */}
                             <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-headset text-title text-[#1F3D57] mb-2"></i>
+                            <i className="fas fa-headset text-subtitle text-[#1F3D57] mb-2"></i>
                             <p className="font-semibold text-body text-[#1F3D57] text-center">Layanan Pelanggan 24/7</p>
                             </div>
                         </div>
                     </div>
-                    <div className="flex justify-center pt-6">
+                    <div className="hidden sm:flex justify-center pt-6">
                         <button
                             onClick={scrollToTopCategories}
                             className="animate-bounce text-[#1F3D57] bg-white rounded-full p-2 transform transition duration-300 hover:scale-110 hover:text-[#1F3D57] cursor-pointer"

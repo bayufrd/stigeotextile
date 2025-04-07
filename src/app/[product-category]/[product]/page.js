@@ -23,8 +23,8 @@ const ProductDetail = () => {
         <div className="relative w-full py-8 px-10 h-screen bg-amber-50">
             <Breadcrumb />
             <div className="flex flex-row pt-8">
-                <div className="w-1/2 flex flex-col items-center">
-                    <div className="relative w-[600px] h-[600px] mb-4 shadow-lg border border-gray-300 rounded-xl">
+                <div className="w-1/2 flex flex-col items-center container">
+                    <div className="relative w-[300px] h-[300px] mb-4 shadow-lg border border-gray-300 rounded-xl">
                         <Image
                             src={hasImages ? productData.images[currentImageIndex] : "/no-image.jpg"}
                             alt={"/no-image.jpg"}

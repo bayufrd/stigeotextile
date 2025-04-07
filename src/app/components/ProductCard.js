@@ -52,7 +52,7 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
     return (
         <div className="flex flex-col items-center justify-center my-10 pb-10 border-b last:border-b-0">
         <h2 className="text-title text-center font-semibold mb-4">{name}</h2>
-        <p className="w-2/3 text-gray-600 pb-8 text-justify">{description}</p>
+        <p className="px-6 text-gray-600 pb-8 text-justify">{description}</p>
 
         {/* Wrapper Responsif */}
         <div className="flex flex-col lg:flex-row w-full items-center lg:items-start gap-4">

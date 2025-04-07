@@ -9,6 +9,7 @@ export default function Navbar() {
     const [lastScrollY, setLastScrollY] = useState(0);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAtTop, setIsAtTop] = useState(true);
+    const [activeDropdown, setActiveDropdown] = useState(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -64,22 +65,82 @@ export default function Navbar() {
                             priority
                         />
                     </Link>
-                    <div className="hidden md:flex space-x-4 text-l gap-5 font-bold"> 
+                    <div className="hidden md:flex space-x-4 text-l gap-5 font-bold relative">
                         {navigation.map((item) => (
-                            <Link key={item.name} href={item.href} className="hover:underline">{item.name}</Link>
+                            <div key={item.name} className="relative group">
+                                <Link href={item.href} className="hover:underline">
+                                    {item.name}
+                                </Link>
+                                {item.children && (
+                                    <div className="absolute top-full left-0 bg-green-900 text-white mt-2 p-2 space-y-1 z-50 w-56
+                                                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                                                    transition-all duration-300 transform group-hover:translate-y-2"
+                                    >
+                                    {item.children.map((child) => (
+                                        <Link
+                                            key={child.name}
+                                            href={child.href}
+                                            className="block px-4 py-2 hover:bg-green-800"
+                                        >
+                                        {child.name}
+                                        </Link>
+                                    ))}
+                                    </div>
+                                )}
+                            </div>
                         ))}
-                    </div>
+                        </div>
                     <button onClick={toggleMenu} className="md:hidden">
                         <i className="fa-solid fa-bars"></i>
                     </button>
                 </div>
                 {isMenuOpen && (
                     <div className="md:hidden flex flex-col text-center pt-2 mt-2 border-t border-gray-300">
-                        {navigation.map((item) => (
-                            <Link key={item.name} href={item.href} className="hover:underline my-2">{item.name}</Link>
-                        ))}
+                        {navigation.map((item) => {
+                        const isActive = activeDropdown === item.name;
+                        return (
+                            <div key={item.name} className="relative border-b border-gray-700">
+                            <button
+                                onClick={() =>
+                                setActiveDropdown(isActive ? null : item.name)
+                                }
+                                className="w-full text-left px-4 py-3 flex justify-between items-center font-semibold hover:bg-gray-900 transition"
+                            >
+                                <span className={`${item.children ? "text-green-500" : ""}`}>
+                                {item.name}
+                                </span>
+                                {item.children && (
+                                <span className="ml-2">
+                                    <i className={`fas ${isActive ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                                </span>
+                                )}
+                            </button>
+
+                            {item.children && (
+                                <div
+                                className={`overflow-hidden transition-all duration-500 bg-black text-white flex flex-col text-left
+                                    ${isActive ? "max-h-[500px] opacity-100 py-2" : "max-h-0 opacity-0 py-0"}
+                                `}
+                                style={{ transitionProperty: "max-height, opacity, padding" }}
+                                >
+                                {item.children.map((child, index) => (
+                                    <Link
+                                        key={child.name}
+                                        href={child.href}
+                                        className={`px-6 py-2 text-sm border-t border-gray-700 hover:bg-gray-800 ${
+                                            index === 0 ? "border-t mt-1" : ""
+                                    }`}
+                                    >
+                                    {child.name}
+                                    </Link>
+                                ))}
+                                </div>
+                            )}
+                            </div>
+                        );
+                        })}
                     </div>
-                )}
+                    )}
             </nav>
         </>
     );

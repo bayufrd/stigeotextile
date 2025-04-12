@@ -50,12 +50,13 @@ export default function Navbar() {
             <div className={`transition-transform duration-500 ${isAtTop ? "h-0" : "h-[91px]"}`}></div>
             <nav
                 className={`
-                    ${isAtTop ? "relative bg-transparent" : "fixed before:content-[''] before:relative before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1] bg-[#0A1E2B]"} 
+                    ${isAtTop && !isMenuOpen ? "relative bg-transparent" : "fixed bg-[#0A1E2B]"} 
+                    ${!isAtTop && !isMenuOpen ? "before:content-[''] before:relative before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1]" : ""}
                     top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-500 z-50 
                     ${isVisible ? "translate-y-0" : "-translate-y-full"}
-                `} 
+                `}
             >
-                <div className="container mx-auto flex justify-between items-center">
+                <div className="container mx-auto flex justify-between items-stretch">
                     <Link href="/" className="flex items-center">
                         <Image 
                             src="/logo/logo_navbar.svg" 
@@ -65,14 +66,14 @@ export default function Navbar() {
                             priority
                         />
                     </Link>
-                    <div className="hidden md:flex space-x-4 text-l gap-5 font-bold relative">
+                    <div className="hidden md:flex space-x-4 text-l gap-5 font-bold relative items-center">
                         {navigation.map((item) => (
-                            <div key={item.name} className="relative group">
+                            <div key={item.name} className="relative group h-full flex items-center">
                                 <Link href={item.href} className="hover:underline">
                                     {item.name}
                                 </Link>
                                 {item.children && (
-                                    <div className="absolute top-full left-0 bg-green-900 text-white mt-2 p-2 space-y-1 z-50 w-56
+                                    <div className="absolute top-full left-0 bg-green-900 text-white space-y-1 z-50 w-56
                                                     opacity-0 invisible group-hover:visible group-hover:opacity-100
                                                     transition-all duration-300 transform group-hover:translate-y-2"
                                     >
@@ -100,26 +101,27 @@ export default function Navbar() {
                         const isActive = activeDropdown === item.name;
                         return (
                             <div key={item.name} className="relative border-b border-gray-700">
-                            <button
-                                onClick={() =>
-                                setActiveDropdown(isActive ? null : item.name)
-                                }
-                                className="w-full text-left px-4 py-3 flex justify-between items-center font-semibold hover:bg-gray-900 transition"
-                            >
-                                <span className={`${item.children ? "text-green-500" : ""}`}>
-                                {item.name}
-                                </span>
+                            <div className="w-full text-left px-4 py-3 flex justify-between items-center font-semibold hover:bg-gray-900 transition">
+                                <Link
+                                    href={item.href}
+                                    className={`${item.children ? "text-green-500" : ""}`}
+                                    onClick={() => setIsMenuOpen(false)}
+                                >
+                                    {item.name}
+                                </Link>
                                 {item.children && (
-                                <span className="ml-2">
-                                    <i className={`fas ${isActive ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
-                                </span>
+                                    <button
+                                        onClick={() => setActiveDropdown(isActive ? null : item.name)}
+                                        className="ml-2"
+                                    >
+                                        <i className={`fas ${isActive ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                                    </button>
                                 )}
-                            </button>
-
+                            </div>
                             {item.children && (
                                 <div
                                 className={`overflow-hidden transition-all duration-500 bg-black text-white flex flex-col text-left
-                                    ${isActive ? "max-h-[500px] opacity-100 py-2" : "max-h-0 opacity-0 py-0"}
+                                    ${isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
                                 `}
                                 style={{ transitionProperty: "max-height, opacity, padding" }}
                                 >
@@ -128,7 +130,7 @@ export default function Navbar() {
                                         key={child.name}
                                         href={child.href}
                                         className={`px-6 py-2 text-sm border-t border-gray-700 hover:bg-gray-800 ${
-                                            index === 0 ? "border-t mt-1" : ""
+                                            index === 0 ? "border-t" : ""
                                     }`}
                                     >
                                     {child.name}
@@ -140,7 +142,7 @@ export default function Navbar() {
                         );
                         })}
                     </div>
-                    )}
+                )}
             </nav>
         </>
     );

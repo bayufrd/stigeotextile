@@ -1,6 +1,7 @@
 "use client";
 
-import { useState, useEffect, useLayoutEffect, useRef } from "react";
+import { useState, useEffect } from "react";
+import { usePathname } from "next/navigation";
 import Link from "next/link";
 import Image from "next/image";
 import { navigation } from "@/app/data/navigation";
@@ -10,6 +11,13 @@ export default function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isAtTop, setIsAtTop] = useState(true);
     const [activeDropdown, setActiveDropdown] = useState(null);
+    const pathname = usePathname();
+
+    const isActive = (href) => {
+        return href === "/"
+            ? pathname === "/"
+            : pathname.startsWith(href);
+    };
 
     useEffect(() => {
         const handleScroll = () => {
@@ -69,7 +77,10 @@ export default function Navbar() {
                     <div className="hidden md:flex space-x-4 text-l gap-5 font-bold relative items-center">
                         {navigation.map((item) => (
                             <div key={item.name} className="relative group h-full flex items-center">
-                                <Link href={item.href} className="hover:underline">
+                                <Link 
+                                    href={item.href} 
+                                    className={`hover:underline ${isActive(item.href) ? "text-green-500" : ""}`}
+                                >
                                     {item.name}
                                 </Link>
                                 {item.children && (
@@ -98,30 +109,30 @@ export default function Navbar() {
                 {isMenuOpen && (
                     <div className="md:hidden flex flex-col text-center pt-2 mt-2 border-t border-gray-300">
                         {navigation.map((item) => {
-                        const isActive = activeDropdown === item.name;
+                        const isActiveDropdown = activeDropdown === item.name;
                         return (
                             <div key={item.name} className="relative border-b border-gray-700">
                             <div className="w-full text-left px-4 py-3 flex justify-between items-center font-semibold hover:bg-gray-900 transition">
                                 <Link
                                     href={item.href}
-                                    className={`${item.children ? "text-green-500" : ""}`}
+                                    className={isActive(item.href) ? "text-green-500" : ""}
                                     onClick={() => setIsMenuOpen(false)}
                                 >
                                     {item.name}
                                 </Link>
                                 {item.children && (
                                     <button
-                                        onClick={() => setActiveDropdown(isActive ? null : item.name)}
+                                        onClick={() => setActiveDropdown(isActiveDropdown ? null : item.name)}
                                         className="ml-2"
                                     >
-                                        <i className={`fas ${isActive ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
+                                        <i className={`fas ${isActiveDropdown ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
                                     </button>
                                 )}
                             </div>
                             {item.children && (
                                 <div
                                 className={`overflow-hidden transition-all duration-500 bg-black text-white flex flex-col text-left
-                                    ${isActive ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
+                                    ${isActiveDropdown ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
                                 `}
                                 style={{ transitionProperty: "max-height, opacity, padding" }}
                                 >

@@ -95,7 +95,6 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
                     {/* Left Slide */}
                     <div className="w-full shrink-0">
                         <div className="relative text-right pr-4 p-4 bg-white rounded shadow-md min-h-[420px] flex flex-col justify-between">
-                        <div className="absolute -inset-x-2 w-full h-[70%] bg-[url('/products/assets/leftside-product-bg.svg')] bg-cover bg-center opacity-25 z-0"></div>
                         <div className="relative z-10 space-y-3 font-bold flex flex-col justify-center">
                             <h3 className="text-subtitle text-amber-300">Aplikasi Produk:</h3>
                             <ul className="text-gray-600 text-body list-none pr-2">
@@ -165,7 +164,6 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
             <div className="hidden lg:flex items-center w-full">
             {/* Left Section */}
             <div className="relative h-full w-1/3 text-right pr-4">
-                <div className="absolute -inset-x-2 w-full h-[70%] bg-[url('/products/assets/leftside-product-bg.svg')] bg-cover bg-center opacity-25 z-0"></div>
                 <div className="z-10 space-y-3 font-bold flex flex-col justify-center h-full">
                 <h3 className="text-title text-amber-300">Aplikasi Produk:</h3>
                 <ul className="text-gray-600 text-body list-none pr-2">
@@ -203,7 +201,6 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
             <div className="w-1/3 gap-6 flex pl-4 flex-col justify-evenly">
                 {details.length > 0 && (
                 <div className="relative h-full">
-                    <div className="absolute -inset-y-20 w-full h-[150%] bg-[url('/products/assets/rightside-product-bg.svg')] bg-cover bg-center opacity-20 z-0"></div>
                     <div className="z-10 text-left space-y-3 font-bold h-full flex flex-col">
                     <h3 className="text-title text-blue-600">Detail Produk:</h3>
                     <div className="space-y-2">

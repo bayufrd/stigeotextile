@@ -115,47 +115,6 @@ const ProductsPage = () => {
                             </div>
                         </div>
                     </div>
-                    <div className="p-6">
-                        {/* 6 Kolom untuk Keunggulan Kami */}
-                        <div className="grid grid-cols-3 gap-4 grid-rows-subgrid md:flex md:justify-between flex-wrap">
-                            
-                            {/* Point 1 */}
-                            <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                                <i className="fas fa-cogs text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
-                                <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Produk Berkualitas Tinggi</p>
-                            </div>
-
-                            {/* Point 2 */}
-                            <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-check-circle text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
-                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Uji Kualitas Berkala</p>
-                            </div>
-
-                            {/* Point 3 */}
-                            <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-shield-alt text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
-                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Jaminan dan Keamanan</p>
-                            </div>
-
-                            {/* Point 4 */}
-                            <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-globe-americas text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
-                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Standar Internasional</p>
-                            </div>
-
-                            {/* Point 5 */}
-                            <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-lightbulb text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
-                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Komitmen terhadap Inovasi</p>
-                            </div>
-
-                            {/* Point 6 */}
-                            <div className="flex flex-col items-center transform transition duration-300 hover:scale-110 hover:text-[#1F3D57]">
-                            <i className="fas fa-headset text-subtitle sm:text-2xl text-[#1F3D57] mb-2"></i>
-                            <p className="sm:font-semibold text-body text-[#1F3D57] text-center">Layanan Pelanggan 24/7</p>
-                            </div>
-                        </div>
-                    </div>
                     <div className="hidden sm:flex justify-center pt-6">
                         <button
                             onClick={scrollToTopCategories}

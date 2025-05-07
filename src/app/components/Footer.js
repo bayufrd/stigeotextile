@@ -4,15 +4,23 @@ import { useState } from 'react';
 import ContactModal from '../components/ContactModal';
 import { addressData } from '../data/addressData';
 import { navigation } from '../data/navigation';
-import Link from 'next/link';
+import Link from 'next/link'; // Importing Link from Next.js
 import Image from 'next/image';
+import ContactInfo from '../contact/contactinfo';
+import { FaFacebookF, FaTwitter, FaInstagram } from 'react-icons/fa'; // Importing social media icons
+import dynamic from 'next/dynamic';
+
+// Dynamically import the MapComponent to avoid SSR issues
+const MapComponent = dynamic(
+  () => import('../components/MapsCompany'),
+  { ssr: false }
+);
 
 export default function Footer() {
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
-  
 
   return (
     <footer className="relative text-white py-8">
@@ -45,71 +53,33 @@ export default function Footer() {
               </div>
             </div>
             <h2 className="text-2xl font-bold">{addressData.name}</h2>
-            <div className="text-gray-300 mb-4">
-              <div className="contact-info-section">
-                <div className="contact-details">
-                  <div className="details-wrapper">
-                    <address>
-                      {addressData.address} <br/>
-                      {addressData.city}<br />
-                      <strong>Phone:</strong><br/>
-                      -Banten: {addressData.phone.banten}<br/>
-                      -Jakarta: {addressData.phone.jakarta}<br/>
-                      -Kalimantan Barat: {addressData.phone.kalimantanbarat}<br />
-                      <strong>Fax:</strong> {addressData.fax}<br />
-                      <strong>Email:</strong> <a href={`mailto:${addressData.email}`} className="text-gray-300 hover:text-white">{addressData.email}</a>
-                    </address>
-                  </div>
-                </div>
-              </div>
-            </div>{/* 
-            <div className="flex space-x-4">
-              <Link href={addressData.social.facebook} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
-                <i className="fab fa-facebook-f"></i>
-              </Link>
-              <Link href={addressData.social.twitter} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
-                <i className="fab fa-twitter"></i>
-              </Link>
-              <Link href={addressData.social.instagram} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
-                <i className="fab fa-instagram"></i>
-              </Link>
-              <Link href={`https://wa.me/${addressData.whatsapp}`} target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-white">
-                <i className="fab fa-whatsapp"></i>
-              </Link>
-            </div> */}
           </div>
-          {/* Navigation - Menggunakan data dari navigation.js dengan padding sesuai */}
-          <div className="flex flex-col md:pt-[125px]">
-            <h3 className="text-lg font-bold mb-4">Navigation</h3>
-            <ul className="space-y-2">
-              {navigation.map((item) => (
-                <li key={item.name}>
-                  <Link href={item.href} className="text-gray-300 hover:text-white">
-                    {item.name}
-                  </Link>
-                </li>
-              ))}
-            </ul>
-          </div>
-          
-          {/* Work Hours - dengan padding sesuai */}
-          <div className="flex flex-col md:pt-[125px]">
-            <h3 className="text-lg font-bold mb-2">Work Hours</h3>
-            <p className="text-gray-300">{addressData.hours}</p>
-            
-            <div className="mt-4">
-            <button
-              onClick={openModal}
-              className="inline-block bg-green-500 text-white py-2 px-4 rounded hover:bg-green-600 transition-colors cursor-pointer"
-            >
-              Call Us
-            </button>
-            </div>
-            <ContactModal isOpen={isModalOpen} onClose={closeModal} />
 
+          {/* Navigation (You can add navigation items here) */}
+          <div className="flex flex-col md:pt-[125px]">
+            {/* Add navigation links dynamically if needed */}
+            {navigation.map((item, index) => (
+              <Link key={index} href={item.href} className="text-gray-300 mb-2">{item.label}</Link>
+            ))}
+          </div>
+
+          {/* Work Hours */}
+          <div className="flex flex-col md:pt-[125px]">
+            <h3 className="text-lg font-bold mb-2">Jam Kerja</h3>
+            <p className="text-gray-300">{addressData.hours}</p>
           </div>
         </div>
+
+        {/* Contact Info and Map Section */}
+        <div className="contact-container mt-8">
+          <ContactInfo />
+        </div>
+
+        <div className="map-section mt-8">
+          <MapComponent />
+        </div>
         
+        {/* Footer Bottom */}
         <div className="border-t border-gray-700 mt-8 pt-6 text-center">
           <p>© 2025 dastrevas. All Rights Reserved</p>
         </div>

@@ -1,3 +1,13 @@
+:root {
+  --primary-color: #2c3e50;
+  --secondary-color: #3498db;
+  --light-color: #ecf0f1;
+  --accent-color: #e67e22;
+  --text-color: #333;
+}
+
+/* Your other CSS styles here... */
+
 
 .hero-section {
     background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://i.pinimg.com/1200x/43/26/22/432622b16aa9b0aa678150384a77aa18.jpg');

@@ -13,7 +13,7 @@ export const addressData = {
   whatsapp: '+6282177177767', //for hyperlink use +62 and no space
   fax: '-',
   email: 'cvsentratekno@gmail.com',
-  hours: '7 AM - 9 PM Mon - Sat',
+  hours: '7 Pagi - 9 Malam Senin - Sabtu',
   social: {
     facebook: 'https://fb.com/bayufrd',
     twitter: 'https://x.com',

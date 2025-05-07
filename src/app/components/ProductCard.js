@@ -158,8 +158,6 @@ const ProductCard = ({ images, name, description, applications, detail_title, de
                 </button>
             </div>
             </div>
-
-
             {/* Desktop View */}
             <div className="hidden lg:flex items-center w-full">
             {/* Left Section */}

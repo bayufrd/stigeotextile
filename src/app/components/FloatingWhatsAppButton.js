@@ -52,7 +52,7 @@ const FloatingWhatsAppButton = () => {
     <div className="fixed bottom-3 right-3 flex items-center space-x-2 z-50">
       {/* "Contact Us" Text Block with Green Background and White Text */}
       <div 
-        className="border-2 border-[#2BB673] bg-[#2BB673] text-white p-2 rounded-lg flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
+        className="border-2 border-[#0A1E2B] bg-[#0A1E2B] hover:bg-green-600 text-white p-2 rounded-lg flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
         onClick={openModal}
       >
         Contact Us
@@ -61,7 +61,7 @@ const FloatingWhatsAppButton = () => {
       {/* WhatsApp Button */}
       <div
         onClick={openModal} // Menggunakan div untuk membuka modal
-        className="bg-[#2BB673] text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
+        className="bg-[#0A1E2B] text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
       >
         <i className="fab fa-whatsapp text-2xl"></i>
       </div>

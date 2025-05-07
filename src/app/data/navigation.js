@@ -1,8 +1,8 @@
 export const navigation = [
-    { name: "Home", href: "/home" },
-    { name: "About", href: "/about" },
+    { name: "Beranda", href: "/home" },
+    { name: "Tentang", href: "/about" },
     { 
-        name: "Products", 
+        name: "Produk", 
         href: "/products",
         children: [
             { name: 'Geotextile Woven', href: '/products/woven' },
@@ -11,5 +11,5 @@ export const navigation = [
             { name: 'Geomembrane', href: '/products/geomembrane' }
         ]
     },
-    { name: "Contact", href: "/contact" },
+    { name: "Kontak", href: "/contact" },
 ];

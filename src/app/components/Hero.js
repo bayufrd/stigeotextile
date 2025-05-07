@@ -74,9 +74,9 @@ const Hero = () => {
                                 <span className="hidden md:inline"><br /></span> sehingga dihasilkan produk dengan ketebalan, kekuatan dan kelenturan yang berbeda-beda
                                 <span className="hidden md:inline"><br /></span> sehingga dapat memenuhi berbagai macam kebutuhan proyek yang ada.
                             </p>
-                            <button className="text-white px-4 py-1 md:px-6 md:py-2 rounded-full opacity-75 hover:opacity-100 transition-opacity"
+                            <button className="text-white px-4 py-1 md:px-6 md:py-2 rounded-full opacity-75 hover:opacity-100 transition-opacity cursor-pointer"
                                 style={{ backgroundColor: "rgba(1, 2, 3, 0.9)" }}>
-                                <span className="font-bold text-body cursor-pointer">LOOK MORE</span>
+                                <span className="font-bold text-body">LOOK MORE</span>
                             </button>
                         </div>
                         {/* Slider indicators */}

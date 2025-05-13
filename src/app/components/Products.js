@@ -1,4 +1,60 @@
+'use client';
+
+import { useState, useEffect } from 'react';
+import { products } from '../data/products';
+
 const Products = () => {
+    const [expanded, setExpanded] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+    const [selectedProduct, setSelectedProduct] = useState(null);
+
+    // Add overlay and disable body scroll when modal is open
+    useEffect(() => {
+        if (showModal) {
+            document.body.style.overflow = 'hidden'; // Disable scrolling
+            // Create overlay if not already present
+            if (!document.getElementById('modal-overlay')) {
+                const overlay = document.createElement('div');
+                overlay.id = 'modal-overlay';
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // Dark semi-transparent background
+                overlay.style.zIndex = '40'; // Ensure it's below the modal
+                document.body.appendChild(overlay);
+            }
+        } else {
+            document.body.style.overflow = ''; // Enable scrolling
+            const overlay = document.getElementById('modal-overlay');
+            if (overlay) {
+                document.body.removeChild(overlay);
+            }
+        }
+
+        return () => {
+            document.body.style.overflow = '';
+            const overlay = document.getElementById('modal-overlay');
+            if (overlay) {
+                document.body.removeChild(overlay);
+            }
+        };
+    }, [showModal]);
+
+    const handleToggle = (index) => {
+        setExpanded(expanded === index ? null : index);
+    };
+
+    const openModal = (product) => {
+        setSelectedProduct(product);
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     return (
         <section id="products" className="py-16 bg-gray-100">
             <div className="container mx-auto text-center">
@@ -7,48 +63,115 @@ const Products = () => {
                     <h1 className="text-[#1F3D57] inline"> KAMI</h1>
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {/* Product Card with Hover Effects */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                        <div className="overflow-hidden rounded mb-4 h-48">
-                            <img 
-                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                                alt="Nonwoven Geotextile" 
-                                className="h-48 w-full object-cover transition duration-500 ease-in-out hover:scale-110" 
+                    {products.map((product, index) => (
+                        <div
+                            key={index}
+                            className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                            onClick={() => openModal(product)}
+                        >
+                            <img
+                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                alt={product.name}
+                                className="h-48 w-auto object-cover transition duration-500 ease-in-out hover:scale-110"
                             />
+                            <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
+                            <p className="text-gray-500">
+                                {expanded === index
+                                    ? product.description
+                                    : product.description.length > 150
+                                        ? `${product.description.slice(0, 150)}...`
+                                        : product.description}
+                            </p>
+                            <button
+                                className="text-blue-600 mt-2 cursor-pointer"
+                                onClick={(e) => {
+                                    e.stopPropagation();
+                                    handleToggle(index);
+                                }}
+                            >
+                                {expanded === index ? 'Show Less' : 'Show More'}
+                            </button>
+                            <div className="text-left mt-4">
+                                <span className="inline-block py-2 px-4 bg-[#1F3D57] text-white rounded-full text-sm font-semibold cursor-pointer hover:bg-blue-600">
+                                    {product.category + " ✓" || "Geotextile"}
+                                </span>
+                            </div>
                         </div>
-                        <h3 className="text-xl font-semibold">GT-200 Nonwoven Geotextile</h3>
-                        <p className="text-gray-500">Premium nonwoven geotextile fabric for filtration, separation, and protection applications.</p>
-                        <span className="text-xl text-blue-600 mt-4 block">$2.45/m²</span>
-                    </div>
-                    
-                    {/* You can duplicate this card for more products */}
-                    <div className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                        <div className="overflow-hidden rounded mb-4 h-48">
-                            <img 
-                                src="https://images.unsplash.com/photo-1580820267682-426da9922592?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                                alt="Woven Geotextile" 
-                                className="h-48 w-full object-cover transition duration-500 ease-in-out hover:scale-110" 
-                            />
-                        </div>
-                        <h3 className="text-xl font-semibold">GT-300 Woven Geotextile</h3>
-                        <p className="text-gray-500">High-strength woven geotextile for soil reinforcement and stabilization applications.</p>
-                        <span className="text-xl text-blue-600 mt-4 block">$3.25/m²</span>
-                    </div>
-                    
-                    <div className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl">
-                        <div className="overflow-hidden rounded mb-4 h-48">
-                            <img 
-                                src="https://images.unsplash.com/photo-1624926571524-494fce833658?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" 
-                                alt="Geomembrane" 
-                                className="h-48 w-full object-cover transition duration-500 ease-in-out hover:scale-110" 
-                            />
-                        </div>
-                        <h3 className="text-xl font-semibold">GM-500 HDPE Geomembrane</h3>
-                        <p className="text-gray-500">Impermeable HDPE geomembrane liner for containment and environmental protection.</p>
-                        <span className="text-xl text-blue-600 mt-4 block">$4.75/m²</span>
-                    </div>
+                    ))}
                 </div>
             </div>
+
+            {/* Modal for Detailed View */}
+            {showModal && selectedProduct && (
+                <div className="fixed inset-0 flex justify-center items-center z-50">
+                    {/* Overlay that closes modal when clicked */}
+                    <div
+                        className="absolute inset-0 bg-gray-800 bg-opacity-50"
+                        onClick={closeModal}
+                    />
+                    <div className="bg-white p-8 rounded-lg w-3/4 md:w-1/2 relative max-h-[80vh] overflow-y-auto z-10">
+                        {/* Close Button */}
+                        <button
+                            className="absolute top-4 right-4 text-black text-2xl"
+                            onClick={closeModal}
+                            style={{
+                                zIndex: 100, // Ensure it is above other elements
+                                cursor: 'pointer',
+                            }}
+                        >
+                            &times;
+                        </button>
+                        <div className="relative">
+                            {/* Image */}
+                            <img
+                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                alt={selectedProduct.name}
+                                className="w-full h-auto object-cover rounded-md mb-4"
+                            />
+                            {/* Product Details */}
+                            <div className="mt-4">
+                                <h2 className="text-2xl font-semibold">{selectedProduct.name}</h2>
+                                <p className="text-gray-500 mt-4">{selectedProduct.description}</p>
+                                {/* {List of Applications} */}
+                                <ul className="text-gray-500 list-none p-2">
+                                        {selectedProduct.details && selectedProduct.details.length > 0 ? (
+                                            selectedProduct.applications.map((application, index) => (
+                                                <li key={index} className="flex justify-start gap-x-4">
+                                                    <span>•</span>
+                                                    <span>{application}</span>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="text-gray-500">No applications available</li>
+                                        )}
+                                    </ul>
+                                <div className="mt-4">
+                                    <span className="text-lg text-gray-600 block">
+                                        <strong>{selectedProduct.detail_title || "Tidak ada detail"}</strong>
+                                    </span>
+                                    {/* List of Product Details */}
+                                    <ul className="text-gray-500 list-none p-2">
+                                        {selectedProduct.details && selectedProduct.details.length > 0 ? (
+                                            selectedProduct.details.map((detail, index) => (
+                                                <li key={index} className="flex justify-start gap-x-4">
+                                                    <span>•</span>
+                                                    <span>{detail}</span>
+                                                </li>
+                                            ))
+                                        ) : (
+                                            <li className="text-gray-500">No details available</li>
+                                        )}
+                                    </ul>
+                                    <span className="text-lg text-[#1F3D57] block mt-2">
+                                        Category: <strong>{selectedProduct.category || "Geotextile"}</strong>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
         </section>
     );
 };

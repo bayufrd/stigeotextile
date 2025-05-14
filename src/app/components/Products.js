@@ -130,9 +130,9 @@ const Products = () => {
                         <div className="relative">
                             {/* Image */}
                             <img
-                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : '/no-image.jpg'}
                                 alt={selectedProduct.name}
-                                className={`w-full h-auto object-cover rounded-md mb-4 cursor-pointer transition-all duration-500 ${isImageFullScreen ? 'transform scale-150' : ''}`}
+                                className={`w-full relative h-[48vh] md:h-[40vh] sm:h-[30vh] object-cover rounded-md mb-4 cursor-pointer transition-all duration-500 ${isImageFullScreen ? 'transform scale-150' : ''}`}
                                 onClick={toggleImageZoom} // Toggle zoom on click
                             />
                             {/* Product Details */}
@@ -150,7 +150,7 @@ const Products = () => {
                                         ))
                                     ) : (
                                         <li className="text-gray-500">
-                                            
+
                                         </li> // Default text if no applications
                                     )}
                                 </ul>

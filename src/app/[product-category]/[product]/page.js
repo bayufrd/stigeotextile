@@ -7,22 +7,22 @@ import { products } from "../../data/products";
 import Breadcrumb from "@/app/components/Breadcrumb";
 
 const ProductDetail = () => {
-    const { "product-category": category, product } = useParams();
-    
-    // Find product based on category and slug
-    const productData = products.find(
-      (p) => p.slug_category === category && p.slug_product === product
-    );
+  const { "product-category": category, product } = useParams();
   
-    // Initialize the state for the image index before the conditional return
-    const [currentImageIndex, setCurrentImageIndex] = useState(0);
-  
-    // Check if product exists first
-    if (!productData) return notFound();
-  
-    // Now safely access productData properties
-    const hasImages = productData.images && productData.images.length > 0;
-  
+  // Find product based on category and slug
+  const productData = products.find(
+    (p) => p.slug_category === category && p.slug_product === product
+  );
+
+  // Initialize the state for the image index before the conditional return
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  // Check if product exists first
+  if (!productData) return notFound();
+
+  // Now safely access productData properties
+  const hasImages = productData.images && productData.images.length > 0;
+
 
   return (
     <>

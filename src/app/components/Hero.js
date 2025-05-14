@@ -1,10 +1,60 @@
 'use client';
 
-import { useEffect, useState } from 'react'; 
-import Image from 'next/image'; 
+import { useEffect, useState } from 'react';
+import Image from 'next/image';
 import Head from 'next/head';  // Import Head from 'next/head'
+import { products } from '../data/products';  // Import the products array
+
 
 const Hero = () => {
+    const [showModal, setShowModal] = useState(false);
+
+
+    // Add overlay and disable body scroll when modal is open
+    useEffect(() => {
+        if (showModal) {
+            document.body.style.overflow = 'hidden'; // Disable scrolling
+
+            // Create overlay if not already present
+            if (!document.getElementById('modal-overlay')) {
+                const overlay = document.createElement('div');
+                overlay.id = 'modal-overlay';
+                overlay.style.position = 'fixed';
+                overlay.style.top = '0';
+                overlay.style.left = '0';
+                overlay.style.width = '100%';
+                overlay.style.height = '100%';
+                overlay.style.backgroundColor = 'rgba(0, 0, 0, 0.7)'; // Dark semi-transparent background
+                overlay.style.zIndex = '30'; // Ensure overlay is behind modal
+                overlay.style.pointerEvents = 'none'; // Ensure it doesn't block interactions with modal
+                document.body.appendChild(overlay);
+            }
+        } else {
+            document.body.style.overflow = ''; // Enable scrolling
+            const overlay = document.getElementById('modal-overlay');
+            if (overlay) {
+                document.body.removeChild(overlay);
+            }
+        }
+
+        return () => {
+            // Cleanup if component is unmounted or modal is closed
+            document.body.style.overflow = '';
+            const overlay = document.getElementById('modal-overlay');
+            if (overlay) {
+                document.body.removeChild(overlay);
+            }
+        };
+    }, [showModal]);
+
+    const openModal = () => {
+        setShowModal(true);
+    };
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     // State to track current slide
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
@@ -67,18 +117,92 @@ const Hero = () => {
                         {/* Text and Button Section */}
                         <div className="absolute top-0 right-0 p-4 md:p-8 z-20 mt-4 md:mt-10 mr-2 md:mr-4 text-right max-w-full md:max-w-[60%]">
                             <h1 className="text-title text-white mb-2 md:mb-4">
-                                Geotextile Non Woven Polyester (PET)
+                                {products[0].name}  {/* Displaying the name of the first product */}
                             </h1>
                             <p className="text-subtitle text-white mb-4 md:mb-6">
-                                Produk Geotextile ini berbahan 100% Polyester (PET) dan berkualitas, diproduksi dengan mesin modern
-                                <span className="hidden md:inline"><br /></span> sehingga dihasilkan produk dengan ketebalan, kekuatan dan kelenturan yang berbeda-beda
-                                <span className="hidden md:inline"><br /></span> sehingga dapat memenuhi berbagai macam kebutuhan proyek yang ada.
+                                {products[0].description.length > 300
+                                    ? products[0].description.slice(0, 300) + "..."  // Truncate description if it's too long
+                                    : products[0].description}
                             </p>
                             <button className="text-white px-4 py-1 md:px-6 md:py-2 rounded-full opacity-75 hover:opacity-100 transition-opacity cursor-pointer"
-                                style={{ backgroundColor: "rgba(1, 2, 3, 0.9)" }}>
+                                style={{ backgroundColor: "rgba(1, 2, 3, 0.9)" }}
+                                onClick={openModal}
+                            >
                                 <span className="font-bold text-body">LOOK MORE</span>
                             </button>
+                            
                         </div>
+                        {/* Modal for Detailed View */}
+                        {showModal && (
+                                <div className="fixed inset-0 flex justify-center items-center z-50">
+                                    {/* Overlay that closes modal when clicked */}
+                                    <div
+                                        className="absolute inset-0 bg-gray-800 bg-opacity-50"
+                                        onClick={closeModal}
+                                    />
+                                    <div className="bg-white p-8 rounded-lg w-3/4 md:w-1/2 relative max-h-[80vh] overflow-y-auto z-10">
+                                        {/* Close Button */}
+                                        <button
+                                            className="absolute top-4 right-4 text-black text-2xl"
+                                            onClick={closeModal}
+                                            style={{
+                                                zIndex: 100, // Ensure it is above other elements
+                                                cursor: 'pointer',
+                                            }}
+                                        >
+                                            &times;
+                                        </button>
+                                        <div className="relative">
+                                            {/* Image */}
+                                            <img
+                                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                                alt={products[0].name}
+                                                className="w-full h-auto object-cover rounded-md mb-4"
+                                            />
+                                            {/* Product Details */}
+                                            <div className="mt-4">
+                                                <h2 className="text-2xl font-semibold">{products[0].name}</h2>
+                                                <p className="text-gray-500 mt-4">{products[0].description}</p>
+                                                {/* {List of Applications} */}
+                                                <ul className="text-gray-500 list-none p-2">
+                                                    {products[0].details && products[0].details.length > 0 ? (
+                                                        products[0].applications.map((application, index) => (
+                                                            <li key={index} className="flex justify-start gap-x-4">
+                                                                <span>•</span>
+                                                                <span>{application}</span>
+                                                            </li>
+                                                        ))
+                                                    ) : (
+                                                        <li className="text-gray-500">No applications available</li>
+                                                    )}
+                                                </ul>
+                                                <div className="mt-4">
+                                                    <span className="text-lg text-gray-600 block">
+                                                        <strong>{products[0].detail_title || "Tidak ada detail"}</strong>
+                                                    </span>
+                                                    {/* List of Product Details */}
+                                                    <ul className="text-gray-500 list-none p-2">
+                                                        {products[0].details && products[0].details.length > 0 ? (
+                                                            products[0].details.map((detail, index) => (
+                                                                <li key={index} className="flex justify-start gap-x-4">
+                                                                    <span>•</span>
+                                                                    <span>{detail}</span>
+                                                                </li>
+                                                            ))
+                                                        ) : (
+                                                            <li className="text-gray-500">No details available</li>
+                                                        )}
+                                                    </ul>
+                                                    <span className="text-lg text-[#1F3D57] block mt-2">
+                                                        Category: <strong>{products[0].category || "Geotextile"}</strong>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
+
                         {/* Slider indicators */}
                         <div className="absolute bottom-4 md:bottom-6 left-0 right-0 flex justify-center gap-2 z-20">
                             {slides.map((_, index) => (
@@ -94,6 +218,7 @@ const Hero = () => {
                 </section>
             </main>
         </div>
+
     );
 };
 

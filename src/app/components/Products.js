@@ -7,6 +7,7 @@ const Products = () => {
     const [expanded, setExpanded] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
+    const [isImageFullScreen, setIsImageFullScreen] = useState(false); // State for zoom/full-screen
 
     // Add overlay and disable body scroll when modal is open
     useEffect(() => {
@@ -53,6 +54,11 @@ const Products = () => {
 
     const closeModal = () => {
         setShowModal(false);
+        setIsImageFullScreen(false); // Reset full-screen state when closing the modal
+    };
+
+    const toggleImageZoom = () => {
+        setIsImageFullScreen((prev) => !prev);
     };
 
     return (
@@ -126,28 +132,31 @@ const Products = () => {
                             <img
                                 src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
                                 alt={selectedProduct.name}
-                                className="w-full h-auto object-cover rounded-md mb-4"
+                                className={`w-full h-auto object-cover rounded-md mb-4 cursor-pointer transition-all duration-500 ${isImageFullScreen ? 'transform scale-150' : ''}`}
+                                onClick={toggleImageZoom} // Toggle zoom on click
                             />
                             {/* Product Details */}
                             <div className="mt-4">
                                 <h2 className="text-2xl font-semibold">{selectedProduct.name}</h2>
                                 <p className="text-gray-500 mt-4">{selectedProduct.description}</p>
-                                {/* {List of Applications} */}
-                                <ul className="text-gray-500 list-none p-2">
-                                        {selectedProduct.details && selectedProduct.details.length > 0 ? (
-                                            selectedProduct.applications.map((application, index) => (
-                                                <li key={index} className="flex justify-start gap-x-4">
-                                                    <span>•</span>
-                                                    <span>{application}</span>
-                                                </li>
-                                            ))
-                                        ) : (
-                                            <li className="text-gray-500">No applications available</li>
-                                        )}
-                                    </ul>
+                                {/* List of Applications */}
+                                <ul className="text-gray-500 list-none p-2 mt-4"> {/* Adding a margin-top for spacing */}
+                                    {selectedProduct.applications && selectedProduct.applications.length > 0 ? (
+                                        selectedProduct.applications.map((application, index) => (
+                                            <li key={index} className="flex justify-start gap-x-4">
+                                                <span>•</span>
+                                                <span>{application}</span>
+                                            </li>
+                                        ))
+                                    ) : (
+                                        <li className="text-gray-500">
+                                            
+                                        </li> // Default text if no applications
+                                    )}
+                                </ul>
                                 <div className="mt-4">
                                     <span className="text-lg text-gray-600 block">
-                                        <strong>{selectedProduct.detail_title || "Tidak ada detail"}</strong>
+                                        <strong>{selectedProduct.detail_title || " "}</strong>
                                     </span>
                                     {/* List of Product Details */}
                                     <ul className="text-gray-500 list-none p-2">
@@ -159,9 +168,24 @@ const Products = () => {
                                                 </li>
                                             ))
                                         ) : (
-                                            <li className="text-gray-500">No details available</li>
+                                            <li className="text-gray-500">
+
+                                            </li>
                                         )}
                                     </ul>
+
+                                    {/* Image for Specifications */}
+                                    {selectedProduct.specs && (
+                                        <div className="mt-4">
+                                            <img
+                                                src={selectedProduct.specs}
+                                                alt="Product Specs"
+                                                className={`w-full h-auto object-cover rounded-md cursor-pointer ${isImageFullScreen ? 'transform scale-150' : ''}`}
+                                                onClick={toggleImageZoom} // Toggle zoom on click
+                                            />
+                                        </div>
+                                    )}
+
                                     <span className="text-lg text-[#1F3D57] block mt-2">
                                         Category: <strong>{selectedProduct.category || "Geotextile"}</strong>
                                     </span>
@@ -171,7 +195,6 @@ const Products = () => {
                     </div>
                 </div>
             )}
-
         </section>
     );
 };

@@ -8,6 +8,7 @@ import { products } from '../data/products';  // Import the products array
 
 const Hero = () => {
     const [showModal, setShowModal] = useState(false);
+    const [isImageFullScreen, setIsImageFullScreen] = useState(false); // State for zoom/full-screen
 
 
     // Add overlay and disable body scroll when modal is open
@@ -53,6 +54,10 @@ const Hero = () => {
 
     const closeModal = () => {
         setShowModal(false);
+    };
+
+    const toggleImageZoom = () => {
+        setIsImageFullScreen((prev) => !prev);
     };
 
     // State to track current slide
@@ -130,78 +135,94 @@ const Hero = () => {
                             >
                                 <span className="font-bold text-body">LOOK MORE</span>
                             </button>
-                            
+
                         </div>
                         {/* Modal for Detailed View */}
                         {showModal && (
-                                <div className="fixed inset-0 flex justify-center items-center z-50">
-                                    {/* Overlay that closes modal when clicked */}
-                                    <div
-                                        className="absolute inset-0 bg-gray-800 bg-opacity-50"
+                            <div className="fixed inset-0 flex justify-center items-center z-50">
+                                {/* Overlay that closes modal when clicked */}
+                                <div
+                                    className="absolute inset-0 bg-gray-800 bg-opacity-50"
+                                    onClick={closeModal}
+                                />
+                                <div className="bg-white p-8 rounded-lg w-3/4 md:w-1/2 relative max-h-[80vh] overflow-y-auto z-10">
+                                    {/* Close Button */}
+                                    <button
+                                        className="absolute top-4 right-4 text-black text-2xl"
                                         onClick={closeModal}
-                                    />
-                                    <div className="bg-white p-8 rounded-lg w-3/4 md:w-1/2 relative max-h-[80vh] overflow-y-auto z-10">
-                                        {/* Close Button */}
-                                        <button
-                                            className="absolute top-4 right-4 text-black text-2xl"
-                                            onClick={closeModal}
-                                            style={{
-                                                zIndex: 100, // Ensure it is above other elements
-                                                cursor: 'pointer',
-                                            }}
-                                        >
-                                            &times;
-                                        </button>
-                                        <div className="relative">
-                                            {/* Image */}
-                                            <img
-                                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                                alt={products[0].name}
-                                                className="w-full h-auto object-cover rounded-md mb-4"
-                                            />
-                                            {/* Product Details */}
+                                        style={{
+                                            zIndex: 100, // Ensure it is above other elements
+                                            cursor: 'pointer',
+                                        }}
+                                    >
+                                        &times;
+                                    </button>
+                                    <div className="relative">
+                                        {/* Image */}
+                                        <img
+                                            src={products[0].images && products[0].images.length > 0 ? products[0].images[0] : '/no-image.jpg'}
+                                            alt={products[0].name}
+                                            className={`w-full relative h-[48vh] md:h-[40vh] sm:h-[30vh] object-cover rounded-md mb-4 cursor-pointer transition-all duration-500 ${isImageFullScreen ? 'transform scale-150' : ''}`}
+                                            onClick={toggleImageZoom} // Toggle zoom on click
+                                        />
+                                        {/* Product Details */}
+                                        <div className="mt-4">
+                                            <h2 className="text-2xl font-semibold">{products[0].name}</h2>
+                                            <p className="text-gray-500 mt-4">{products[0].description}</p>
+                                            {/* List of Applications */}
+                                            <ul className="text-gray-500 list-none p-2 mt-4"> {/* Adding a margin-top for spacing */}
+                                                {products[0].applications && products[0].applications.length > 0 ? (
+                                                    products[0].applications.map((application, index) => (
+                                                        <li key={index} className="flex justify-start gap-x-4">
+                                                            <span>•</span>
+                                                            <span>{application}</span>
+                                                        </li>
+                                                    ))
+                                                ) : (
+                                                    <li className="text-gray-500">
+
+                                                    </li> // Default text if no applications
+                                                )}
+                                            </ul>
                                             <div className="mt-4">
-                                                <h2 className="text-2xl font-semibold">{products[0].name}</h2>
-                                                <p className="text-gray-500 mt-4">{products[0].description}</p>
-                                                {/* {List of Applications} */}
+                                                <span className="text-lg text-gray-600 block">
+                                                    <strong>{products[0].detail_title || " "}</strong>
+                                                </span>
+                                                {/* List of Product Details */}
                                                 <ul className="text-gray-500 list-none p-2">
                                                     {products[0].details && products[0].details.length > 0 ? (
-                                                        products[0].applications.map((application, index) => (
+                                                        products[0].details.map((detail, index) => (
                                                             <li key={index} className="flex justify-start gap-x-4">
                                                                 <span>•</span>
-                                                                <span>{application}</span>
+                                                                <span>{detail}</span>
                                                             </li>
                                                         ))
                                                     ) : (
-                                                        <li className="text-gray-500">No applications available</li>
+                                                        <li className="text-gray-500">
+
+                                                        </li>
                                                     )}
                                                 </ul>
-                                                <div className="mt-4">
-                                                    <span className="text-lg text-gray-600 block">
-                                                        <strong>{products[0].detail_title || "Tidak ada detail"}</strong>
-                                                    </span>
-                                                    {/* List of Product Details */}
-                                                    <ul className="text-gray-500 list-none p-2">
-                                                        {products[0].details && products[0].details.length > 0 ? (
-                                                            products[0].details.map((detail, index) => (
-                                                                <li key={index} className="flex justify-start gap-x-4">
-                                                                    <span>•</span>
-                                                                    <span>{detail}</span>
-                                                                </li>
-                                                            ))
-                                                        ) : (
-                                                            <li className="text-gray-500">No details available</li>
-                                                        )}
-                                                    </ul>
-                                                    <span className="text-lg text-[#1F3D57] block mt-2">
-                                                        Category: <strong>{products[0].category || "Geotextile"}</strong>
-                                                    </span>
-                                                </div>
+                                                {/* Image for Specifications */}
+                                                {products[0].specs && (
+                                                    <div className="mt-4">
+                                                        <img
+                                                            src={products[0].specs}
+                                                            alt="Product Specs"
+                                                            className={`w-full h-auto object-cover rounded-md cursor-pointer ${isImageFullScreen ? 'transform scale-150' : ''}`}
+                                                            onClick={toggleImageZoom} // Toggle zoom on click
+                                                        />
+                                                    </div>
+                                                )}
+                                                <span className="text-lg text-[#1F3D57] block mt-2">
+                                                    Category: <strong>{products[0].category || "Geotextile"}</strong>
+                                                </span>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            )}
+                            </div>
+                        )}
 
                         {/* Slider indicators */}
                         <div className="absolute bottom-4 md:bottom-6 left-0 right-0 flex justify-center gap-2 z-20">

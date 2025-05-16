@@ -7,7 +7,22 @@ const Products = () => {
     const [expanded, setExpanded] = useState(null);
     const [showModal, setShowModal] = useState(false);
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const [isImageFullScreen, setIsImageFullScreen] = useState(false); // State for zoom/full-screen
+    const [isImageFullScreen, setIsImageFullScreen] = useState(false);
+    const [activeCategory, setActiveCategory] = useState('Semua');
+    const [filteredProducts, setFilteredProducts] = useState(products);
+
+    // Define available categories
+    const categories = ['Semua', 'Geotextile Woven', 'Geotextile Non Woven', 'Geomembrane'];
+
+    // Filter products based on selected category
+    useEffect(() => {
+        if (activeCategory === 'Semua') {
+            setFilteredProducts(products);
+        } else {
+            const filtered = products.filter(product => product.category === activeCategory);
+            setFilteredProducts(filtered);
+        }
+    }, [activeCategory]);
 
     // Add overlay and disable body scroll when modal is open
     useEffect(() => {
@@ -61,6 +76,10 @@ const Products = () => {
         setIsImageFullScreen((prev) => !prev);
     };
 
+    const handleCategoryChange = (category) => {
+        setActiveCategory(category);
+    };
+
     return (
         <section id="products" className="py-16 bg-gray-100">
             <div className="container mx-auto text-center">
@@ -68,42 +87,67 @@ const Products = () => {
                     <h1 className="text-black inline">PRODUK</h1>
                     <h1 className="text-[#1F3D57] inline"> KAMI</h1>
                 </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {products.map((product, index) => (
-                        <div
-                            key={index}
-                            className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl"
-                            onClick={() => openModal(product)}
+                
+                {/* Category Filter Buttons */}
+                <div className="flex flex-wrap justify-center gap-4 mb-10">
+                    {categories.map((category) => (
+                        <button
+                            key={category}
+                            onClick={() => handleCategoryChange(category)}
+                            className={`py-2 px-6 rounded-full transition-all duration-300 ${
+                                activeCategory === category
+                                    ? 'bg-[#1F3D57] text-white font-semibold shadow-lg'
+                                    : 'bg-white text-gray-700 hover:bg-gray-200'
+                            }`}
                         >
-                            <img
-                                src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                alt={product.name}
-                                className="h-48 w-auto object-cover transition duration-500 ease-in-out hover:scale-110"
-                            />
-                            <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
-                            <p className="text-gray-500">
-                                {expanded === index
-                                    ? product.description
-                                    : product.description.length > 150
-                                        ? `${product.description.slice(0, 150)}...`
-                                        : product.description}
-                            </p>
-                            <button
-                                className="text-blue-600 mt-2 cursor-pointer"
-                                onClick={(e) => {
-                                    e.stopPropagation();
-                                    handleToggle(index);
-                                }}
-                            >
-                                {expanded === index ? 'Show Less' : 'Show More'}
-                            </button>
-                            <div className="text-left mt-4">
-                                <span className="inline-block py-2 px-4 bg-[#1F3D57] text-white rounded-full text-sm font-semibold cursor-pointer hover:bg-blue-600">
-                                    {product.category + " ✓" || "Geotextile"}
-                                </span>
-                            </div>
-                        </div>
+                            {category}
+                        </button>
                     ))}
+                </div>
+                
+                {/* Product Cards */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                    {filteredProducts.length > 0 ? (
+                        filteredProducts.map((product, index) => (
+                            <div
+                                key={index}
+                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                                onClick={() => openModal(product)}
+                            >
+                                <img
+                                    src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                                    alt={product.name}
+                                    className="h-48 w-auto object-cover transition duration-500 ease-in-out hover:scale-110"
+                                />
+                                <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
+                                <p className="text-gray-500">
+                                    {expanded === index
+                                        ? product.description
+                                        : product.description.length > 150
+                                            ? `${product.description.slice(0, 150)}...`
+                                            : product.description}
+                                </p>
+                                <button
+                                    className="text-blue-600 mt-2 cursor-pointer"
+                                    onClick={(e) => {
+                                        e.stopPropagation();
+                                        handleToggle(index);
+                                    }}
+                                >
+                                    {expanded === index ? 'Show Less' : 'Show More'}
+                                </button>
+                                <div className="text-left mt-4">
+                                    <span className="inline-block py-2 px-4 bg-[#1F3D57] text-white rounded-full text-sm font-semibold cursor-pointer hover:bg-blue-600">
+                                        {product.category + " ✓" || "Geotextile"}
+                                    </span>
+                                </div>
+                            </div>
+                        ))
+                    ) : (
+                        <div className="col-span-3 py-16 text-center">
+                            <p className="text-xl text-gray-500">Tidak ada produk dalam kategori ini.</p>
+                        </div>
+                    )}
                 </div>
             </div>
 

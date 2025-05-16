@@ -6,8 +6,8 @@ export const addressData = {
   address: 'Jl. Perum Cikande Permai Blok L1 No.24',
   city: 'Cikande, Banten',
   phone: {
-    banten: '08119891210 - Bonari Nasution',
-    jakarta: '082177372944 - David Kristian Nasution',
+    banten: '08119891210 - Bonari',
+    jakarta: '082177372944 - David',
     kalimantanbarat: '08979767067 - Marcelino'
   },
   whatsapp: '+6282177177767', //for hyperlink use +62 and no space

@@ -83,7 +83,7 @@ export const products = [
             "/products/6.jpg",
         ],
         name: "Geotextile Woven Polypropylene (PP) Circular",
-        category: "Geomembrane",
+        category: "Geotextile Woven",
         description: "Perbedaan woven Circular terletak pada proses pembuatannya, dimana woven jenis ini memiliki sistem anyaman (1:1) ada 2 warna, hitam (terbuat dari polypropylene) dan putih (terbuat dari polyester). Woven geotextile terbuat dari bahan baku serat polypropylene dan ditambahkan dengan bahan yang tahan terhadap sinar UV sehingga menghasilkan daya tarik yang kuat serta stabilitas yang tinggi.",
         applications: [
             "Sebagai Perkuatan dan Stabilisasi timbunan tanah yang jelek dan pada lahan gambut.",
@@ -102,7 +102,7 @@ export const products = [
         images: [
         ],
         name: "Geotextile Woven Polypropylene (PP) Sulzer",
-        category: "Geotextile Non Woven",
+        category: "Geotextile Woven",
         description: "Perbedaan woven Sulzer terletak pada proses pembuatannya, dimana woven ini memiliki sistem anyaman plain/flat (2:1). Dengan teknik tersebut woven Sulzer mempunyai rapat yang paling kecil dari semua jenis anyaman sehingga woven Sulzer menjadi yang paling kuat diantara jenis woven lainnya. ",
         applications: [
             "Woven Sulzer dipakai untuk proyek konstruksi yang membutuhkan tensile strength lebih dari 56 kN/m ",

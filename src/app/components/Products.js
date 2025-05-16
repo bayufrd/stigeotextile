@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { products } from '../data/products';
 
 const Products = () => {
@@ -10,9 +10,29 @@ const Products = () => {
     const [isImageFullScreen, setIsImageFullScreen] = useState(false);
     const [activeCategory, setActiveCategory] = useState('Semua');
     const [filteredProducts, setFilteredProducts] = useState(products);
-
+    const [currentPage, setCurrentPage] = useState(1);
+    const [isMobile, setIsMobile] = useState(false);
+    const [productsPerPage, setProductsPerPage] = useState(6);
+    
     // Define available categories
     const categories = ['Semua', 'Geotextile Woven', 'Geotextile Non Woven', 'Geomembrane'];
+
+    // Check if device is mobile
+    useEffect(() => {
+        const checkIfMobile = () => {
+            setIsMobile(window.innerWidth < 640);
+            setProductsPerPage(window.innerWidth < 640 ? 2 : 6);
+        };
+        
+        // Initial check
+        checkIfMobile();
+        
+        // Add event listener for window resize
+        window.addEventListener('resize', checkIfMobile);
+        
+        // Cleanup
+        return () => window.removeEventListener('resize', checkIfMobile);
+    }, []);
 
     // Filter products based on selected category
     useEffect(() => {
@@ -22,7 +42,35 @@ const Products = () => {
             const filtered = products.filter(product => product.category === activeCategory);
             setFilteredProducts(filtered);
         }
+        setCurrentPage(1); // Reset to first page when category changes
     }, [activeCategory]);
+
+    // Get current products for pagination
+    const getCurrentProducts = useCallback(() => {
+        const indexOfLastProduct = currentPage * productsPerPage;
+        const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+        return filteredProducts.slice(indexOfFirstProduct, indexOfLastProduct);
+    }, [currentPage, productsPerPage, filteredProducts]);
+
+    // Calculate total pages
+    const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
+
+    // Change page
+    const paginate = (pageNumber) => setCurrentPage(pageNumber);
+
+    // Go to next page
+    const nextPage = () => {
+        if (currentPage < totalPages) {
+            setCurrentPage(currentPage + 1);
+        }
+    };
+
+    // Go to previous page
+    const prevPage = () => {
+        if (currentPage > 1) {
+            setCurrentPage(currentPage - 1);
+        }
+    };
 
     // Add overlay and disable body scroll when modal is open
     useEffect(() => {
@@ -107,8 +155,8 @@ const Products = () => {
                 
                 {/* Product Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-                    {filteredProducts.length > 0 ? (
-                        filteredProducts.map((product, index) => (
+                    {getCurrentProducts().length > 0 ? (
+                        getCurrentProducts().map((product, index) => (
                             <div
                                 key={index}
                                 className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl"
@@ -149,6 +197,81 @@ const Products = () => {
                         </div>
                     )}
                 </div>
+                
+                {/* Pagination */}
+                {filteredProducts.length > productsPerPage && (
+                    <div className="pagination-container mt-12 flex justify-center items-center">
+                        <button
+                            onClick={prevPage}
+                            disabled={currentPage === 1}
+                            className={`mx-1 px-4 py-2 rounded-md ${
+                                currentPage === 1
+                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                    : 'bg-[#1F3D57] text-white hover:bg-[#17324A]'
+                            }`}
+                        >
+                            &laquo;
+                        </button>
+                        
+                        <div className="hidden sm:flex">
+                            {[...Array(totalPages)].map((_, index) => {
+                                // For desktop: show all pages if there are 5 or fewer,
+                                // otherwise show first page, last page, current page, and one page before and after current
+                                const pageNum = index + 1;
+                                const showPageNumber = totalPages <= 5 || 
+                                    pageNum === 1 || 
+                                    pageNum === totalPages || 
+                                    pageNum === currentPage || 
+                                    pageNum === currentPage - 1 || 
+                                    pageNum === currentPage + 1;
+                                
+                                // Show ellipsis for gaps
+                                const showEllipsisBefore = pageNum === currentPage - 1 && currentPage > 3;
+                                const showEllipsisAfter = pageNum === currentPage + 1 && currentPage < totalPages - 2;
+                                
+                                return (
+                                    <div key={index} className="flex items-center">
+                                        {showEllipsisBefore && <span className="mx-1">...</span>}
+                                        
+                                        {showPageNumber && (
+                                            <button
+                                                onClick={() => paginate(pageNum)}
+                                                className={`mx-1 px-4 py-2 rounded-md ${
+                                                    currentPage === pageNum
+                                                        ? 'bg-[#1F3D57] text-white'
+                                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                                }`}
+                                            >
+                                                {pageNum}
+                                            </button>
+                                        )}
+                                        
+                                        {showEllipsisAfter && <span className="mx-1">...</span>}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                        
+                        {/* For mobile: just show current page / total pages */}
+                        <div className="sm:hidden mx-2">
+                            <span className="text-gray-700 font-medium">
+                                {currentPage} / {totalPages}
+                            </span>
+                        </div>
+                        
+                        <button
+                            onClick={nextPage}
+                            disabled={currentPage === totalPages}
+                            className={`mx-1 px-4 py-2 rounded-md ${
+                                currentPage === totalPages
+                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                    : 'bg-[#1F3D57] text-white hover:bg-[#17324A]'
+                            }`}
+                        >
+                            &raquo;
+                        </button>
+                    </div>
+                )}
             </div>
 
             {/* Modal for Detailed View */}

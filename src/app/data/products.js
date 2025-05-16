@@ -143,5 +143,30 @@ export const products = [
         specs: "/products/data/6b.png",
         slug_category: "Geomembrane",
         slug_product: "ada-kelima"
+    },
+    {
+        images: [
+        ],
+        name: "Produk 7",
+        category: "Geomembrane",
+        description: "GeoSentra  merupakan Geomembrane yang dibuat dengan bahan baku berkualitas terbaik mengikuti standar internasional GRI (Geosynthetic Research Institute). Geomembrane merupakan bahan yang berfungsi sebagai penahan air, terbuat dari bahan baku polyethylene berkualitas tinggi baik HDPE (High Density Polyethylene) atau LDPE (Low Density polyethylen) serta ditambahkan carbon black, antoxidant, ant-aging and UV-resistance. Selain itu, geomembrane juga tahan terhadap korosi, minyak, asam dan panas tinggi. Bahan ini berkembang pesat karena harga yang kompetitif jika dibandingkan dengan menggunakan beton, sehingga menarik perhatian pemilik proyek untuk menggunakannya sebagai pengganti pelapis beton atau beton bocor.",
+        applications: [
+            "Embung penampungan air ",
+            "Tambak udang dan ikan ",
+            "Tempat pembuangan akhir sampah ",
+            "Proyek kolam penampungan air lainnya, seperti waduk, empang dll.",
+            "Instalasi pengelolaan air, seperti landfill (limbah pertambangan), pelapisan saluran / kolam, dll. ",
+
+        ],
+        detail_title: "Kelebihan Penggunaan Geomembrane :",
+        details: [
+            "Geomembrane kuat dan memiliki sifat kedap air (impermeable), sehingga mampu menahan air ataupun berbagai cairan lainnya. ",
+            "Geomembrane tidak meracuni air dan tidak mengandung bahan-bahan berbahaya, sehingga dapat menjaga kondisi dan kualitas air dan dapat digunakan untuk berbagai usaha pertambakan. ",
+            "Geomembrane mengandung zat anti UV yang berguna untuk menahan sinar UV sehingga geomembrane dapat dipakai bertahun-tahun. ",
+            "Bentuk dan desain geomembrane yang lentur memudahkan dalam pemasangan dan penyambungan baik menggunakan extruder, hot wedge, dll. ",
+        ],
+        specs: "/products/data/6b.png",
+        slug_category: "Geomembrane",
+        slug_product: "ada-kelima"
     }
 ];

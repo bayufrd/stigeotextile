@@ -24,7 +24,7 @@ export const products = [
             "Mendistribusikan tekanan secara rata dari beban kendaraan ke dalam tanah dasar"
         ],
         specs: "/products/data/1b.png",
-        slug_category: "gotextile-non-woven",
+        slug_category: "geotextile-non-woven",
         slug_product: "geotextile-non-woven-polyester-pet"
     },
     {
@@ -53,7 +53,7 @@ export const products = [
             "Mendistribusikan tekanan secara rata dari beban kendaraan ke dalam tanah dasar"
         ],
         specs: "/products/data/2b.png",
-        slug_category: "gotextile-non-woven",
+        slug_category: "geotextile-non-woven",
         slug_product: "geotextile-non-woven-polyester-pp"
     },
     {
@@ -73,7 +73,7 @@ export const products = [
         details: [
         ],
         specs: "/products/data/3b.png",
-        slug_category: "gotextile-non-woven",
+        slug_category: "geotextile-non-woven",
         slug_product: "geotextile-non-woven-polyester-ls"
     },
     {
@@ -95,7 +95,7 @@ export const products = [
             "Geotextile Woven cocok untuk digunakan sebagai bahan stabilisasi tanah dasar yang lunak atau rusak, Geotextile jenis ini mempunyai tensile strength (kuat tarik) yang lebih tinggi dibandingkan dengan Geotextile Non Woven (sekitar 2 kali lipat untuk gramasi atau berat per m2 yang sama).",
         ],
         specs: "/products/data/4b.png",
-        slug_category: "gotextile-non-woven",
+        slug_category: "geotextile-woven",
         slug_product: "geotextile-non-woven-polyester-ls"
     },
     {
@@ -141,8 +141,8 @@ export const products = [
             "Bentuk dan desain geomembrane yang lentur memudahkan dalam pemasangan dan penyambungan baik menggunakan extruder, hot wedge, dll. ",
         ],
         specs: "/products/data/6b.png",
-        slug_category: "Geomembrane",
-        slug_product: "ada-kelima"
+        slug_category: "geomembrane",
+        slug_product: "Geomembrane"
     },
     {
         images: [
@@ -166,7 +166,7 @@ export const products = [
             "Bentuk dan desain geomembrane yang lentur memudahkan dalam pemasangan dan penyambungan baik menggunakan extruder, hot wedge, dll. ",
         ],
         specs: "/products/data/6b.png",
-        slug_category: "Geomembrane",
-        slug_product: "ada-kelima"
+        slug_category: "geomembrane",
+        slug_product: "Geomembrane"
     }
 ];

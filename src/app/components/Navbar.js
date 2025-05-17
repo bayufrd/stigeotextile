@@ -19,6 +19,14 @@ export default function Navbar() {
             : pathname.startsWith(href);
     };
 
+    //For Mapping Navbar
+    const categoryMapping = {
+        'Semua': 'semua',  // No filter
+        'Geotextile Woven': 'geotextile-woven',
+        'Geotextile Non Woven': 'geotextile-non-woven',
+        'Geomembrane': 'geomembrane',
+    };
+
     useEffect(() => {
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
@@ -52,21 +60,38 @@ export default function Navbar() {
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
-    const scrollToSection = (sectionId) => {
-        if (sectionId === "home") {
-            // Scroll to the top of the page
+    const scrollToSection = (sectionId, category = "") => {
+        // Check if the section is "products" and handle scrolling accordingly
+        if (sectionId === "products") {
+            // Scroll to the products section
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // Update the URL hash and active category, if provided
+            if (category) {
+                const categorySlug = categoryMapping[category] || category;
+                window.history.pushState({}, "", `#${categorySlug}`); // Update URL hash without page jump
+            }
+        }
+        // Check which section to scroll to
+        else if (sectionId === "home") {
+            // Scroll to the top of the page (for Home)
             window.scrollTo({ top: 0, behavior: "smooth" });
         } else if (sectionId === "contact") {
-            // Scroll to the bottom of the page
+            // Scroll to the bottom of the page (for Contact)
             window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
         } else {
-            // For "About" and "Products", scroll to their respective sections
+            // For other sections (e.g., About), handle the scroll
             const element = document.getElementById(sectionId);
             if (element) {
                 element.scrollIntoView({ behavior: 'smooth', block: 'start' });
             }
         }
     };
+
+
 
     return (
         <>
@@ -100,13 +125,14 @@ export default function Navbar() {
                                 </button>
                                 {item.children && (
                                     <div className="absolute top-full left-0 bg-[#0A1E2B] text-white space-y-1 z-50 w-56
-                        opacity-0 invisible group-hover:visible group-hover:opacity-100
-                        transition-all duration-300 transform group-hover:translate-y-2"
+                                    opacity-0 invisible group-hover:visible group-hover:opacity-100
+                                    transition-all duration-300 transform group-hover:translate-y-2"
                                     >
                                         {item.children.map((child) => (
                                             <Link
                                                 key={child.name}
-                                                href={child.href}
+                                                href=""
+                                                onClick={() => scrollToSection("products", child.name)} // Pass clean category name for UI
                                                 className="block px-4 py-2 hover:bg-green-800"
                                             >
                                                 {child.name}
@@ -154,12 +180,13 @@ export default function Navbar() {
                                             {item.children.map((child, index) => (
                                                 <Link
                                                     key={child.name}
-                                                    href={child.href}
-                                                    className={`px-6 py-2 text-sm border-t border-gray-700 hover:bg-gray-800 ${index === 0 ? "border-t" : ""
-                                                        }`}
+                                                    href=""
+                                                    onClick={() => scrollToSection("products", child.name)}
+                                                    className={`px-6 py-2 text-sm border-t border-gray-700 hover:bg-gray-800 ${index === 0 ? "border-t" : ""}`}
                                                 >
                                                     {child.name}
                                                 </Link>
+
                                             ))}
                                         </div>
                                     )}

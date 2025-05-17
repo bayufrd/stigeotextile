@@ -15,7 +15,35 @@ const Products = () => {
     const [productsPerPage, setProductsPerPage] = useState(6);
     
     // Define available categories
-    const categories = ['Semua', 'Geotextile Woven', 'Geotextile Non Woven', 'Geomembrane'];
+    const categories = ['Semua', 'Geotextile Woven', 'Geotextile Non Woven', 'Geotextile Geobag', 'Geomembrane'];
+
+    //For Mapping Navbar
+    const categoryMapping = {
+        'Semua': 'semua',  // No filter
+        'Geotextile Woven': 'geotextile-woven',
+        'Geotextile Non Woven': 'geotextile-non-woven',
+        'Geotextile Geobag': 'geobag',
+        'Geomembrane': 'geomembrane',
+      };
+      
+        // Handle hash change for active category
+        useEffect(() => {
+            const handleHashChange = () => {
+                const categoryFromHash = window.location.hash.replace('#', '').toLowerCase();
+                if (categories.includes(categoryFromHash)) {
+                    setActiveCategory(categoryFromHash);
+                } else {
+                    setActiveCategory('Semua');  // Default to 'Semua' if no valid category
+                }
+            };
+    
+            // Run on initial load and whenever the hash changes
+            handleHashChange(); // Initial check
+            window.addEventListener('hashchange', handleHashChange);
+    
+            // Cleanup the event listener on component unmount
+            return () => window.removeEventListener('hashchange', handleHashChange);
+        }, []);
 
     // Check if device is mobile
     useEffect(() => {
@@ -36,14 +64,20 @@ const Products = () => {
 
     // Filter products based on selected category
     useEffect(() => {
-        if (activeCategory === 'Semua') {
-            setFilteredProducts(products);
+        // Get the category from the mapping using the selected UI category
+        const selectedCategorySlug = categoryMapping[activeCategory];
+    
+        if (selectedCategorySlug === 'semua') {
+            setFilteredProducts(products); // No filter
         } else {
-            const filtered = products.filter(product => product.category === activeCategory);
+            const filtered = products.filter(product => 
+                product.slug_category === selectedCategorySlug // Use slug for filtering
+            );
             setFilteredProducts(filtered);
         }
         setCurrentPage(1); // Reset to first page when category changes
     }, [activeCategory]);
+    
 
     // Get current products for pagination
     const getCurrentProducts = useCallback(() => {
@@ -72,6 +106,19 @@ const Products = () => {
         }
     };
 
+    const scrollToSection = (sectionId, category = "") => {
+        if (category) {
+            const categorySlug = categoryMapping[category] || category;
+            history.pushState(null, "", `#${categorySlug}`);
+        }
+
+        const element = document.getElementById(sectionId);
+        if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        setActiveCategory(category);
+    };
     // Add overlay and disable body scroll when modal is open
     useEffect(() => {
         if (showModal) {

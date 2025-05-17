@@ -3,13 +3,13 @@ export const navigation = [
     { name: "Tentang", href: "/about" },
     { 
         name: "Produk", 
-        href: "/products",
-        // children: [
-        //     { name: 'Geotextile Woven', href: '/products/woven' },
-        //     { name: 'Geotextile Non Woven', href: '/products/non-woven' },
-        //     { name: 'Geotextile Geobag', href: '/products/geobag' },
-        //     { name: 'Geomembrane', href: '/products/geomembrane' }
-        // ]
+        href: "/products",  // Link to Products section (as a placeholder)
+        children: [
+            { name: 'Geotextile Woven', href: '#geotextile-woven' },  // Match category names in products
+            { name: 'Geotextile Non Woven', href: '#geotextile-non-woven' },
+            { name: 'Geotextile Geobag', href: '#geotextile-geobag' },
+            { name: 'Geomembrane', href: '#geomembrane' }
+        ]
     },
     { name: "Kontak", href: "/contact" },
 ];

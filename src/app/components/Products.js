@@ -105,20 +105,6 @@ const Products = () => {
             setCurrentPage(currentPage - 1);
         }
     };
-
-    const scrollToSection = (sectionId, category = "") => {
-        if (category) {
-            const categorySlug = categoryMapping[category] || category;
-            history.pushState(null, "", `#${categorySlug}`);
-        }
-
-        const element = document.getElementById(sectionId);
-        if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-
-        setActiveCategory(category);
-    };
     // Add overlay and disable body scroll when modal is open
     useEffect(() => {
         if (showModal) {

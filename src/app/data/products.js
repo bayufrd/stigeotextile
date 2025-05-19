@@ -148,7 +148,7 @@ export const products = [
         images: [
         ],
         name: "Produk 7",
-        category: "Geomembrane",
+        category: "Geotextile Geobag",
         description: "GeoSentra  merupakan Geomembrane yang dibuat dengan bahan baku berkualitas terbaik mengikuti standar internasional GRI (Geosynthetic Research Institute). Geomembrane merupakan bahan yang berfungsi sebagai penahan air, terbuat dari bahan baku polyethylene berkualitas tinggi baik HDPE (High Density Polyethylene) atau LDPE (Low Density polyethylen) serta ditambahkan carbon black, antoxidant, ant-aging and UV-resistance. Selain itu, geomembrane juga tahan terhadap korosi, minyak, asam dan panas tinggi. Bahan ini berkembang pesat karena harga yang kompetitif jika dibandingkan dengan menggunakan beton, sehingga menarik perhatian pemilik proyek untuk menggunakannya sebagai pengganti pelapis beton atau beton bocor.",
         applications: [
             "Embung penampungan air ",
@@ -166,7 +166,7 @@ export const products = [
             "Bentuk dan desain geomembrane yang lentur memudahkan dalam pemasangan dan penyambungan baik menggunakan extruder, hot wedge, dll. ",
         ],
         specs: "/products/data/6b.png",
-        slug_category: "geomembrane",
-        slug_product: "Geomembrane"
+        slug_category: "geobag",
+        slug_product: "geobag"
     }
 ];

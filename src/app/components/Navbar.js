@@ -72,7 +72,7 @@ export default function Navbar() {
             // Update the URL hash and active category, if provided
             if (category) {
                 const categorySlug = categoryMapping[category] || category;
-                window.history.pushState({}, "", `#${categorySlug}`); // Update URL hash without page jump
+                history.pushState({}, "", `#${categorySlug}`); // Update URL hash without page jump
             }
         }
         // Check which section to scroll to
@@ -132,7 +132,7 @@ export default function Navbar() {
                                             <Link
                                                 key={child.name}
                                                 href=""
-                                                onClick={() => scrollToSection("products", child.name)} // Pass clean category name for UI
+                                                onClick={() => scrollToSection("products", child.href)} // Pass clean category name for UI
                                                 className="block px-4 py-2 hover:bg-green-800"
                                             >
                                                 {child.name}
@@ -181,7 +181,7 @@ export default function Navbar() {
                                                 <Link
                                                     key={child.name}
                                                     href=""
-                                                    onClick={() => scrollToSection("products", child.name)}
+                                                    onClick={() => scrollToSection("products", child.href)}
                                                     className={`px-6 py-2 text-sm border-t border-gray-700 hover:bg-gray-800 ${index === 0 ? "border-t" : ""}`}
                                                 >
                                                     {child.name}

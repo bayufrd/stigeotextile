@@ -13,7 +13,7 @@ const Products = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [isMobile, setIsMobile] = useState(false);
     const [productsPerPage, setProductsPerPage] = useState(6);
-    
+
     // Define available categories
     const categories = ['Semua', 'Geotextile Woven', 'Geotextile Non Woven', 'Geotextile Geobag', 'Geomembrane'];
 
@@ -24,26 +24,35 @@ const Products = () => {
         'Geotextile Non Woven': 'geotextile-non-woven',
         'Geotextile Geobag': 'geobag',
         'Geomembrane': 'geomembrane',
-      };
-      
-        // Handle hash change for active category
-        useEffect(() => {
-            const handleHashChange = () => {
-                const categoryFromHash = window.location.hash.replace('#', '').toLowerCase();
-                if (categories.includes(categoryFromHash)) {
-                    setActiveCategory(categoryFromHash);
-                } else {
-                    setActiveCategory('Semua');  // Default to 'Semua' if no valid category
-                }
-            };
-    
-            // Run on initial load and whenever the hash changes
-            handleHashChange(); // Initial check
-            window.addEventListener('hashchange', handleHashChange);
-    
-            // Cleanup the event listener on component unmount
-            return () => window.removeEventListener('hashchange', handleHashChange);
-        }, []);
+    };
+
+    const [currentProductSlide, setCurrentProductSlide] = useState(0);
+    const handleSlideChange = (direction) => {
+        if (direction === 'next') {
+            setCurrentProductSlide((prev) => (prev + 1) % selectedProduct.images.length);
+        } else {
+            setCurrentProductSlide((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length);
+        }
+    };
+
+    // Handle hash change for active category
+    useEffect(() => {
+        const handleHashChange = () => {
+            const categoryFromHash = window.location.hash.replace('#', '').toLowerCase();
+            if (categories.includes(categoryFromHash)) {
+                setActiveCategory(categoryFromHash);
+            } else {
+                setActiveCategory('Semua');  // Default to 'Semua' if no valid category
+            }
+        };
+
+        // Run on initial load and whenever the hash changes
+        handleHashChange(); // Initial check
+        window.addEventListener('hashchange', handleHashChange);
+
+        // Cleanup the event listener on component unmount
+        return () => window.removeEventListener('hashchange', handleHashChange);
+    }, []);
 
     // Check if device is mobile
     useEffect(() => {
@@ -51,13 +60,13 @@ const Products = () => {
             setIsMobile(window.innerWidth < 640);
             setProductsPerPage(window.innerWidth < 640 ? 2 : 6);
         };
-        
+
         // Initial check
         checkIfMobile();
-        
+
         // Add event listener for window resize
         window.addEventListener('resize', checkIfMobile);
-        
+
         // Cleanup
         return () => window.removeEventListener('resize', checkIfMobile);
     }, []);
@@ -66,18 +75,18 @@ const Products = () => {
     useEffect(() => {
         // Get the category from the mapping using the selected UI category
         const selectedCategorySlug = categoryMapping[activeCategory];
-    
+
         if (selectedCategorySlug === 'semua') {
             setFilteredProducts(products); // No filter
         } else {
-            const filtered = products.filter(product => 
+            const filtered = products.filter(product =>
                 product.slug_category === selectedCategorySlug // Use slug for filtering
             );
             setFilteredProducts(filtered);
         }
         setCurrentPage(1); // Reset to first page when category changes
     }, [activeCategory]);
-    
+
 
     // Get current products for pagination
     const getCurrentProducts = useCallback(() => {
@@ -168,24 +177,23 @@ const Products = () => {
                     <h1 className="text-black inline">PRODUK</h1>
                     <h1 className="text-[#1F3D57] inline"> KAMI</h1>
                 </div>
-                
+
                 {/* Category Filter Buttons */}
                 <div className="flex flex-wrap justify-center gap-4 mb-10">
                     {categories.map((category) => (
                         <button
                             key={category}
                             onClick={() => handleCategoryChange(category)}
-                            className={`py-2 px-6 rounded-full transition-all duration-300 ${
-                                activeCategory === category
-                                    ? 'bg-[#1F3D57] text-white font-semibold shadow-lg'
-                                    : 'bg-white text-gray-700 hover:bg-gray-200'
-                            }`}
+                            className={`py-2 px-6 rounded-full transition-all duration-300 ${activeCategory === category
+                                ? 'bg-[#1F3D57] text-white font-semibold shadow-lg'
+                                : 'bg-white text-gray-700 hover:bg-gray-200'
+                                }`}
                         >
                             {category}
                         </button>
                     ))}
                 </div>
-                
+
                 {/* Product Cards */}
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {getCurrentProducts().length > 0 ? (
@@ -195,11 +203,13 @@ const Products = () => {
                                 className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl"
                                 onClick={() => openModal(product)}
                             >
-                                <img
-                                    src="https://images.unsplash.com/photo-1621905251189-08b45d6a269e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
-                                    alt={product.name}
-                                    className="h-48 w-auto object-cover transition duration-500 ease-in-out hover:scale-110"
-                                />
+                                <div className="flex justify-center items-center h-48">
+                                    <img
+                                        src={product.images[0]}
+                                        alt={product.name}
+                                        className="w-full relative h-[26vh] object-cover rounded-md transition duration-500 ease-in-out hover:scale-110"
+                                    />
+                                </div>
                                 <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
                                 <p className="text-gray-500">
                                     {expanded === index
@@ -230,76 +240,72 @@ const Products = () => {
                         </div>
                     )}
                 </div>
-                
                 {/* Pagination */}
                 {filteredProducts.length > productsPerPage && (
                     <div className="pagination-container mt-12 flex justify-center items-center">
                         <button
                             onClick={prevPage}
                             disabled={currentPage === 1}
-                            className={`mx-1 px-4 py-2 rounded-md ${
-                                currentPage === 1
-                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                                    : 'bg-[#1F3D57] text-white hover:bg-[#17324A]'
-                            }`}
+                            className={`mx-1 px-4 py-2 rounded-md ${currentPage === 1
+                                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                : 'bg-[#1F3D57] text-white hover:bg-[#17324A]'
+                                }`}
                         >
                             &laquo;
                         </button>
-                        
+
                         <div className="hidden sm:flex">
                             {[...Array(totalPages)].map((_, index) => {
                                 // For desktop: show all pages if there are 5 or fewer,
                                 // otherwise show first page, last page, current page, and one page before and after current
                                 const pageNum = index + 1;
-                                const showPageNumber = totalPages <= 5 || 
-                                    pageNum === 1 || 
-                                    pageNum === totalPages || 
-                                    pageNum === currentPage || 
-                                    pageNum === currentPage - 1 || 
+                                const showPageNumber = totalPages <= 5 ||
+                                    pageNum === 1 ||
+                                    pageNum === totalPages ||
+                                    pageNum === currentPage ||
+                                    pageNum === currentPage - 1 ||
                                     pageNum === currentPage + 1;
-                                
+
                                 // Show ellipsis for gaps
                                 const showEllipsisBefore = pageNum === currentPage - 1 && currentPage > 3;
                                 const showEllipsisAfter = pageNum === currentPage + 1 && currentPage < totalPages - 2;
-                                
+
                                 return (
                                     <div key={index} className="flex items-center">
                                         {showEllipsisBefore && <span className="mx-1">...</span>}
-                                        
+
                                         {showPageNumber && (
                                             <button
                                                 onClick={() => paginate(pageNum)}
-                                                className={`mx-1 px-4 py-2 rounded-md ${
-                                                    currentPage === pageNum
-                                                        ? 'bg-[#1F3D57] text-white'
-                                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                                }`}
+                                                className={`mx-1 px-4 py-2 rounded-md ${currentPage === pageNum
+                                                    ? 'bg-[#1F3D57] text-white'
+                                                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                                    }`}
                                             >
                                                 {pageNum}
                                             </button>
                                         )}
-                                        
+
                                         {showEllipsisAfter && <span className="mx-1">...</span>}
                                     </div>
                                 );
                             })}
                         </div>
-                        
+
                         {/* For mobile: just show current page / total pages */}
                         <div className="sm:hidden mx-2">
                             <span className="text-gray-700 font-medium">
                                 {currentPage} / {totalPages}
                             </span>
                         </div>
-                        
+
                         <button
                             onClick={nextPage}
                             disabled={currentPage === totalPages}
-                            className={`mx-1 px-4 py-2 rounded-md ${
-                                currentPage === totalPages
-                                    ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
-                                    : 'bg-[#1F3D57] text-white hover:bg-[#17324A]'
-                            }`}
+                            className={`mx-1 px-4 py-2 rounded-md ${currentPage === totalPages
+                                ? 'bg-gray-200 text-gray-500 cursor-not-allowed'
+                                : 'bg-[#1F3D57] text-white hover:bg-[#17324A]'
+                                }`}
                         >
                             &raquo;
                         </button>
@@ -329,17 +335,76 @@ const Products = () => {
                         </button>
                         <div className="relative">
                             {/* Image */}
-                            <img
+                                <div className="relative w-full overflow-hidden" style={{ height: "min(320px, 48vh)" }}>
+                                    {/* Left navigation button */}
+                                    <button
+                                        onClick={() => handleSlideChange('prev')}
+                                        className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+                                        aria-label="Previous slide"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                    </button>
+
+                                    <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
+                                        {/* Image slides */}
+                                        {selectedProduct.images && selectedProduct.images.length > 0 ? (
+                                            selectedProduct.images.map((image, index) => (
+                                                <div key={index} className="min-w-full flex justify-center items-center">
+                                                    <div className="w-full relative h-full overflow-hidden">
+                                                        <img
+                                                            src={image}
+                                                            alt={selectedProduct.name}
+                                                            width={1600}
+                                                            height={500}
+                                                            className="object-cover w-full relative h-full"
+                                                            loading="lazy"
+                                                        />
+                                                    </div>
+                                                </div>
+                                            ))
+                                        ) : (
+                                            <div className="min-w-full flex justify-center items-center">
+                                                <div className="w-full relative h-full overflow-hidden">
+                                                    <Image
+                                                        src="/no-image.jpg"
+                                                        alt="No image available"
+                                                        width={1600}
+                                                        height={500}
+                                                        className="object-cover w-full h-full"
+                                                        loading="lazy"
+                                                    />
+                                                </div>
+                                            </div>
+                                        )}
+                                    </div>
+
+                                    {/* Right navigation button */}
+                                    <button
+                                        onClick={() => handleSlideChange('next')}
+                                        className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
+                                        aria-label="Next slide"
+                                    >
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+                                </div>
+                            {/* <img
                                 src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : '/no-image.jpg'}
                                 alt={selectedProduct.name}
                                 className={`w-full relative h-[48vh] md:h-[40vh] sm:h-[30vh] object-cover rounded-md mb-4 cursor-pointer transition-all duration-500 ${isImageFullScreen ? 'transform scale-150' : ''}`}
                                 onClick={toggleImageZoom} // Toggle zoom on click
-                            />
+                            /> */}
                             {/* Product Details */}
                             <div className="mt-4">
                                 <h2 className="text-2xl font-semibold">{selectedProduct.name}</h2>
                                 <p className="text-gray-500 mt-4">{selectedProduct.description}</p>
                                 {/* List of Applications */}
+                                <span className="text-lg text-gray-600 block">
+                                    <strong>{"Aplikasi : "}</strong>
+                                </span>
                                 <ul className="text-gray-500 list-none p-2 mt-4"> {/* Adding a margin-top for spacing */}
                                     {selectedProduct.applications && selectedProduct.applications.length > 0 ? (
                                         selectedProduct.applications.map((application, index) => (

@@ -1,9 +1,8 @@
 export const products = [
     {
         images: [
-            "/products/3.jpeg",
-            "/products/1.jpeg",
-            "/products/2.jpeg",
+            "/products/data/1c-1. Geotextile Non Woven (PET).jpg",
+            "/products/data/1c-2. Geotextile Non Woven (PET).jpg",
         ],
         name: "Geotextile Non Woven Polyester (PET)",
         category: "Geotextile Non Woven",
@@ -29,9 +28,8 @@ export const products = [
     },
     {
         images: [
-            "/products/4.jpg",
-            "/products/5.jpg",
-            "/products/6.jpg",
+            "/products/data/2c-1. Geotextile Non Woven (PP).jpg",
+            "/products/data/2c-2. Geotextile Non Woven (PP).jpg",
         ],
         name: "Geotextile Non Woven Polypropylene (PP)",
         category: "Geotextile Non Woven",
@@ -58,6 +56,8 @@ export const products = [
     },
     {
         images: [
+            "/products/data/3c-1. Geotextile Non Woven (LS).jpg",
+            "/products/data/3c-2. Geotextile Non Woven (LS).jpg",
         ],
         name: "Geotextile Non Woven Continuous Filament (LS)",
         category: "Geotextile Non Woven",
@@ -78,9 +78,8 @@ export const products = [
     },
     {
         images: [
-            "/products/4.jpg",
-            "/products/5.jpg",
-            "/products/6.jpg",
+            "/products/data/4c-1. Geotextile Woven Circular.jpg",
+            "/products/data/4c-2. Geotextile Woven Circular.jpg",
         ],
         name: "Geotextile Woven Polypropylene (PP) Circular",
         category: "Geotextile Woven",
@@ -100,6 +99,8 @@ export const products = [
     },
     {
         images: [
+            "/products/data/2c-1. Geotextile Non Woven (PP).jpg",
+            "/products/data/1c-2. Geotextile Non Woven (PET).jpg",
         ],
         name: "Geotextile Woven Polypropylene (PP) Sulzer",
         category: "Geotextile Woven",
@@ -121,6 +122,8 @@ export const products = [
     },
     {
         images: [
+            "/products/data/6c-1. Smooth Geomembrane.jpg",
+            "/products/data/6c-2. Smooth Geomembrane.jpg",
         ],
         name: "Smooth Geomembrane",
         category: "Geomembrane",
@@ -146,26 +149,27 @@ export const products = [
     },
     {
         images: [
+            "/products/data/7c-1. Geobag.jpg",
+            "/products/data/7c-2. Geobag.jpg",
         ],
-        name: "Produk 7",
+        name: "Geobag",
         category: "Geotextile Geobag",
-        description: "GeoSentra  merupakan Geomembrane yang dibuat dengan bahan baku berkualitas terbaik mengikuti standar internasional GRI (Geosynthetic Research Institute). Geomembrane merupakan bahan yang berfungsi sebagai penahan air, terbuat dari bahan baku polyethylene berkualitas tinggi baik HDPE (High Density Polyethylene) atau LDPE (Low Density polyethylen) serta ditambahkan carbon black, antoxidant, ant-aging and UV-resistance. Selain itu, geomembrane juga tahan terhadap korosi, minyak, asam dan panas tinggi. Bahan ini berkembang pesat karena harga yang kompetitif jika dibandingkan dengan menggunakan beton, sehingga menarik perhatian pemilik proyek untuk menggunakannya sebagai pengganti pelapis beton atau beton bocor.",
+        description: "SentraBag merupakan Geobag / Sandbag yang berasal dari produk turunan geotextile non woven terbuat dari polyester (PET) atau polypropylene (PP) sebagai bahan baku yang kemudian dijahit dan diisi pasir atau tanah hingga membentuk seperti bantal dengan dimensi tertentu.",
         applications: [
-            "Embung penampungan air ",
-            "Tambak udang dan ikan ",
-            "Tempat pembuangan akhir sampah ",
-            "Proyek kolam penampungan air lainnya, seperti waduk, empang dll.",
-            "Instalasi pengelolaan air, seperti landfill (limbah pertambangan), pelapisan saluran / kolam, dll. ",
-
+            "Sebagai break water dan abrasi bibir pantai",
+            "Membendung dinding sungai/waduk (River bank protection)",
+            "Pengendalian erosi, Perlindungan tepi lereng & bendungan",
+            "Penahan longsor tebing dan penahan material timbunan",
+            "aplikasi yang membutuhkan perlindungan luar biasa, dll.",
         ],
-        detail_title: "Kelebihan Penggunaan Geomembrane :",
+        detail_title: "Kelebihan Penggunaan Geobag :",
         details: [
-            "Geomembrane kuat dan memiliki sifat kedap air (impermeable), sehingga mampu menahan air ataupun berbagai cairan lainnya. ",
-            "Geomembrane tidak meracuni air dan tidak mengandung bahan-bahan berbahaya, sehingga dapat menjaga kondisi dan kualitas air dan dapat digunakan untuk berbagai usaha pertambakan. ",
-            "Geomembrane mengandung zat anti UV yang berguna untuk menahan sinar UV sehingga geomembrane dapat dipakai bertahun-tahun. ",
-            "Bentuk dan desain geomembrane yang lentur memudahkan dalam pemasangan dan penyambungan baik menggunakan extruder, hot wedge, dll. ",
+            "PrimaBag dapat tahan terhadap sinar UV dan ramah lingkungan. Bahkan remis, ganggang, dan lumut dapat hidup melekat pada serat Geobag ini, sehingga menjadikan Geobag lebih terlindungi dari sengatan matahari.",
+            "Ketahanan yang baik terhadap abrasi dan bahan kimia sehingga Geobag dapat bertahan pada berbagai kondisi tanah dan air laut.",
+            "Memiliki fleksibilitas untuk menyesuaikan diri dengan medan yang tidak rata",
+            "Material ini memiliki lifetime yang panjang",
         ],
-        specs: "/products/data/6b.png",
+        specs: "/products/data/7b.png",
         slug_category: "geobag",
         slug_product: "geobag"
     }

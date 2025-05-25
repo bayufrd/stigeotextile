@@ -99,12 +99,12 @@ export const products = [
     },
     {
         images: [
-            "/products/data/2c-1. Geotextile Non Woven (PP).jpg",
-            "/products/data/1c-2. Geotextile Non Woven (PET).jpg",
+            "/products/data/5c-1. Geotextile Woven Sulzer.jpg",
+            "/products/data/5c-2. Geotextile Woven Sulzer.jpg",
         ],
         name: "Geotextile Woven Polypropylene (PP) Sulzer",
         category: "Geotextile Woven",
-        description: "Perbedaan woven Sulzer terletak pada proses pembuatannya, dimana woven ini memiliki sistem anyaman plain/flat (2:1). Dengan teknik tersebut woven Sulzer mempunyai rapat yang paling kecil dari semua jenis anyaman sehingga woven Sulzer menjadi yang paling kuat diantara jenis woven lainnya. ",
+        description: "Perbedaan woven Sulzer terletak pada proses pembuatannya, dimana woven ini memiliki sistem anyaman plain/flat (2:1), Dengan teknik tersebut woven Sulzer mempunyai rapat yang paling kecil dari semua jenis anyaman sehingga woven Sulzer menjadi yang paling kuat diantara jenis woven lainnya.          ",
         applications: [
             "Woven Sulzer dipakai untuk proyek konstruksi yang membutuhkan tensile strength lebih dari 56 kN/m ",
             "Perkuatan timbunan dan Lahan Gambut",
@@ -138,10 +138,7 @@ export const products = [
         ],
         detail_title: "Kelebihan Penggunaan Geomembrane :",
         details: [
-            "Geomembrane kuat dan memiliki sifat kedap air (impermeable), sehingga mampu menahan air ataupun berbagai cairan lainnya. ",
-            "Geomembrane tidak meracuni air dan tidak mengandung bahan-bahan berbahaya, sehingga dapat menjaga kondisi dan kualitas air dan dapat digunakan untuk berbagai usaha pertambakan. ",
-            "Geomembrane mengandung zat anti UV yang berguna untuk menahan sinar UV sehingga geomembrane dapat dipakai bertahun-tahun. ",
-            "Bentuk dan desain geomembrane yang lentur memudahkan dalam pemasangan dan penyambungan baik menggunakan extruder, hot wedge, dll. ",
+            "Geotextile woven Sulzer kami terbuat dari bahan baku serat polypropylene berkualitas tinggi, tahan terhadap sinar UV sehingga menghasilkan daya tarik yang kuat serta stabilitas yang tinggi. Selain itu material ini juga memiliki performa jangka panjang yang sangat baik. Instalasi yang mudah, biaya efektif, tahan terhadap kimia, dan mikro organisme.",
         ],
         specs: "/products/data/6b.png",
         slug_category: "geomembrane",

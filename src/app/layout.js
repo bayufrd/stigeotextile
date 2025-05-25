@@ -13,6 +13,11 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+        <title>Sentra Teknologi Investama</title>
+        <meta name="description" content="Your trusted technology partner" />
+      </head>
       <body className="min-h-screen flex flex-col">
         <Header />
         <Navbar />

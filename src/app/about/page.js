@@ -34,7 +34,7 @@ export default function About() {
     }, 5000); // Change slide every 5 seconds
 
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
   // Auto slide effect for product collection
   useEffect(() => {

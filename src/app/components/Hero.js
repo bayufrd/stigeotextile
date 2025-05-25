@@ -63,8 +63,8 @@ const Hero = () => {
     // State to track current slide
     const [currentSlide, setCurrentSlide] = useState(0);
     const slides = [
-        "/displayAbout/about-product1.jpg",
-        "/displayAbout/about-product2.jpg"
+        "/products/data/3c-2. Geotextile Non Woven (LS).jpg",
+        "/products/data/5c-2. Geotextile Woven Sulzer.jpg"
     ];
 
     // State for Sentra Collection carousel
@@ -78,7 +78,7 @@ const Hero = () => {
         }, 5000); // Change slide every 5 seconds
 
         return () => clearInterval(timer);
-    }, []);
+    }, [slides.length]);
 
     // Auto slide effect for product collection
     useEffect(() => {

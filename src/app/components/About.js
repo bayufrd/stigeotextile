@@ -39,7 +39,7 @@ const About = () => {
         }, 5000); // Change slide every 5 seconds
 
         return () => clearInterval(timer);
-    }, []);
+    }, [slides.length]);
 
     // Auto slide effect for product collection
     useEffect(() => {
@@ -186,7 +186,7 @@ const About = () => {
                             <div className="min-w-full flex justify-center items-center">
                                 <div className="w-full relative h-full overflow-hidden">
                                     <Image
-                                        src="/displayAbout/about-product3.jpg"
+                                        src="/products/data/1c-1. Geotextile Non Woven (PET).jpg"
                                         alt="Sentra Product 1"
                                         width={1600}
                                         height={500}
@@ -199,7 +199,7 @@ const About = () => {
                             <div className="min-w-full flex justify-center items-center">
                                 <div className="w-full relative h-full overflow-hidden">
                                     <Image
-                                        src="/displayAbout/about-product4.jpg"
+                                        src="/products/data/2c-1. Geotextile Non Woven (PP).jpg"
                                         alt="Sentra Product 2"
                                         width={1600}
                                         height={500}
@@ -212,7 +212,7 @@ const About = () => {
                             <div className="min-w-full flex justify-center items-center">
                                 <div className="w-full relative h-full overflow-hidden">
                                     <Image
-                                        src="/displayAbout/about-product5.jpg"
+                                        src="/products/data/3c-1. Geotextile Non Woven (LS).jpg"
                                         alt="Sentra Product 3"
                                         width={1600}
                                         height={500}
@@ -225,7 +225,7 @@ const About = () => {
                             <div className="min-w-full flex justify-center items-center">
                                 <div className="w-full relative h-full overflow-hidden">
                                     <Image
-                                        src="/displayAbout/about-product6.jpg"
+                                        src="/products/data/4c-1. Geotextile Woven Circular.jpg"
                                         alt="Sentra Product 4"
                                         width={1600}
                                         height={500}
@@ -238,7 +238,7 @@ const About = () => {
                             <div className="min-w-full flex justify-center items-center">
                                 <div className="w-full relative h-full overflow-hidden">
                                     <Image
-                                        src="/displayAbout/about-product7.jpg"
+                                        src="/products/data/6c-1. Smooth Geomembrane.jpg"
                                         alt="Sentra Product 5"
                                         width={1600}
                                         height={500}

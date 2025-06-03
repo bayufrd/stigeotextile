@@ -15,7 +15,14 @@ const ContactModal = ({ isOpen, onClose }) => {
   const extractNumbers = (phone) => {
     return phone.replace(/\D/g, ''); // Menghapus semua karakter non-digit
   };
-
+  const extractNumbersWhatsapp = (phone) => {
+    // Remove all non-digit characters
+    const digitsOnly = phone.replace(/\D/g, '');
+    // Remove the first digit from the extracted digits
+    return digitsOnly.substring(1);
+  };
+  
+  
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50" onClick={onClose}>
       <div
@@ -79,7 +86,7 @@ const ContactModal = ({ isOpen, onClose }) => {
           {showWhatsAppContacts && (
             <div className="space-y-3 mt-3">
               <Link
-                href={`http://wa.me/${extractNumbers(addressData.phone.banten)}`}
+                href={`http://wa.me/+62${extractNumbersWhatsapp(addressData.phone.banten)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-center text-[#1F3D57] font-medium transition-colors"
@@ -88,7 +95,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               </Link>
 
               <Link
-                href={`http://wa.me/${extractNumbers(addressData.phone.jakarta)}`}
+                href={`http://wa.me/+62${extractNumbersWhatsapp(addressData.phone.jakarta)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-center text-[#1F3D57] font-medium transition-colors"
@@ -97,7 +104,7 @@ const ContactModal = ({ isOpen, onClose }) => {
               </Link>
 
               <Link
-                href={`http://wa.me/${extractNumbers(addressData.phone.kalimantanbarat)}`}
+                href={`http://wa.me/+62${extractNumbersWhatsapp(addressData.phone.kalimantanbarat)}`}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="block w-full py-3 bg-gray-100 hover:bg-gray-200 rounded-lg text-center text-[#1F3D57] font-medium transition-colors"

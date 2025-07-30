@@ -4,6 +4,14 @@ import Navbar from "./components/Navbar";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import FloatingWhatsAppButton from "./components/FloatingWhatsAppButton"; 
+// app/layout.js
+import { Poppins } from 'next/font/google'
+
+const poppins = Poppins({ 
+    subsets: ['latin'], 
+    weight: ['300', '400', '500', '600', '700'],
+    display: 'swap'
+});
 
 export const metadata = {
   title: 'Sentra Teknologi Investama | Geotextile & Produk Konstruksi',
@@ -38,19 +46,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="id">
+    <html lang="id" className={poppins.className}>
       <head>
-        <title>Sentra Teknologi Investama | Geotextile & Produk Konstruksi</title>
-        <meta name="description" content="Supplier geotextile terbaik di Indonesia. Produk geotextile non-woven, woven, dan geosynthetics berkualitas." />
-        <meta name="keywords" content="geotextile, geotextile non-woven, geotextile woven, distributor geotextile, sentra teknologi investama" />
-        <meta name="author" content="Sentra Teknologi Investama" />
-        <meta name="robots" content="index, follow" />
-        <link rel="icon" href="/favicon.ico" />
-        <meta property="og:title" content="Sentra Teknologi Investama | Geotextile" />
-        <meta property="og:description" content="Distributor resmi produk geotextile dan geosynthetics di Indonesia." />
-        <meta property="og:image" content="/logo.jpg" />
-        <meta property="og:url" content="https://www.stigeotextile.com" />
-        <meta name="twitter:card" content="summary_large_image" />
       </head>
       <body className="min-h-screen flex flex-col">
         <Header />

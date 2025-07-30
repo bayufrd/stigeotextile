@@ -1,72 +1,169 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import Link from "next/link";
-import { addressData } from '../data/addressData';
+import { useState, useEffect, useRef } from "react";
+import { FaWhatsapp, FaEnvelope } from "react-icons/fa";
 import ContactModal from '../components/ContactModal';
 
 const FloatingWhatsAppButton = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isExpanded, setIsExpanded] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const buttonRef = useRef(null);
 
-  // Menambahkan class pada body saat modal terbuka untuk membuat background gelap
+  // Efek untuk mengatur overflow body dan overlay
   useEffect(() => {
     if (isModalOpen) {
-      // Menambahkan class pada body atau menambahkan overlay gelap
       document.body.style.overflow = 'hidden';
-      // Membuat elemen overlay jika belum ada
-      if (!document.getElementById('modal-overlay')) {
-        const overlay = document.createElement('div');
-        overlay.id = 'modal-overlay';
-        overlay.style.position = 'fixed';
-        overlay.style.top = '0';
-        overlay.style.left = '0';
-        overlay.style.width = '100%';
-        overlay.style.height = '100%';
-        overlay.style.backgroundColor = 'rgba(0, 0, 0, 1)'; // Full black
-        overlay.style.zIndex = '40'; // Pastikan z-index lebih rendah dari modal
-        document.body.appendChild(overlay);
-      }
     } else {
-      // Menghapus class dan overlay saat modal ditutup
       document.body.style.overflow = '';
-      const overlay = document.getElementById('modal-overlay');
-      if (overlay) {
-        document.body.removeChild(overlay);
-      }
     }
 
-    // Cleanup function untuk memastikan overlay dihapus saat komponen unmount
     return () => {
       document.body.style.overflow = '';
-      const overlay = document.getElementById('modal-overlay');
-      if (overlay) {
-        document.body.removeChild(overlay);
-      }
     };
   }, [isModalOpen]);
+
+  // Deteksi perangkat mobile
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+
+    return () => {
+      window.removeEventListener('resize', checkMobile);
+    };
+  }, []);
 
   const openModal = () => setIsModalOpen(true);
   const closeModal = () => setIsModalOpen(false);
 
-  return (
-    <div className="fixed bottom-3 right-3 flex items-center space-x-2 z-50">
-      {/* "Contact Us" Text Block with Green Background and White Text */}
-      <div 
-        className="border-2 border-[#0A1E2B] bg-[#0A1E2B] hover:bg-green-600 text-white p-2 rounded-lg flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
-        onClick={openModal}
-      >
-        Contact Us
-      </div>
+  const handleButtonClick = (e) => {
+    // Mencegah event default
+    e?.preventDefault?.();
+    e?.stopPropagation?.();
 
-      {/* WhatsApp Button */}
-      <div
-        onClick={openModal} // Menggunakan div untuk membuka modal
-        className="bg-[#0A1E2B] text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition-all duration-300 flex items-center justify-center cursor-pointer hover:opacity-90 transition-opacity"
+    if (isMobile) {
+      openModal();
+    } else {
+      setIsExpanded(!isExpanded);
+    }
+  };
+
+  // Handler sentuhan khusus untuk mobile
+  const handleTouchStart = (e) => {
+    // Gunakan opsi non-passive untuk preventDefault
+    if (e.cancelable) {
+      e.preventDefault();
+    }
+  };
+
+  return (
+    <div 
+      className="fixed bottom-6 right-6 z-50 flex flex-col items-end space-y-4"
+      onMouseLeave={() => !isMobile && setIsExpanded(false)}
+    >
+      {/* Expanded Menu untuk non-mobile */}
+      {isExpanded && !isMobile && (
+        <div 
+          className="
+            flex 
+            flex-col 
+            space-y-3 
+            mb-4 
+            bg-white 
+            shadow-2xl 
+            rounded-2xl 
+            p-4 
+            border 
+            border-gray-100 
+            animate-slide-in-right
+          "
+        >
+          <button 
+            onClick={openModal}
+            className="
+              flex 
+              items-center 
+              space-x-3 
+              text-[#0A1E2B] 
+              hover:text-green-600 
+              transition-colors 
+              group
+              active:bg-gray-100
+              focus:outline-none
+            "
+          >
+            <FaWhatsapp className="text-2xl group-hover:text-green-600" />
+            <span className="font-medium">WhatsApp</span>
+          </button>
+          
+          <div className="w-full h-px bg-gray-200"></div>
+          
+          <button 
+            onClick={openModal}
+            className="
+              flex 
+              items-center 
+              space-x-3 
+              text-[#0A1E2B] 
+              hover:text-blue-600 
+              transition-colors 
+              group
+              active:bg-gray-100
+              focus:outline-none
+            "
+          >
+            <FaEnvelope className="text-2xl group-hover:text-blue-600" />
+            <span className="font-medium">Email</span>
+          </button>
+        </div>
+      )}
+
+      {/* Main Button */}
+      <div 
+        ref={buttonRef}
+        className="
+          flex 
+          items-center 
+          space-x-3 
+          bg-[#0A1E2B] 
+          text-white 
+          rounded-full 
+          shadow-2xl 
+          hover:bg-green-600 
+          transition-all 
+          duration-300 
+          cursor-pointer
+          group
+          active:scale-95
+        "
+        onClick={handleButtonClick}
+        // Gunakan event handler khusus untuk sentuhan
+        onTouchStart={handleTouchStart}
+        onTouchEnd={handleButtonClick}
       >
-        <i className="fab fa-whatsapp text-2xl"></i>
+        <div 
+          className="
+            p-4 
+            rounded-full 
+            flex 
+            items-center 
+            justify-center
+          "
+        >
+          <FaWhatsapp className="text-3xl" />
+        </div>
+        {isExpanded && !isMobile && (
+          <div className="pr-4 font-medium">
+            Hubungi Kami
+          </div>
+        )}
       </div>
       
-      {/* Modal Called - meningkatkan z-index untuk memastikan muncul di atas overlay */}
+      {/* Modal */}
       <ContactModal isOpen={isModalOpen} onClose={closeModal} />
     </div>
   );

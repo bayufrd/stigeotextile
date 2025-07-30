@@ -1,0 +1,145 @@
+{
+    "heroSlides": [
+        "/products/7.jpg",
+        "/products/8.jpg",
+        "/products/9.jpg"
+    ],
+    "products": [
+        {
+            "id": 1,
+            "name": "Geotextile Non Woven",
+            "description": "High-quality geotextile non-woven fabric designed for soil stabilization, filtration, and separation in various civil engineering and construction projects.",
+            "category": "Geotextile",
+            "images": [
+                "/products/6.jpg"
+
+            ],
+            "applications": [
+                "Road Construction",
+                "Embankment Reinforcement", 
+                "Drainage Systems",
+                "Erosion Control"
+            ],
+            "detail_title": "Technical Specifications",
+            "details": [
+                "Material: Polypropylene",
+                "Weight: 100-300 g/m²",
+                "Tensile Strength: 10-50 kN/m",
+                "UV Resistant"
+            ],
+            "specs": "/products/specs/geotextile-non-woven-specs.jpg"
+        },
+        {
+            "id": 2,
+            "name": "Geotextile Woven Sulzer",
+            "description": "Premium woven geotextile fabric manufactured using advanced Sulzer weaving technology, providing superior strength and durability for complex engineering applications.",
+            "category": "Geotextile",
+            "images": [
+                "/products/7.jpg"
+
+            ],
+            "applications": [
+                "Soil Reinforcement",
+                "Foundation Stabilization", 
+                "Retaining Walls",
+                "Ground Separation"
+            ],
+            "detail_title": "Technical Parameters",
+            "details": [
+                "Material: High-Density Polyethylene",
+                "Weight: 200-600 g/m²",
+                "Tensile Strength: 30-100 kN/m",
+                "High Dimensional Stability"
+            ],
+            "specs": "/products/specs/geotextile-woven-specs.jpg"
+        },
+        {
+            "id": 3,
+            "name": "Smooth Geomembrane",
+            "description": "Advanced smooth geomembrane for comprehensive environmental protection and containment solutions in various industrial and civil applications.",
+            "category": "Geomembrane",
+            "images": [
+                "/products/8.jpg"
+
+            ],
+            "applications": [
+                "Landfill Lining",
+                "Water Reservoir Sealing",
+                "Mining Waste Containment",
+                "Environmental Protection"
+            ],
+            "detail_title": "Product Characteristics",
+            "details": [
+                "Material: HDPE/LLDPE",
+                "Thickness: 0.5-2.5 mm",
+                "Temperature Resistance: -40°C to 80°C",
+                "Chemical Resistant"
+            ],
+            "specs": "/products/specs/smooth-geomembrane-specs.jpg"
+        },
+        {
+            "id": 4,
+            "name": "Textured Geomembrane",
+            "description": "High-performance textured geomembrane providing enhanced friction and superior performance in challenging environmental conditions.",
+            "category": "Geomembrane",
+            "images": [
+                "/products/9.jpg"
+
+            ],
+            "applications": [
+                "Slope Stabilization",
+                "Tailings Dam Lining",
+                "Canal Sealing",
+                "Waste Management"
+            ],
+            "detail_title": "Technical Specifications",
+            "details": [
+                "Material: HDPE",
+                "Surface: Textured Both Sides",
+                "Thickness Range: 1-3 mm",
+                "High Friction Coefficient"
+            ],
+            "specs": "/products/specs/textured-geomembrane-specs.jpg"
+        },
+        {
+            "id": 5,
+            "name": "Drainage Geocomposite",
+            "description": "Innovative drainage solution combining geotextile and drainage core for efficient water management in construction and environmental projects.",
+            "category": "Geocomposite",
+            "images": [
+                "/products/4.jpg"
+            ],
+            "applications": [
+                "Underground Structures",
+                "Retaining Wall Drainage",
+                "Bridge Abutments",
+                "Green Roof Systems"
+            ],
+            "detail_title": "Product Features",
+            "details": [
+                "Core Material: Polymeric Drainage Network",
+                "Flow Capacity: High Efficiency",
+                "Lightweight Design",
+                "Excellent Filtration Properties"
+            ],
+            "specs": "/products/specs/drainage-geocomposite-specs.jpg"
+        }
+    ],
+    "productCollections": [
+        {
+            "name": "Geotextile Collection",
+            "description": "Comprehensive range of geotextile solutions for diverse engineering applications",
+            "products": [1, 2]
+        },
+        {
+            "name": "Geomembrane Collection",
+            "description": "Advanced membrane solutions for environmental protection",
+            "products": [3, 4]
+        },
+        {
+            "name": "Specialized Solutions",
+            "description": "Innovative products for complex engineering challenges",
+            "products": [5]
+        }
+    ]
+}

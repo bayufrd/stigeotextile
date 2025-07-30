@@ -1,17 +1,16 @@
-"use client";
+"use client";  
 
-import { useState, useEffect } from "react";
-import { usePathname } from "next/navigation";
-import Link from "next/link";
-import Image from "next/image";
-import { navigation } from "@/app/data/navigation";
-export default function Navbar() {
-    const [isVisible, setIsVisible] = useState(true);
-    const [lastScrollY, setLastScrollY] = useState(0);
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isAtTop, setIsAtTop] = useState(true);
-    const [activeDropdown, setActiveDropdown] = useState(null);
-    const pathname = usePathname();
+import { useState, useEffect } from "react";  
+import { usePathname } from "next/navigation";  
+import Link from "next/link";  
+import Image from "next/image";  
+import { navigation } from "@/app/data/navigation";  
+
+export default function Navbar() {  
+    const [isScrolled, setIsScrolled] = useState(false);  
+    const [isSidebarOpen, setIsSidebarOpen] = useState(false);  
+    const [openDropdown, setOpenDropdown] = useState(null);  
+    const pathname = usePathname();  
 
     const isActive = (href) => {
         return href === "/"
@@ -19,9 +18,8 @@ export default function Navbar() {
             : pathname.startsWith(href);
     };
 
-    //For Mapping Navbar
     const categoryMapping = {
-        'Semua': 'semua',  // No filter
+        'Semua': 'semua',
         'Geotextile Woven': 'geotextile-woven',
         'Geotextile Non Woven': 'geotextile-non-woven',
         'Geomembrane': 'geomembrane',
@@ -29,174 +27,298 @@ export default function Navbar() {
 
     useEffect(() => {
         const handleScroll = () => {
-            const currentScrollY = window.scrollY;
-
-            setIsAtTop(currentScrollY === 0);
-
-            if (currentScrollY > lastScrollY && currentScrollY > 50) {
-                setIsVisible(false);
-            } else {
-                setIsVisible(true);
-                setIsMenuOpen(false);
-            }
-            setLastScrollY(currentScrollY);
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            setIsScrolled(scrollTop > 50);
         };
 
-        window.addEventListener("scroll", handleScroll);
-        return () => window.removeEventListener("scroll", handleScroll);
-    }, [lastScrollY]);
+        window.addEventListener('scroll', handleScroll);
 
-    useEffect(() => {
-        if (isVisible && !isAtTop || isMenuOpen && !isAtTop) {
-            const timer = setTimeout(() => {
-                setIsVisible(false);
-                setIsMenuOpen(false);
-            }, 2500);
-
-            return () => clearTimeout(timer);
-        }
-    }, [isVisible, isAtTop, isMenuOpen]);
-
-    const toggleMenu = () => {
-        setIsMenuOpen(!isMenuOpen);
-    };
-    const scrollToSection = (sectionId, category = "") => {
-        // Check if the section is "products" and handle scrolling accordingly
-        if (sectionId === "products") {
-            // Scroll to the products section
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
-
-            // Update the URL hash and active category, if provided
-            if (category) {
-                const categorySlug = categoryMapping[category] || category;
-                history.pushState({}, "", `#${categorySlug}`); // Update URL hash without page jump
-            }
-        }
-        // Check which section to scroll to
-        else if (sectionId === "home") {
-            // Scroll to the top of the page (for Home)
-            window.scrollTo({ top: 0, behavior: "smooth" });
-        } else if (sectionId === "contact") {
-            // Scroll to the bottom of the page (for Contact)
-            window.scrollTo({ top: document.body.scrollHeight, behavior: "smooth" });
+        if (isSidebarOpen) {
+            document.body.style.overflow = 'hidden';
         } else {
-            // For other sections (e.g., About), handle the scroll
-            const element = document.getElementById(sectionId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }
+            document.body.style.overflow = 'unset';
         }
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            document.body.style.overflow = 'unset';
+        };
+    }, [isSidebarOpen]);
+
+    const scrollToSection = (sectionId, category = "") => {
+        // Logging untuk debugging
+        console.log("Scrolling to section:", sectionId, "Category:", category);
+    
+        // Tutup sidebar dan dropdown
+        setIsSidebarOpen(false);
+        setOpenDropdown(null);
+    
+        // Tunggu sebentar untuk animasi sidebar menutup
+        setTimeout(() => {
+            if (sectionId === "contact") {
+                // Scroll ke bagian paling bawah
+                window.scrollTo({
+                    top: document.body.scrollHeight,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+    
+            if (sectionId === "products" && category) {
+                // Gunakan mapping untuk mendapatkan slug kategori
+                const categorySlug = categoryMapping[category] || category;
+                
+                // Set hash untuk trigger perubahan kategori
+                window.location.hash = categorySlug;
+            }
+    
+            // Cari elemen target
+            const element = document.getElementById(sectionId);
+            
+            if (element) {
+                // Menggunakan metode scroll yang lebih reliable
+                element.scrollIntoView({ 
+                    behavior: 'smooth', 
+                    block: 'start' 
+                });
+            } else {
+                // Fallback jika elemen tidak ditemukan
+                console.warn(`Section ${sectionId} not found`);
+                
+                // Coba navigasi ke halaman dengan hash
+                window.location.href = `/#${sectionId}`;
+            }
+        }, 300); // Delay untuk animasi sidebar
     };
 
-
+    const toggleDropdown = (itemName) => {
+        setOpenDropdown(openDropdown === itemName ? null : itemName);
+    };
 
     return (
         <>
-            <div className={`transition-transform duration-500 ${isAtTop ? "h-0" : "h-[91px]"}`}></div>
-            <nav
-                className={`
-                    ${isAtTop && !isMenuOpen ? "relative bg-transparent" : "fixed bg-[#0A1E2B]"} 
-                    ${!isAtTop && !isMenuOpen ? "before:content-[''] before:relative before:inset-0 before:bg-[url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')] before:brightness-50 before:opacity-80 before:z-[-1]" : ""}
-                    top-0 left-0 w-full p-4 text-white shadow-md transition-transform duration-500 z-50 
-                    ${isVisible ? "translate-y-0" : "-translate-y-full"}
-                `}
-            >
-                <div className="container mx-auto flex justify-between items-stretch">
-                    <Link href="/" className="flex items-center">
-                        <Image
-                            src="/logo/logo_navbar.svg"
-                            alt="Logo"
-                            width={80}
-                            height={60}
-                            priority
-                        />
-                    </Link>
-                    <div className="hidden md:flex space-x-4 text-l gap-5 font-bold relative items-center">
-                        {navigation.map((item) => (
-                            <div key={item.name} className="relative group h-full flex items-center">
-                                <button
-                                    onClick={() => scrollToSection(item.href.substring(1))} // Remove the "/" from href to get the id
-                                    className={` cursor-pointer hover:underline ${isActive(item.href) ? "text-green-500" : ""}`}
-                                >
-                                    {item.name}
-                                </button>
-                                {item.children && (
-                                    <div className="absolute top-full left-0 bg-[#0A1E2B] text-white space-y-1 z-50 w-56
-                                    opacity-0 invisible group-hover:visible group-hover:opacity-100
-                                    transition-all duration-300 transform group-hover:translate-y-2"
+            <div className="fixed top-0 left-0 right-0 z-[9999]">
+                <nav 
+                    className={`
+                        relative w-full transition-all duration-300
+                        ${isScrolled || isSidebarOpen 
+                            ? 'bg-[#0A1E2B]/90 backdrop-blur-sm h-16' 
+                            : 'bg-transparent h-20'}
+                    `}
+                >
+                    <div className="container mx-auto px-4 h-full flex justify-between items-center">
+                        {/* Logo and Title Container */}
+                        <div className="flex items-center space-x-4">
+                            {/* Logo */}
+                            <Link 
+                                href="/" 
+                                className={`
+                                    flex items-center transition-all duration-300
+                                    ${isScrolled 
+                                        ? 'h-10 w-auto' 
+                                        : 'h-14 w-auto'}
+                                `}
+                            >
+                                <Image
+                                    src="/logo/logo_navbar.svg"
+                                    alt="Logo"
+                                    width={60}
+                                    height={40}
+                                    priority
+                                    className="object-contain h-full w-auto"
+                                />
+                            </Link>
+
+                            {/* Web Title */}
+                            <h1 
+                                 className={`
+                                 font-bold 
+                                 transition-all 
+                                 duration-300 
+                                 hidden md:block
+                                 ${isScrolled 
+                                     ? 'text-white text-lg' 
+                                     : 'text-white text-xl'}
+                             `}
+                            >
+                                Sentra Teknologi Investama
+                            </h1>
+                        </div>
+
+                        {/* Desktop Navigation */}
+                        <div className="hidden md:flex space-x-6 items-center">
+                            {navigation.map((item) => (
+                                <div key={item.name} className="relative group">
+                                    <button
+                                        onClick={() => scrollToSection(item.href.substring(1))}
+                                        className={`  
+                                            text-sm font-medium tracking-wider  
+                                            transition-colors duration-300  
+                                            ${isActive(item.href)
+                                                ? 'text-green-500'
+                                                : 'text-white hover:text-green-500'}  
+                                        `}
                                     >
+                                        {item.name}
+                                    </button>
+
+                                    {item.children && (
+                                        <div className="absolute top-full left-0 bg-[#0A1E2B] text-white  
+                                            mt-2 rounded-md shadow-lg overflow-hidden  
+                                            opacity-0 invisible group-hover:visible group-hover:opacity-100  
+                                            transition-all duration-300 z-50 min-w-[200px]"
+                                        >
+                                            {item.children.map((child) => (
+                                                <button
+                                                    key={child.name}
+                                                    onClick={() => scrollToSection("products", child.href)}
+                                                    className="block w-full text-left px-4 py-2   
+                                                        text-sm hover:bg-green-800   
+                                                        transition-colors duration-300"
+                                                >
+                                                    {child.name}
+                                                </button>
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Mobile Menu Toggle */}
+                        <button
+                            onClick={() => setIsSidebarOpen(true)}
+                            className="md:hidden text-white focus:outline-none"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M4 6h16M4 12h16M4 18h16"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+                </nav>
+
+                {/* Mobile Sidebar */}
+                <div 
+                    className={`
+                        fixed top-0 right-0 w-64 h-full bg-[#0A1E2B] 
+                        transform transition-transform duration-300 ease-in-out z-[110]
+                        ${isSidebarOpen ? 'translate-x-0' : 'translate-x-full'}
+                        shadow-2xl overflow-hidden
+                    `}
+                >
+                    <div className="flex justify-between items-center p-4 border-b border-gray-700 bg-[#091A25]">
+                        <Link href="/" className="flex items-center">
+                            <Image
+                                src="/logo/logo_navbar.svg"
+                                alt="Logo"
+                                width={60}
+                                height={40}
+                                priority
+                                className="h-10 w-auto"
+                            />
+                        </Link>
+                        <h1 className="text-white text-lg font-bold">
+                                STI
+                            </h1>
+                        <button 
+                            onClick={() => setIsSidebarOpen(false)}
+                            className="text-white"
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+                    </div>
+
+                    <div className="p-4 overflow-y-auto h-[calc(100%-80px)] bg-[#0A1E2B]">
+                        {navigation.map((item) => (
+                            <div key={item.name} className="mb-2">
+                                <div 
+                                    className={`
+                                        flex justify-between items-center p-2 
+                                        ${isActive(item.href)
+                                            ? 'text-green-500'
+                                            : 'text-white'}
+                                        hover:bg-[#091A25]
+                                        rounded-md
+                                        transition-colors duration-300
+                                        cursor-pointer // Tambahkan cursor pointer
+                                    `}
+                                >
+                                    <button 
+                                        onClick={() => {
+                                            scrollToSection(item.href.substring(1));
+                                            item.children ? toggleDropdown(item.name) : null;
+                                        }}
+                                        className="flex-grow text-left"
+                                    >
+                                        {item.name}
+                                    </button>
+                                    
+                                    {item.children && (
+                                        <button 
+                                            onClick={() => toggleDropdown(item.name)}
+                                            className="pl-2"
+                                        >
+                                            {openDropdown === item.name ? '▲' : '▼'}
+                                        </button>
+                                    )}
+                                </div>
+
+                                {/* Dropdown */}
+                                {item.children && openDropdown === item.name && (
+                                    <div className="pl-4 mt-2 space-y-2 bg-[#091A25] rounded-md p-2">
                                         {item.children.map((child) => (
-                                            <Link
+                                            <button
                                                 key={child.name}
-                                                href=""
-                                                onClick={() => scrollToSection("products", child.href)} // Pass clean category name for UI
-                                                className="block px-4 py-2 hover:bg-green-800"
+                                                onClick={() => scrollToSection("products", child.href)}
+                                                className="block w-full text-left text-white 
+                                                    hover:text-green-500 p-2 
+                                                    hover:bg-[#0A1E2B]
+                                                    rounded-md
+                                                    transition-colors duration-300
+                                                    cursor-pointer" // Tambahkan cursor pointer
                                             >
                                                 {child.name}
-                                            </Link>
+                                            </button>
                                         ))}
                                     </div>
                                 )}
                             </div>
                         ))}
                     </div>
-
-                    <button onClick={toggleMenu} className="md:hidden">
-                        <i className="fa-solid fa-bars"></i>
-                    </button>
                 </div>
-                {isMenuOpen && (
-                    <div className="md:hidden flex flex-col text-center pt-2 mt-2 border-t border-gray-300">
-                        {navigation.map((item) => {
-                            const isActiveDropdown = activeDropdown === item.name;
-                            return (
-                                <div key={item.name} className="relative border-b border-gray-700">
-                                    <div className="w-full text-left px-4 py-3 flex justify-between items-center font-semibold hover:bg-gray-900 transition">
-                                        <button
-                                            onClick={() => scrollToSection(item.href.substring(1))}
-                                            className={isActive(item.href) ? "text-green-500" : ""}
-                                        >
-                                            {item.name}
-                                        </button>
-                                        {item.children && (
-                                            <button
-                                                onClick={() => setActiveDropdown(isActiveDropdown ? null : item.name)}
-                                                className="ml-2"
-                                            >
-                                                <i className={`fas ${isActiveDropdown ? 'fa-chevron-up' : 'fa-chevron-down'}`}></i>
-                                            </button>
-                                        )}
-                                    </div>
-                                    {item.children && (
-                                        <div
-                                            className={`overflow-hidden transition-all duration-500 bg-black text-white flex flex-col text-left
-                ${isActiveDropdown ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}
-              `}
-                                            style={{ transitionProperty: "max-height, opacity, padding" }}
-                                        >
-                                            {item.children.map((child, index) => (
-                                                <Link
-                                                    key={child.name}
-                                                    href=""
-                                                    onClick={() => scrollToSection("products", child.href)}
-                                                    className={`px-6 py-2 text-sm border-t border-gray-700 hover:bg-gray-800 ${index === 0 ? "border-t" : ""}`}
-                                                >
-                                                    {child.name}
-                                                </Link>
 
-                                            ))}
-                                        </div>
-                                    )}
-                                </div>
-                            );
-                        })}
-                    </div>
+                {/* Overlay */}
+                {isSidebarOpen && (
+                    <div 
+                        onClick={() => setIsSidebarOpen(false)}
+                        className="fixed inset-0 bg-black bg-opacity-70 z-[90] md:hidden"
+                    />
                 )}
-
-            </nav>
+            </div>
         </>
     );
 }

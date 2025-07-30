@@ -41,8 +41,24 @@ const Products = () => {
     useEffect(() => {
         const handleHashChange = () => {
             const categoryFromHash = window.location.hash.replace('#', '').toLowerCase();
-            if (categories.includes(categoryFromHash)) {
-                setActiveCategory(categoryFromHash);
+
+            // Mapping dari slug ke nama kategori
+            const slugToCategory = {
+                'semua': 'Semua',
+                'geotextile-woven': 'Geotextile Woven',
+                'geotextile-non-woven': 'Geotextile Non Woven',
+                'geotextile-geobag': 'Geotextile Geobag',
+                'geomembrane': 'Geomembrane'
+            };
+
+            // Cari kategori yang sesuai dengan slug
+            const matchedCategory = Object.keys(slugToCategory).find(
+                slug => slug === categoryFromHash
+            );
+
+            if (matchedCategory) {
+                // Set kategori menggunakan nama kategori
+                setActiveCategory(slugToCategory[matchedCategory]);
             } else {
                 setActiveCategory('Semua');  // Default to 'Semua' if no valid category
             }
@@ -202,33 +218,35 @@ const Products = () => {
                         getCurrentProducts().map((product, index) => (
                             <div
                                 key={index}
-                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl"
+                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl grid grid-rows-[auto_1fr_auto]" // Gunakan grid untuk layout
                                 onClick={() => openModal(product)}
                             >
-                                <div className="flex justify-center items-center h-48">
+                                <div className="h-48 mb-4 overflow-hidden rounded-md">
                                     <img
                                         src={product.images[0]}
                                         alt={product.name}
-                                        className="w-full relative h-[26vh] object-cover rounded-md transition duration-500 ease-in-out hover:scale-110"
+                                        className="w-full h-full object-cover transition duration-500 ease-in-out hover:scale-110"
                                     />
                                 </div>
-                                <h3 className="text-xl font-semibold mt-4">{product.name}</h3>
-                                <p className="text-gray-500">
-                                    {expanded === index
-                                        ? product.description
-                                        : product.description.length > 150
-                                            ? `${product.description.slice(0, 150)}...`
-                                            : product.description}
-                                </p>
-                                <button
-                                    className="text-blue-600 mt-2 cursor-pointer"
-                                    onClick={(e) => {
-                                        e.stopPropagation();
-                                        handleToggle(index);
-                                    }}
-                                >
-                                    {expanded === index ? 'Show Less' : 'Show More'}
-                                </button>
+                                <div>
+                                    <h3 className="text-xl font-semibold">{product.name}</h3>
+                                    <p className="text-gray-500 mt-2">
+                                        {expanded === index
+                                            ? product.description
+                                            : product.description.length > 150
+                                                ? `${product.description.slice(0, 150)}...`
+                                                : product.description}
+                                    </p>
+                                    <button
+                                        className="text-blue-600 mt-2 cursor-pointer"
+                                        onClick={(e) => {
+                                            e.stopPropagation();
+                                            handleToggle(index);
+                                        }}
+                                    >
+                                        {expanded === index ? 'Show Less' : 'Show More'}
+                                    </button>
+                                </div>
                                 <div className="text-left mt-4">
                                     <span className="inline-block py-2 px-4 bg-[#1F3D57] text-white rounded-full text-sm font-semibold cursor-pointer hover:bg-blue-600">
                                         {product.category + " ✓" || "Geotextile"}
@@ -317,148 +335,448 @@ const Products = () => {
 
             {/* Modal for Detailed View */}
             {showModal && selectedProduct && (
-                <div className="fixed inset-0 flex justify-center items-center z-50">
-                    {/* Overlay that closes modal when clicked */}
+                <div className="fixed inset-0 flex justify-center items-center z-50 p-4 pt-16">
                     <div
-                        className="absolute inset-0 bg-gray-800 bg-opacity-50"
+                        className="absolute inset-0 bg-black/50 backdrop-blur-sm"
                         onClick={closeModal}
                     />
-                    <div className="bg-white p-8 rounded-lg w-3/4 md:w-1/2 relative max-h-[80vh] overflow-y-auto z-10">
-                        {/* Close Button */}
-                        <button
-                            className="absolute top-4 right-4 text-black text-2xl"
-                            onClick={closeModal}
-                            style={{
-                                zIndex: 100, // Ensure it is above other elements
-                                cursor: 'pointer',
-                            }}
-                        >
-                            &times;
-                        </button>
-                        <div className="relative">
-                            {/* Image */}
-                                <div className="relative w-full overflow-hidden" style={{ height: "min(320px, 48vh)" }}>
-                                    {/* Left navigation button */}
-                                    <button
-                                        onClick={() => handleSlideChange('prev')}
-                                        className="absolute left-2 md:left-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-                                        aria-label="Previous slide"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                                        </svg>
-                                    </button>
-
-                                    <div className="flex transition-transform duration-300 ease-in-out" style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}>
-                                        {/* Image slides */}
-                                        {selectedProduct.images && selectedProduct.images.length > 0 ? (
-                                            selectedProduct.images.map((image, index) => (
-                                                <div key={index} className="min-w-full flex justify-center items-center">
-                                                    <div className="w-full relative h-full overflow-hidden">
-                                                        <img
-                                                            src={image}
-                                                            alt={selectedProduct.name}
-                                                            width={1600}
-                                                            height={500}
-                                                            className="object-cover w-full relative h-full"
-                                                            loading="lazy"
-                                                        />
-                                                    </div>
-                                                </div>
-                                            ))
-                                        ) : (
-                                            <div className="min-w-full flex justify-center items-center">
-                                                <div className="w-full relative h-full overflow-hidden">
-                                                    <Image
-                                                        src="/no-image.jpg"
-                                                        alt="No image available"
-                                                        width={1600}
-                                                        height={500}
-                                                        className="object-cover w-full h-full"
-                                                        loading="lazy"
-                                                    />
-                                                </div>
-                                            </div>
-                                        )}
-                                    </div>
-
-                                    {/* Right navigation button */}
-                                    <button
-                                        onClick={() => handleSlideChange('next')}
-                                        className="absolute right-2 md:right-4 top-1/2 transform -translate-y-1/2 bg-white rounded-full p-1 md:p-2 shadow-md z-10 hover:bg-gray-100 hover:scale-105 transition-all duration-300 ease-in-out cursor-pointer"
-                                        aria-label="Next slide"
-                                    >
-                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 md:h-6 md:w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                                        </svg>
-                                    </button>
-                                </div>
-                            {/* <img
-                                src={selectedProduct.images && selectedProduct.images.length > 0 ? selectedProduct.images[0] : '/no-image.jpg'}
-                                alt={selectedProduct.name}
-                                className={`w-full relative h-[48vh] md:h-[40vh] sm:h-[30vh] object-cover rounded-md mb-4 cursor-pointer transition-all duration-500 ${isImageFullScreen ? 'transform scale-150' : ''}`}
-                                onClick={toggleImageZoom} // Toggle zoom on click
-                            /> */}
-                            {/* Product Details */}
-                            <div className="mt-4">
-                                <h2 className="text-2xl font-semibold">{selectedProduct.name}</h2>
-                                <p className="text-gray-500 mt-4">{selectedProduct.description}</p>
-                                {/* List of Applications */}
-                                <span className="text-lg text-gray-600 block">
-                                    <strong>{"Aplikasi : "}</strong>
+                    <div className="relative w-full max-w-5xl h-[85vh] bg-white rounded-xl shadow-2xl overflow-hidden flex">
+                        {/* Image Section - Added border and overflow control */}
+                        <div className="w-1/2 relative border-r border-gray-200">
+                            <div className="absolute top-4 left-4 z-10">
+                                <span className="bg-[#1F3D57] text-white px-3 py-1 rounded-full text-sm">
+                                    {selectedProduct.category || "Geotextile"}
                                 </span>
-                                <ul className="text-gray-500 list-none p-2 mt-4"> {/* Adding a margin-top for spacing */}
-                                    {selectedProduct.applications && selectedProduct.applications.length > 0 ? (
-                                        selectedProduct.applications.map((application, index) => (
-                                            <li key={index} className="flex justify-start gap-x-4">
-                                                <span>•</span>
-                                                <span>{application}</span>
-                                            </li>
-                                        ))
-                                    ) : (
-                                        <li className="text-gray-500">
+                            </div>
 
-                                        </li> // Default text if no applications
-                                    )}
-                                </ul>
-                                <div className="mt-4">
-                                    <span className="text-lg text-gray-600 block">
-                                        <strong>{selectedProduct.detail_title || " "}</strong>
-                                    </span>
-                                    {/* List of Product Details */}
-                                    <ul className="text-gray-500 list-none p-2">
-                                        {selectedProduct.details && selectedProduct.details.length > 0 ? (
-                                            selectedProduct.details.map((detail, index) => (
-                                                <li key={index} className="flex justify-start gap-x-4">
-                                                    <span>•</span>
-                                                    <span>{detail}</span>
-                                                </li>
-                                            ))
-                                        ) : (
-                                            <li className="text-gray-500">
-
-                                            </li>
-                                        )}
-                                    </ul>
-
-                                    {/* Image for Specifications */}
-                                    {selectedProduct.specs && (
-                                        <div className="mt-4">
-                                            <img
-                                                src={selectedProduct.specs}
-                                                alt="Product Specs"
-                                                className={`w-full h-auto object-cover rounded-md cursor-pointer ${isImageFullScreen ? 'transform scale-150' : ''}`}
-                                                onClick={toggleImageZoom} // Toggle zoom on click
-                                            />
+                            {/* Image Slider - Added overflow hidden */}
+                            <div className="relative w-full h-full overflow-hidden">
+                                <div
+                                    className="flex h-full transition-transform duration-300"
+                                    style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}
+                                >
+                                    {selectedProduct.images.map((image, index) => (
+                                        <div
+                                            key={index}
+                                            className="min-w-full h-full flex items-center justify-center cursor-zoom-in px-4 py-4" // Added padding
+                                        >
+                                            <div className="w-full h-full bg-gray-100 flex items-center justify-center rounded-lg overflow-hidden">
+                                                <img
+                                                    src={image}
+                                                    alt={`${selectedProduct.name} - Image ${index + 1}`}
+                                                    className="max-w-full max-h-full object-contain"
+                                                    onError={(e) => {
+                                                        const imgElement = e.currentTarget;
+                                                        imgElement.style.display = 'none';
+                                                        imgElement.parentElement?.classList.add('bg-gray-300');
+                                                    }}
+                                                    onClick={() => {
+                                                        const fullScreenImage = window.open('', '_blank');
+                                                        fullScreenImage.document.write(`  
+                                                <html>  
+                                                    <head>  
+                                                        <title>${selectedProduct.name} - Image ${index + 1}</title>  
+                                                        <style>  
+                                                            body {   
+                                                                margin: 0;   
+                                                                display: flex;   
+                                                                justify-content: center;   
+                                                                align-items: center;   
+                                                                height: 100vh;   
+                                                                background: rgba(0,0,0,0.9);  
+                                                            }  
+                                                            img {   
+                                                                max-width: 95%;   
+                                                                max-height: 95%;   
+                                                                object-fit: contain;   
+                                                            }  
+                                                        </style>  
+                                                    </head>  
+                                                    <body>  
+                                                        <img src="${image}" alt="${selectedProduct.name} - Image ${index + 1}">  
+                                                    </body>  
+                                                </html>  
+                                            `);
+                                                    }}
+                                                />
+                                            </div>
                                         </div>
-                                    )}
+                                    ))}
+                                </div>
 
-                                    <span className="text-lg text-[#1F3D57] block mt-2">
-                                        Category: <strong>{selectedProduct.category || "Geotextile"}</strong>
-                                    </span>
+                                {/* Navigation Buttons */}
+                                {selectedProduct.images.length > 1 && (
+                                    <>
+                                        <button
+                                            onClick={() => handleSlideChange('prev')}
+                                            className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/70 p-2 rounded-full"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                            </svg>
+                                        </button>
+                                        <button
+                                            onClick={() => handleSlideChange('next')}
+                                            className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/70 p-2 rounded-full"
+                                        >
+                                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                            </svg>
+                                        </button>
+                                    </>
+                                )}
+
+                                {/* Indicator */}
+                                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                                    {selectedProduct.images.map((_, index) => (
+                                        <button
+                                            key={index}
+                                            className={`w-2 h-2 rounded-full ${currentProductSlide === index ? 'bg-[#1F3D57]' : 'bg-gray-300'}`}
+                                            onClick={() => setCurrentProductSlide(index)}
+                                        />
+                                    ))}
                                 </div>
                             </div>
                         </div>
+                        {/* Details Section */}
+                        <div className="w-1/2 p-8 overflow-y-auto">
+                            <button
+                                onClick={closeModal}
+                                className="absolute top-4 right-4 text-gray-600 hover:text-black"
+                            >
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                </svg>
+                            </button>
+
+                            <h2 className="text-3xl font-bold mb-4">{selectedProduct.name}</h2>
+                            <p className="text-gray-600 mb-6">{selectedProduct.description}</p>
+
+                            {/* Accordion-like Sections */}
+                            <div className="space-y-4">
+                                {/* Applications */}
+                                {selectedProduct.applications && selectedProduct.applications.length > 0 && (
+                                    <div className="border-b pb-4">
+                                        <h3 className="text-xl font-semibold mb-3">Aplikasi</h3>
+                                        <ul className="space-y-2 text-gray-600">
+                                            {selectedProduct.applications.map((app, index) => (
+                                                <li key={index} className="flex items-center">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        className="h-5 w-5 mr-2 text-[#1F3D57]"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
+                                                    {app}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Details */}
+                                {selectedProduct.details && selectedProduct.details.length > 0 && (
+                                    <div className="border-b pb-4">
+                                        <h3 className="text-xl font-semibold mb-3">
+                                            {selectedProduct.detail_title || "Detail Produk"}
+                                        </h3>
+                                        <ul className="space-y-2 text-gray-600">
+                                            {selectedProduct.details.map((detail, index) => (
+                                                <li key={index} className="flex items-center">
+                                                    <svg
+                                                        xmlns="http://www.w3.org/2000/svg"
+                                                        className="h-5 w-5 mr-2 text-[#1F3D57]"
+                                                        viewBox="0 0 20 20"
+                                                        fill="currentColor"
+                                                    >
+                                                        <path
+                                                            fillRule="evenodd"
+                                                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                            clipRule="evenodd"
+                                                        />
+                                                    </svg>
+                                                    {detail}
+                                                </li>
+                                            ))}
+                                        </ul>
+                                    </div>
+                                )}
+
+                                {/* Specifications Image */}
+                                {selectedProduct.specs && (
+                                    <div>
+                                        <h3 className="text-xl font-semibold mb-3">Spesifikasi</h3>
+                                        <img
+                                            src={selectedProduct.specs}
+                                            alt="Product Specifications"
+                                            className="w-full rounded-lg shadow-md cursor-zoom-in"
+                                            onClick={() => {
+                                                const fullScreenImage = window.open('', '_blank');
+                                                fullScreenImage.document.write(`  
+                                        <html>  
+                                            <head>  
+                                                <title>Spesifikasi ${selectedProduct.name}</title>  
+                                                <style>  
+                                                    body {   
+                                                        margin: 0;   
+                                                        display: flex;   
+                                                        justify-content: center;   
+                                                        align-items: center;   
+                                                        height: 100vh;   
+                                                        background: rgba(0,0,0,0.9);  
+                                                    }  
+                                                    img {   
+                                                        max-width: 95%;   
+                                                        max-height: 95%;   
+                                                        object-fit: contain;   
+                                                    }  
+                                                </style>  
+                                            </head>  
+                                            <body>  
+                                                <img src="${selectedProduct.specs}" alt="Spesifikasi ${selectedProduct.name}">  
+                                            </body>  
+                                        </html>  
+                                    `);
+                                            }}
+                                        />
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+            {/* Mobile Version */}
+            {showModal && selectedProduct && isMobile && (
+                <div className="fixed inset-0 z-50 bg-white overflow-y-auto pt-16">
+
+                    {/* Image Carousel */}
+                    <div className="relative w-full">
+                        <div
+                            className="flex transition-transform duration-300"
+                            style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}
+                        >
+                            {selectedProduct.images.map((image, index) => (
+                                <div
+                                    key={index}
+                                    className="min-w-full flex justify-center items-center cursor-zoom-in"
+                                    onClick={() => {
+                                        const fullScreenImage = window.open('', '_blank');
+                                        fullScreenImage.document.write(`  
+                                <html>  
+                                    <head>  
+                                        <title>${selectedProduct.name} - Image ${index + 1}</title>  
+                                        <style>  
+                                            body {   
+                                                margin: 0;   
+                                                display: flex;   
+                                                justify-content: center;   
+                                                align-items: center;   
+                                                height: 100vh;   
+                                                background: rgba(0,0,0,0.9);  
+                                            }  
+                                            img {   
+                                                max-width: 95%;   
+                                                max-height: 95%;   
+                                                object-fit: contain;   
+                                            }  
+                                        </style>  
+                                    </head>  
+                                    <body>  
+                                        <img src="${image}" alt="${selectedProduct.name} - Image ${index + 1}">  
+                                    </body>  
+                                </html>  
+                            `);
+                                    }}
+                                >
+                                    <img
+                                        src={image}
+                                        alt={`${selectedProduct.name} - Image ${index + 1}`}
+                                        className="w-full max-h-[50vh] object-contain"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+
+                        {/* Navigation Buttons */}
+                        {selectedProduct.images.length > 1 && (
+                            <>
+                                <button
+                                    onClick={() => handleSlideChange('prev')}
+                                    className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 p-2 rounded-full"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                                    </svg>
+                                </button>
+                                <button
+                                    onClick={() => handleSlideChange('next')}
+                                    className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 p-2 rounded-full"
+                                >
+                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                    </svg>
+                                </button>
+                            </>
+                        )}
+                        <button
+                            onClick={closeModal}
+                            className="
+        absolute 
+        top-4 
+        right-4 
+        text-gray-600 
+        hover:text-black 
+        z-10 
+        bg-white 
+        bg-opacity-20 
+        hover:bg-opacity-40 
+        rounded-full 
+        p-2 
+        transition-all 
+        duration-300 
+        flex 
+        items-center 
+        justify-center
+    "
+                        >
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                className="h-6 w-6"
+                                fill="none"
+                                viewBox="0 0 24 24"
+                                stroke="currentColor"
+                            >
+                                <path
+                                    strokeLinecap="round"
+                                    strokeLinejoin="round"
+                                    strokeWidth={2}
+                                    d="M6 18L18 6M6 6l12 12"
+                                />
+                            </svg>
+                        </button>
+                        {/* Indicator */}
+                        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
+                            {selectedProduct.images.map((_, index) => (
+                                <button
+                                    key={index}
+                                    className={`w-2 h-2 rounded-full ${currentProductSlide === index ? 'bg-[#1F3D57]' : 'bg-gray-300'}`}
+                                    onClick={() => setCurrentProductSlide(index)}
+                                />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* Details Section */}
+                    <div className="p-4">
+                        <div className="bg-[#1F3D57] text-white px-3 py-1 rounded-full text-sm inline-block mb-4">
+                            {selectedProduct.category || "Geotextile"}
+                        </div>
+
+                        <h2 className="text-2xl font-bold mb-4">{selectedProduct.name}</h2>
+                        <p className="text-gray-600 mb-6">{selectedProduct.description}</p>
+
+                        {/* Applications */}
+                        {selectedProduct.applications && selectedProduct.applications.length > 0 && (
+                            <div className="border-b pb-4 mb-4">
+                                <h3 className="text-xl font-semibold mb-3">Aplikasi</h3>
+                                <ul className="space-y-2 text-gray-600">
+                                    {selectedProduct.applications.map((app, index) => (
+                                        <li key={index} className="flex items-center">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5 mr-2 text-[#1F3D57]"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
+                                            {app}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {/* Details */}
+                        {selectedProduct.details && selectedProduct.details.length > 0 && (
+                            <div className="border-b pb-4 mb-4">
+                                <h3 className="text-xl font-semibold mb-3">
+                                    {selectedProduct.detail_title || "Detail Produk"}
+                                </h3>
+                                <ul className="space-y-2 text-gray-600">
+                                    {selectedProduct.details.map((detail, index) => (
+                                        <li key={index} className="flex items-center">
+                                            <svg
+                                                xmlns="http://www.w3.org/2000/svg"
+                                                className="h-5 w-5 mr-2 text-[#1F3D57]"
+                                                viewBox="0 0 20 20"
+                                                fill="currentColor"
+                                            >
+                                                <path
+                                                    fillRule="evenodd"
+                                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                                    clipRule="evenodd"
+                                                />
+                                            </svg>
+                                            {detail}
+                                        </li>
+                                    ))}
+                                </ul>
+                            </div>
+                        )}
+
+                        {/* Specifications Image */}
+                        {selectedProduct.specs && (
+                            <div>
+                                <h3 className="text-xl font-semibold mb-3">Spesifikasi</h3>
+                                <img
+                                    src={selectedProduct.specs}
+                                    alt="Product Specifications"
+                                    className="w-full rounded-lg shadow-md cursor-zoom-in"
+                                    onClick={() => {
+                                        const fullScreenImage = window.open('', '_blank');
+                                        fullScreenImage.document.write(`
+                                <html>
+                                    <head>
+                                        <title>Spesifikasi ${selectedProduct.name}</title>
+                                        <style>
+                                            body { 
+                                                margin: 0; 
+                                                display: flex; 
+                                                justify-content: center; 
+                                                align-items: center; 
+                                                height: 100vh; 
+                                                background: rgba(0,0,0,0.9);
+                                            }
+                                            img { 
+                                                max-width: 95%; 
+                                                max-height: 95%; 
+                                                object-fit: contain; 
+                                            }
+                                        </style>
+                                    </head>
+                                    <body>
+                                        <img src="${selectedProduct.specs}" alt="Spesifikasi ${selectedProduct.name}">
+                                    </body>
+                                </html>
+                            `);
+                                    }}
+                                />
+                            </div>
+                        )}
                     </div>
                 </div>
             )}

@@ -55,14 +55,7 @@ export default function Navbar() {
     
         // Tunggu sebentar untuk animasi sidebar menutup
         setTimeout(() => {
-            if (sectionId === "contact") {
-                // Scroll ke bagian paling bawah
-                window.scrollTo({
-                    top: document.body.scrollHeight,
-                    behavior: 'smooth'
-                });
-                return;
-            }
+            
     
             if (sectionId === "products" && category) {
                 // Gunakan mapping untuk mendapatkan slug kategori

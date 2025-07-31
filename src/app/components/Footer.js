@@ -17,9 +17,50 @@ const MapComponent = dynamic(
 
 export default function Footer() {
   const [isModalOpen, setIsModalOpen] = useState(false);
-  
-  const socialLinks = [
 
+  // Tambahkan kategori mapping
+  const categoryMapping = {
+    'Semua': 'semua',
+    'Geotextile Woven': 'geotextile-woven',
+    'Geotextile Non Woven': 'geotextile-non-woven',
+    'Geomembrane': 'geomembrane',
+  };
+
+  const scrollToSection = (sectionId, category = "") => {
+    // Logging untuk debugging
+    console.log("Scrolling to section:", sectionId, "Category:", category);
+
+    // Tunggu sebentar untuk animasi
+    setTimeout(() => {
+      
+
+      if (sectionId === "products" && category) {
+        // Gunakan mapping untuk mendapatkan slug kategori
+        const categorySlug = categoryMapping[category] || category;
+
+        // Set hash untuk trigger perubahan kategori
+        window.location.hash = categorySlug;
+      }
+
+      // Cari elemen target
+      const element = document.getElementById(sectionId);
+
+      if (element) {
+        // Menggunakan metode scroll yang lebih reliable
+        element.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
+        });
+      } else {
+        // Fallback jika elemen tidak ditemukan
+        console.warn(`Section ${sectionId} not found`);
+
+        // Coba navigasi ke halaman dengan hash
+        window.location.href = `/#${sectionId}`;
+      }
+    }, 300); // Delay untuk animasi
+  };
+  const socialLinks = [
     // { icon: FaFacebookF, href: addressData.social.facebook },
     // { icon: FaTwitter, href: addressData.social.twitter },
     // { icon: FaInstagram, href: addressData.social.instagram },
@@ -30,15 +71,15 @@ export default function Footer() {
   const closeModal = () => setIsModalOpen(false);
 
   return (
-    <>
-      <footer   
-        className="relative text-white py-8"  
-        style={{  
-          backgroundImage: "url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')",   
-          backgroundSize: 'cover',  
-          backgroundPosition: 'center'  
-        }}  
-      > 
+    <section id="contact">
+      <footer
+        className="relative text-white py-8"
+        style={{
+          backgroundImage: "url('https://i.pinimg.com/736x/80/ad/63/80ad631f67f14b858f04f8faab8cfeae.jpg')",
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
         <div className="container mx-auto px-4">
           {/* Footer Top Section */}
           <div className="grid md:grid-cols-3 gap-8 mb-12">
@@ -55,13 +96,13 @@ export default function Footer() {
               <p className="text-gray-300 mb-4">
                 Solusi Teknologi Inovatif untuk Infrastruktur Berkelanjutan
               </p>
-              
+
               {/* Social Media Links */}
               <div className="flex space-x-4">
                 {socialLinks.map((social, index) => (
-                  <Link 
-                    key={index} 
-                    href={social.href} 
+                  <Link
+                    key={index}
+                    href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="
@@ -89,41 +130,43 @@ export default function Footer() {
               <div className="grid grid-cols-2 gap-2">
                 {navigation.map((item, index) => (
                   <div key={index}>
-                    <Link 
-                      href={item.href} 
+                    <button
+                      onClick={() => scrollToSection(item.href.substring(1))}
                       className="
                         text-gray-300 
                         hover:text-white 
                         hover:translate-x-1 
                         transition-all 
                         duration-300
+                        text-left
                       "
                     >
                       {item.name}
-                    </Link>
+                    </button>
                     {item.children && (
                       <div className="pl-2 mt-2 space-y-1">
                         {item.children.map((child, childIndex) => (
-                          <Link
+                          <button
                             key={childIndex}
-                            href={`${item.href}/${child.href}`}
+                            onClick={() => scrollToSection("products", child.href)}
                             className="
                               block
                               text-xs
                               text-gray-400
                               hover:text-white
                               transition-colors
+                              text-left
                             "
                           >
                             {child.name}
-                          </Link>
+                          </button>
                         ))}
                       </div>
                     )}
                   </div>
                 ))}
               </div>
-              
+
               <div className="mt-6">
                 <h4 className="text-lg font-bold mb-2">Jam Kerja</h4>
                 <p className="text-gray-300">{addressData.hours}</p>
@@ -193,6 +236,6 @@ export default function Footer() {
         isOpen={isModalOpen} 
         onClose={closeModal} 
       />
-    </>
+    </section>
   );
 }

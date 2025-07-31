@@ -558,7 +558,7 @@ const Products = () => {
                 <div className="fixed inset-0 z-50 bg-white overflow-y-auto pt-16">
 
                     {/* Image Carousel */}
-                    <div className="relative w-full">
+                    <div className="relative w-full overflow-hidden">
                         <div
                             className="flex transition-transform duration-300"
                             style={{ transform: `translateX(-${currentProductSlide * 100}%)` }}
@@ -566,7 +566,8 @@ const Products = () => {
                             {selectedProduct.images.map((image, index) => (
                                 <div
                                     key={index}
-                                    className="min-w-full flex justify-center items-center cursor-zoom-in"
+                                    className="w-full flex-shrink-0 flex justify-center items-center cursor-zoom-in 
+                                    rounded-lg shadow-md overflow-hidden"
                                     onClick={() => {
                                         const fullScreenImage = window.open('', '_blank');
                                         fullScreenImage.document.write(`  

@@ -195,6 +195,7 @@ body {
 .products-grid.transitioning {
   opacity: 0.7;
   transform: scale(0.98);
+  transition: opacity 0.3s ease, transform 0.3s ease;
 }
 
 .no-scroll {

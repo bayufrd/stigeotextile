@@ -385,7 +385,7 @@ const Products = () => {
                         {/* For mobile: just show current page / total pages */}
                         <div className="sm:hidden mx-2">
                             <span className="text-gray-700 font-medium">
-                                1 / {totalPages || 1}
+                                {currentPage} / {totalPages || 1}
                             </span>
                         </div>
 

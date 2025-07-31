@@ -27,7 +27,22 @@ const Products = () => {
         'Geotextile Geobag': 'geobag',
         'Geomembrane': 'geomembrane',
     };
+    const [isTransitioning, setIsTransitioning] = useState(false);
 
+    // Modifikasi fungsi pagination
+    const paginate = (pageNumber) => {
+        setIsTransitioning(true);
+        setCurrentPage(pageNumber);
+
+        // Nonaktifkan scroll
+        //document.body.style.overflow = 'hidden';
+
+        // Kembalikan scroll setelah transisi
+        const timer = setTimeout(() => {
+            setIsTransitioning(false);
+            document.body.style.overflow = '';
+        }, 300);
+    };
     const [currentProductSlide, setCurrentProductSlide] = useState(0);
     const handleSlideChange = (direction) => {
         if (direction === 'next') {
@@ -36,7 +51,18 @@ const Products = () => {
             setCurrentProductSlide((prev) => (prev - 1 + selectedProduct.images.length) % selectedProduct.images.length);
         }
     };
+    // Dalam komponen Products, tambahkan logika untuk mengisi grid
+    const fillGridWithPlaceholders = () => {
+        const currentProducts = getCurrentProducts();
+        const placeholdersNeeded = isMobile
+            ? Math.max(0, 2 - currentProducts.length)
+            : Math.max(0, 6 - currentProducts.length);
 
+        return [
+            ...currentProducts,
+            ...Array(placeholdersNeeded).fill(null)
+        ];
+    };
     // Handle hash change for active category
     useEffect(() => {
         const handleHashChange = () => {
@@ -117,7 +143,6 @@ const Products = () => {
     const totalPages = Math.ceil(filteredProducts.length / productsPerPage);
 
     // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
     // Go to next page
     const nextPage = () => {
@@ -132,6 +157,7 @@ const Products = () => {
             setCurrentPage(currentPage - 1);
         }
     };
+
     // Add overlay and disable body scroll when modal is open
     useEffect(() => {
         if (showModal) {
@@ -213,55 +239,96 @@ const Products = () => {
                 </div>
 
                 {/* Product Cards */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+                {/* Product Cards */}
+                <div
+                    className={`
+        grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 
+        gap-4 sm:gap-8 
+        products-grid 
+        grid-auto-rows-[1fr] 
+        min-h-[600px]
+        ${isTransitioning ? 'transitioning' : ''}
+    `}
+                >
                     {getCurrentProducts().length > 0 ? (
-                        getCurrentProducts().map((product, index) => (
-                            <div
-                                key={index}
-                                className="bg-white p-6 rounded-lg shadow-lg cursor-pointer transform transition duration-300 hover:scale-105 hover:shadow-xl grid grid-rows-[auto_1fr_auto]" // Gunakan grid untuk layout
-                                onClick={() => openModal(product)}
-                            >
-                                <div className="h-48 mb-4 overflow-hidden rounded-md">
-                                    <img
-                                        src={product.images[0]}
-                                        alt={product.name}
-                                        className="w-full h-full object-cover transition duration-500 ease-in-out hover:scale-110"
-                                    />
+                        (!isMobile ? fillGridWithPlaceholders() : fillGridWithPlaceholders()).map((product, index) => (
+                            product ? (
+                                <div
+                                    key={`product-${index}`}
+                                    className="bg-white p-4 sm:p-6 rounded-lg shadow-lg cursor-pointer 
+                    transform transition duration-300 hover:scale-105 hover:shadow-xl 
+                    flex flex-col 
+                    h-full // Pastikan tinggi penuh
+                    min-h-[400px]
+                    justify-between // Distribusi konten merata
+                    relative
+                    "
+                                    onClick={() => openModal(product)}
+                                >
+                                    {/* Image Container dengan tinggi fixed */}
+                                    <div className="h-36 sm:h-48 mb-4 overflow-hidden rounded-md flex-shrink-0">
+                                        <img
+                                            src={product.images[0]}
+                                            alt={product.name}
+                                            className="w-full h-full object-cover transition duration-500 ease-in-out hover:scale-110"
+                                        />
+                                    </div>
+
+                                    {/* Content Container dengan tinggi dan overflow terkontrol */}
+                                    <div className="flex-grow flex flex-col">
+                                        <h3 className="text-lg sm:text-xl font-semibold mb-2 line-clamp-2 h-14">
+                                            {product.name}
+                                        </h3>
+                                        <p className="text-gray-500 mt-2 flex-grow line-clamp-4 min-h-[96px] text-sm sm:text-base">
+                                            {expanded === index
+                                                ? product.description
+                                                : product.description.length > 150
+                                                    ? `${product.description.slice(0, 150)}...`
+                                                    : product.description}
+                                        </p>
+                                        {product.description.length > 150 && (
+                                            <button
+                                                className="text-blue-600 mt-2 cursor-pointer self-start text-sm"
+                                                onClick={(e) => {
+                                                    e.stopPropagation();
+                                                    handleToggle(index);
+                                                }}
+                                            >
+                                                {expanded === index ? 'Show Less' : 'Show More'}
+                                            </button>
+                                        )}
+                                    </div>
+
+                                    {/* Category Tag */}
+                                    <div className="text-left mt-4 flex-shrink-0">
+                                        <span className="inline-block py-1 px-3 sm:py-2 sm:px-4 
+                            bg-[#1F3D57] text-white rounded-full 
+                            text-xs sm:text-sm font-semibold 
+                            cursor-pointer hover:bg-blue-600">
+                                            {product.category + " ✓" || "Geotextile"}
+                                        </span>
+                                    </div>
                                 </div>
-                                <div>
-                                    <h3 className="text-xl font-semibold">{product.name}</h3>
-                                    <p className="text-gray-500 mt-2">
-                                        {expanded === index
-                                            ? product.description
-                                            : product.description.length > 150
-                                                ? `${product.description.slice(0, 150)}...`
-                                                : product.description}
-                                    </p>
-                                    <button
-                                        className="text-blue-600 mt-2 cursor-pointer"
-                                        onClick={(e) => {
-                                            e.stopPropagation();
-                                            handleToggle(index);
-                                        }}
-                                    >
-                                        {expanded === index ? 'Show Less' : 'Show More'}
-                                    </button>
+                            ) : (
+                                <div
+                                    key={`placeholder-${index}`}
+                                    className="bg-gray-100 rounded-lg min-h-[400px] h-full
+                    opacity-50 
+                    flex items-center justify-center
+                    relative"
+                                >
+                                    <p className="text-gray-400 text-center">Produk Kosong</p>
                                 </div>
-                                <div className="text-left mt-4">
-                                    <span className="inline-block py-2 px-4 bg-[#1F3D57] text-white rounded-full text-sm font-semibold cursor-pointer hover:bg-blue-600">
-                                        {product.category + " ✓" || "Geotextile"}
-                                    </span>
-                                </div>
-                            </div>
+                            )
                         ))
                     ) : (
-                        <div className="col-span-3 py-16 text-center">
+                        <div className="col-span-full py-16 text-center flex justify-center items-center min-h-[400px]">
                             <p className="text-xl text-gray-500">Tidak ada produk dalam kategori ini.</p>
                         </div>
                     )}
                 </div>
                 {/* Pagination */}
-                {filteredProducts.length > productsPerPage && (
+                {(filteredProducts.length > 0 || filteredProducts.length === 0) && (
                     <div className="pagination-container mt-12 flex justify-center items-center">
                         <button
                             onClick={prevPage}
@@ -273,49 +340,52 @@ const Products = () => {
                         >
                             &laquo;
                         </button>
+                        {/* Pagination code */}
 
-                        <div className="hidden sm:flex">
-                            {[...Array(totalPages)].map((_, index) => {
-                                // For desktop: show all pages if there are 5 or fewer,
-                                // otherwise show first page, last page, current page, and one page before and after current
-                                const pageNum = index + 1;
-                                const showPageNumber = totalPages <= 5 ||
-                                    pageNum === 1 ||
-                                    pageNum === totalPages ||
-                                    pageNum === currentPage ||
-                                    pageNum === currentPage - 1 ||
-                                    pageNum === currentPage + 1;
+                        {totalPages > 0 && (
+                            <div className="hidden sm:flex">
+                                {[...Array(totalPages)].map((_, index) => {
+                                    // For desktop: show all pages if there are 5 or fewer,
+                                    // otherwise show first page, last page, current page, and one page before and after current
+                                    const pageNum = index + 1;
+                                    const showPageNumber = totalPages <= 5 ||
+                                        pageNum === 1 ||
+                                        pageNum === totalPages ||
+                                        pageNum === currentPage ||
+                                        pageNum === currentPage - 1 ||
+                                        pageNum === currentPage + 1;
 
-                                // Show ellipsis for gaps
-                                const showEllipsisBefore = pageNum === currentPage - 1 && currentPage > 3;
-                                const showEllipsisAfter = pageNum === currentPage + 1 && currentPage < totalPages - 2;
+                                    // Show ellipsis for gaps
+                                    const showEllipsisBefore = pageNum === currentPage - 1 && currentPage > 3;
+                                    const showEllipsisAfter = pageNum === currentPage + 1 && currentPage < totalPages - 2;
 
-                                return (
-                                    <div key={index} className="flex items-center">
-                                        {showEllipsisBefore && <span className="mx-1">...</span>}
+                                    return (
+                                        <div key={index} className="flex items-center">
+                                            {showEllipsisBefore && <span className="mx-1">...</span>}
 
-                                        {showPageNumber && (
-                                            <button
-                                                onClick={() => paginate(pageNum)}
-                                                className={`mx-1 px-4 py-2 rounded-md ${currentPage === pageNum
-                                                    ? 'bg-[#1F3D57] text-white'
-                                                    : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
-                                                    }`}
-                                            >
-                                                {pageNum}
-                                            </button>
-                                        )}
+                                            {showPageNumber && (
+                                                <button
+                                                    onClick={() => paginate(pageNum)}
+                                                    className={`mx-1 px-4 py-2 rounded-md ${currentPage === pageNum
+                                                        ? 'bg-[#1F3D57] text-white'
+                                                        : 'bg-gray-200 text-gray-700 hover:bg-gray-300'
+                                                        }`}
+                                                >
+                                                    {pageNum}
+                                                </button>
+                                            )}
 
-                                        {showEllipsisAfter && <span className="mx-1">...</span>}
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                            {showEllipsisAfter && <span className="mx-1">...</span>}
+                                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
 
                         {/* For mobile: just show current page / total pages */}
                         <div className="sm:hidden mx-2">
                             <span className="text-gray-700 font-medium">
-                                {currentPage} / {totalPages}
+                                1 / {totalPages || 1}
                             </span>
                         </div>
 
